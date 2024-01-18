@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "290718547533",
+    "project_id": "art-meeting",
+    "storage_bucket": "art-meeting.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:290718547533:android:4679c57d95b90ed6f26604",
+        "android_client_info": {
+          "package_name": "com.example.makdad_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTrruDCDmxmJz2HfSGUWo3OlhJD9A6wJE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
