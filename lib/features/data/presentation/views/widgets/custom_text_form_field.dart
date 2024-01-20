@@ -5,24 +5,27 @@ class CustomTExtFormField extends StatelessWidget {
       {super.key,
       required this.hintText,
       required this.icon,
-      this.textInputType = TextInputType.text, this.suffixIcon, this.controller});
+      this.textInputType = TextInputType.text, this.suffixIcon, this.controller,  this.obscureText=false});
   final String hintText;
   final IconData icon;
   final TextInputType textInputType;
   final Widget? suffixIcon;
   final TextEditingController? controller;
+  final bool obscureText ;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      obscureText: obscureText,
       controller: controller,
       
       validator: (value) {
-        if(value==null){
+        if(value!.isEmpty){
           return 'must not be empty';
 
         }
-        return '';
+        return null;
+        
       },
       keyboardType: textInputType,
       decoration: InputDecoration(
