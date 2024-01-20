@@ -9,6 +9,8 @@ class LoginTo extends StatelessWidget {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+    var emailController=TextEditingController();
+    var passwordcontroller=TextEditingController();
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: SingleChildScrollView(
@@ -26,14 +28,16 @@ class LoginTo extends StatelessWidget {
             SizedBox(
               height: height * 0.03,
             ),
-            const CustomTExtFormField(
-              hintText: 'Email',
+             CustomTExtFormField(
+              controller: emailController,
+              hintText: 'Your Email',
               icon: Icons.mail,
             ),
             SizedBox(
               height: height * 0.03,
             ),
-            const CustomTExtFormField(
+             CustomTExtFormField(
+              controller: passwordcontroller,
               hintText: 'Password',
               icon: Icons.lock,
             ),
