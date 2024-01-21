@@ -11,3 +11,10 @@ class RegisterErrorState extends RegisterState {
 
   RegisterErrorState({required this.error});
 }
+class CreateUserSuccesState extends RegisterState {}
+
+class CreateUserErrorState extends RegisterState {
+  final String error;
+
+  CreateUserErrorState({required this.error});
+}
