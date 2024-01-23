@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:makdad_app/core/utils/cashe_helper.dart';
+import 'package:makdad_app/core/utils/componants.dart';
 import 'package:makdad_app/features/data/presentation/manger/cubit/login_cubit/login_cubit.dart';
 import 'package:makdad_app/features/data/presentation/manger/cubit/login_cubit/login_state.dart';
 import 'package:makdad_app/features/data/presentation/views/register_page.dart';
+import 'package:makdad_app/features/data/presentation/views/social_home_view.dart';
 import 'package:makdad_app/features/data/presentation/views/widgets/custom_text_form_field.dart';
 
 class LoginTo extends StatefulWidget {
@@ -24,7 +27,23 @@ class _LoginToState extends State<LoginTo> {
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: SingleChildScrollView(
-        child: BlocBuilder<LoginCubit, LoginState>(
+        child: BlocConsumer<LoginCubit, LoginState>(
+          listener: (context, state) {
+            if (state is LoginSuccesState) {
+              showToast(msg: 'Success', state: ToastState.succes);
+              CasheHelper.saveDate(key: 'uId', value: state.uId)
+                  .then((value) {})
+                  .catchError((error) {});
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => const SocialHomeView(),
+                ),
+              );
+            }
+            if (state is LoginErrorState) {
+              showToast(msg: 'Error Login', state: ToastState.error);
+            }
+          },
           builder: (context, state) => Form(
             key: formkey,
             child: Column(

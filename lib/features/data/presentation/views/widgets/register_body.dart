@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:makdad_app/core/utils/componants.dart';
 import 'package:makdad_app/features/data/presentation/manger/cubit/Register_cubit/register_cubit.dart';
 import 'package:makdad_app/features/data/presentation/manger/cubit/Register_cubit/register_state.dart';
 import 'package:makdad_app/features/data/presentation/views/home_views.dart';
 import 'package:makdad_app/features/data/presentation/views/social_home_view.dart';
 import 'package:makdad_app/features/data/presentation/views/widgets/custom_text_form_field.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class RegisterBody extends StatefulWidget {
   const RegisterBody({
@@ -31,8 +33,14 @@ class _RegisterBodyState extends State<RegisterBody> {
         padding: const EdgeInsets.all(12.0),
         child: BlocConsumer<RegisterCubit, RegisterState>(
           listener: (context, state) {
-            if(state is CreateUserSuccesState){
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) =>const SocialHomeView(),));
+            if (state is CreateUserSuccesState) {
+              showToast(msg: 'Success', state: ToastState.succes);
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const SocialHomeView(),
+              ));
+            }
+            if (state is RegisterErrorState) {
+             showToast(msg: 'Error', state: ToastState.error);
             }
           },
           builder: (context, state) => Form(
@@ -106,7 +114,7 @@ class _RegisterBodyState extends State<RegisterBody> {
                         onPressed: () {
                           if (formkey.currentState!.validate()) {
                             RegisterCubit.get(context).userRegister(
-                              phone: phoneController.text,
+                                phone: phoneController.text,
                                 username: userNamecontroller.text,
                                 email: emailController.text,
                                 password: passwordcontroller.text);

@@ -14,24 +14,28 @@ class RegisterCubit extends Cubit<RegisterState> {
     FirebaseAuth.instance
         .createUserWithEmailAndPassword(email: email, password: password)
         .then((value) {
-      print(value.user!.email);
-      print(value.user!.uid);
-      createUser(name: username, email: email, password: password, phone: phone, uId:value.user!.uid);
+      createUserInCloud(
+        name: username,
+        email: email,
+        password: password,
+        phone: phone,
+        uId: value.user!.uid,
+      );
 
-      emit(RegisterSuccesState());
+      // emit(RegisterSuccesState());
     }).catchError((error) {
       emit(RegisterErrorState(error: error.toString()));
     });
   }
 
-  void createUser(
+  void createUserInCloud(
       {required String name,
       required String email,
       required String password,
       required String phone,
       required String uId}) {
     UserModel model =
-        UserModel(email: email, name: name, phone: phone, uId: uId);
+        UserModel(email: email, name: name, phone: phone, uId: uId,isEmailVerfied: false);
     FirebaseFirestore.instance
         .collection('users')
         .doc(uId)

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 const defaulColor = Colors.green;
 
@@ -46,4 +47,37 @@ Widget defaulatTextFormField({
       ),
     ),
   );
+}
+
+void showToast({
+  required String msg,
+  required ToastState state,
+}) =>
+    Fluttertoast.showToast(
+      msg: msg,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 5,
+      backgroundColor: choosToastColor(state: state),
+      toastLength: Toast.LENGTH_LONG,
+      fontSize: 16.0,
+    );
+
+enum ToastState { succes, error, warning }
+
+Color choosToastColor({required ToastState state}) {
+  Color color;
+  switch (state) {
+    case ToastState.succes:
+      color = Colors.green;
+      break;
+
+    case ToastState.error:
+      color = Colors.red;
+      break;
+
+    case ToastState.warning:
+      color = Colors.amber;
+      break;
+  }
+  return color;
 }
