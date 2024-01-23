@@ -1,8 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:makdad_app/core/utils/constant.dart';
 import 'package:makdad_app/features/data/models/user_model.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
+import 'package:makdad_app/features/data/presentation/views/chats/chats.dart';
+import 'package:makdad_app/features/data/presentation/views/feeds/feeds.dart';
+import 'package:makdad_app/features/data/presentation/views/settings/settings.dart';
+import 'package:makdad_app/features/data/presentation/views/users/users.dart';
 
 class SocialCubit extends Cubit<SocialState> {
   SocialCubit() : super(SocialIntialState());
@@ -24,5 +29,23 @@ class SocialCubit extends Cubit<SocialState> {
         ),
       );
     });
+  }
+
+  int currentIndex = 0;
+  List<Widget> screensNave = const [
+    FeedsScreen(),
+    ChatsScreen(),
+    UsersScreen(),
+    SettingsScreen(),
+  ];
+  List<String> titlels = const [
+    'Home',
+    'Chats',
+    'Friends',
+    'Settings',
+  ];
+  void changeBottomNav(index) {
+    currentIndex = index;
+    emit(SocialChangeBottomNavState());
   }
 }

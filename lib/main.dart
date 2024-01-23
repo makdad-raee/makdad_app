@@ -39,6 +39,16 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [BlocProvider<SocialCubit>(create:(context) =>  SocialCubit()..getUserData(),)],
       child: MaterialApp(
+        theme: ThemeData(
+          iconTheme:const IconThemeData(color: Colors.grey),
+          bottomNavigationBarTheme: BottomNavigationBarThemeData(
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: defaultColor,
+            backgroundColor: Colors.white,
+            elevation: 20.0,
+            unselectedItemColor: Colors.grey
+          )
+        ),
         debugShowCheckedModeBanner: false,
         home: starWidget,
       ),
