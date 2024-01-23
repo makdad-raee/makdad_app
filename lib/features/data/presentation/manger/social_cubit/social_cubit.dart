@@ -1,0 +1,28 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:makdad_app/core/utils/constant.dart';
+import 'package:makdad_app/features/data/models/user_model.dart';
+import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
+
+class SocialCubit extends Cubit<SocialState> {
+  SocialCubit() : super(SocialIntialState());
+  static SocialCubit get(context) {
+    return BlocProvider.of(context);
+  }
+
+  UserModel? userModel;
+  void getUserData() {
+    emit(SocialGetUserLoadinState());
+    FirebaseFirestore.instance.collection('users').doc(uId).get().then((value) {
+      print(value.data());
+      emit(SocialGetUserSuccesState());
+    }).catchError((error) {
+      print(error.toString());
+      emit(
+        SocialGetUserErrorState(
+          error: error.toString(),
+        ),
+      );
+    });
+  }
+}
