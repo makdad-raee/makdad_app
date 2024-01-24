@@ -9,3 +9,8 @@ List<BottomNavigationBarItem> bottomNavigationBarItems = const [
   BottomNavigationBarItem(icon: Icon(FontAwesomeIcons.user), label: 'Users'),
   BottomNavigationBarItem(icon: Icon(FontAwesomeIcons.gear), label: 'Settings'),
 ];
+TextStyle? style18 =const TextStyle(fontSize: 18,fontWeight: FontWeight.w500,);
+
+TextStyle? style16 =const TextStyle(fontSize: 16,fontWeight: FontWeight.w500,);
+TextStyle? style14 =const TextStyle(fontSize: 14,fontWeight: FontWeight.w500,);
+TextStyle? style12 =const TextStyle(fontSize: 12,color: Color.fromARGB(255, 97, 96, 96));

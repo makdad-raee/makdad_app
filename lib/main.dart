@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
       providers: [BlocProvider<SocialCubit>(create:(context) =>  SocialCubit()..getUserData(),)],
       child: MaterialApp(
         theme: ThemeData(
-          iconTheme:const IconThemeData(color: Colors.grey),
+         // iconTheme:const IconThemeData(color: Colors.grey),
           bottomNavigationBarTheme: BottomNavigationBarThemeData(
             type: BottomNavigationBarType.fixed,
             selectedItemColor: defaultColor,
