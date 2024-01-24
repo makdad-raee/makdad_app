@@ -16,18 +16,21 @@ class CustomReaction extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Row(
-        children: [
-          Icon(
-            icon,
-            color: color,
-            size: 16,
-          ),
-          const SizedBox(
-            width: 5,
-          ),
-          Text(text),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 5),
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              color: color,
+              size: 16,
+            ),
+            const SizedBox(
+              width: 5,
+            ),
+            Text(text),
+          ],
+        ),
       ),
     );
   }
