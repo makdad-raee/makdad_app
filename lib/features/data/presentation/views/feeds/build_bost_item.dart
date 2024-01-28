@@ -47,14 +47,13 @@ class BuildPostItem extends StatelessWidget {
               padding: EdgeInsets.only(top: 12),
               child: Row(
                 children: [
-                  Expanded(
-                    child: Align(
-                        alignment: Alignment.topLeft,
-                        child: CustomReaction(
-                          text: '600',
-                          icon: FontAwesomeIcons.heart,
-                        )),
-                  ),
+                  Align(
+                      alignment: Alignment.topLeft,
+                      child: CustomReaction(
+                        text: '600',
+                        icon: FontAwesomeIcons.heart,
+                      )),
+                      Spacer(),
                   Align(
                     alignment: Alignment.topRight,
                     child: Expanded(
