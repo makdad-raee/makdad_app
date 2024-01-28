@@ -6,6 +6,7 @@ import 'package:makdad_app/features/data/presentation/views/widgets/custom_react
 import 'package:makdad_app/features/data/presentation/views/widgets/diveder.dart';
 import 'package:makdad_app/features/data/presentation/views/widgets/hash_tag.dart';
 import 'package:makdad_app/features/data/presentation/views/widgets/photo_of_the_post.dart';
+
 class BuildPostItem extends StatelessWidget {
   const BuildPostItem({
     super.key,
@@ -15,7 +16,7 @@ class BuildPostItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.all(8),
-      elevation: 10,
+      elevation: 5,
       clipBehavior: Clip.antiAliasWithSaveLayer,
       child: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -42,27 +43,76 @@ class BuildPostItem extends StatelessWidget {
               ),
             ),
             const PhotoOfThePost(),
-            const Row(
+            const Padding(
+              padding: EdgeInsets.only(top: 12),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Align(
+                        alignment: Alignment.topLeft,
+                        child: CustomReaction(
+                          text: '600',
+                          icon: FontAwesomeIcons.heart,
+                        )),
+                  ),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: Expanded(
+                      child: CustomReaction(
+                          icon: FontAwesomeIcons.comment,
+                          color: Colors.amber,
+                          text: '1200 comments'),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const Diveder(),
+            Row(
               children: [
                 Expanded(
-                  child: Align(
-                      alignment: Alignment.topLeft,
-                      child: CustomReaction(
-                        text: '600',
-                        icon: FontAwesomeIcons.heart,
-                      )),
-                ),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: Expanded(
-                    child: CustomReaction(
-                        icon: FontAwesomeIcons.comment,
-                        color: Colors.amber,
-                        text: '1200 comments'),
+                  child: InkWell(
+                    onTap: () {},
+                    child: Row(
+                      children: [
+                        const CircleAvatar(
+                          radius: 18,
+                          backgroundImage: NetworkImage(
+                              'https://img.freepik.com/free-photo/woman-sportswear-exercising-outdoors_23-2148965007.jpg?t=st=1706044475~exp=1706045075~hmac=68c156d1ff94c3efd853725b26ef5192db95e11c18c1ae56a1b4ada27f166674'),
+                        ),
+                        const SizedBox(
+                          width: 15,
+                        ),
+                        Text(
+                          'Write a Comment ... ',
+                          style: style12,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
+                InkWell(
+                  onTap: () {},
+                  child: Row(
+                    children: [
+                      const Icon(
+                        FontAwesomeIcons.heart,
+                        color: Colors.red,
+                        size: 18,
+                      ),
+                      const SizedBox(
+                        width: 6,
+                      ),
+                      Text(
+                        'Like',
+                        style: style14.copyWith(
+                            color: const Color.fromARGB(255, 113, 111, 111)),
+                      )
+                    ],
+                  ),
+                )
               ],
-            )
+            ),
           ],
         ),
       ),

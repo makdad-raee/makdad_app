@@ -14,8 +14,10 @@ class CustomReaction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
+    return InkWell(
+      onTap: () {
+        
+      },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 5),
         child: Row(

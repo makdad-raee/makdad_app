@@ -8,9 +8,9 @@ class FeedsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        Card(
+        const Card(
           margin: EdgeInsets.all(8),
           elevation: 10,
           clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -28,7 +28,11 @@ class FeedsBody extends StatelessWidget {
             ),
           ]),
         ),
-        BuildPostItem(),
+        ListView.builder(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            itemCount: 10,
+            itemBuilder: (context, child) => const BuildPostItem()),
       ],
     );
   }

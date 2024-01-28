@@ -16,9 +16,8 @@ class SocialHomeView extends StatelessWidget {
       builder: (context, state) => Scaffold(
         appBar: AppBar(
           actions: [
-            IconButton(onPressed: () {
-              
-            }, icon:const Icon(FontAwesomeIcons.bell)),
+            IconButton(
+                onPressed: () {}, icon: const Icon(FontAwesomeIcons.bell)),
             IconButton(
                 onPressed: () {},
                 icon: const Icon(FontAwesomeIcons.magnifyingGlass))

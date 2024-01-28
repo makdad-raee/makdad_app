@@ -18,7 +18,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   Widget widget;
-   uId = CasheHelper.getData(key: 'uId');
+  uId = CasheHelper.getData(key: 'uId');
   if (uId != '') {
     widget = const SocialHomeView();
   } else {
@@ -37,18 +37,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider<SocialCubit>(create:(context) =>  SocialCubit()..getUserData(),)],
+      providers: [
+        BlocProvider<SocialCubit>(
+          create: (context) => SocialCubit()..getUserData(),
+        )
+      ],
       child: MaterialApp(
         theme: ThemeData(
-         // iconTheme:const IconThemeData(color: Colors.grey),
-          bottomNavigationBarTheme: BottomNavigationBarThemeData(
-            type: BottomNavigationBarType.fixed,
-            selectedItemColor: defaultColor,
-            backgroundColor: Colors.white,
-            elevation: 20.0,
-            unselectedItemColor: Colors.grey
-          )
-        ),
+            // iconTheme:const IconThemeData(color: Colors.grey),
+            bottomNavigationBarTheme: BottomNavigationBarThemeData(
+                type: BottomNavigationBarType.fixed,
+                selectedItemColor: defaultColor,
+                backgroundColor: Colors.white,
+                elevation: 20.0,
+                unselectedItemColor: Colors.grey)),
         debugShowCheckedModeBanner: false,
         home: starWidget,
       ),
