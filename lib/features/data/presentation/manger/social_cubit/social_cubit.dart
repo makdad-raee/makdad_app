@@ -6,6 +6,7 @@ import 'package:makdad_app/features/data/models/user_model.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
 import 'package:makdad_app/features/data/presentation/views/chats/chats.dart';
 import 'package:makdad_app/features/data/presentation/views/feeds/feeds.dart';
+import 'package:makdad_app/features/data/presentation/views/new_post/new_post_view.dart';
 import 'package:makdad_app/features/data/presentation/views/settings/settings.dart';
 import 'package:makdad_app/features/data/presentation/views/users/users.dart';
 
@@ -35,12 +36,14 @@ class SocialCubit extends Cubit<SocialState> {
   List<Widget> screensNave = const [
     FeedsScreen(),
     ChatsScreen(),
+    NewPostView(),
     UsersScreen(),
     SettingsScreen(),
   ];
   List<String> titlels = const [
     'Home',
     'Chats',
+    'add post',
     'Friends',
     'Settings',
   ];
@@ -48,7 +51,7 @@ class SocialCubit extends Cubit<SocialState> {
     if(index==2){
       emit(SocialNewPostBottomNavState());
     }
- else   {currentIndex = index;
+ else {currentIndex = index;
  emit(SocialChangeBottomNavState());}
     
   }

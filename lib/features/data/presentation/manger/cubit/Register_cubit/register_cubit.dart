@@ -34,8 +34,16 @@ class RegisterCubit extends Cubit<RegisterState> {
       required String password,
       required String phone,
       required String uId}) {
-    UserModel model =
-        UserModel(email: email, name: name, phone: phone, uId: uId,isEmailVerfied: false);
+    UserModel model = UserModel(
+      email: email,
+      name: name,
+      phone: phone,
+      bio: 'Write your Bio',
+      uId: uId,
+      isEmailVerfied: false,
+      image:
+          'https://img.freepik.com/free-photo/happiness-wellbeing-confidence-concept-cheerful-attractive-african-american-woman-curly-haircut-cross-arms-chest-self-assured-powerful-pose-smiling-determined-wear-yellow-sweater_176420-35063.jpg?w=740&t=st=1706452962~exp=1706453562~hmac=1073f10f620d9a462e450414b8c4f166d2474c0422a2010fba27e8cb68bb8a16',
+    );
     FirebaseFirestore.instance
         .collection('users')
         .doc(uId)
