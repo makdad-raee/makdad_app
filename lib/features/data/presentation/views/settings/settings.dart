@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:makdad_app/core/utils/componants.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_cubit.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
+import 'package:makdad_app/features/data/presentation/views/settings/photos_flowers_posts_row.dart';
 import 'package:makdad_app/features/data/presentation/views/settings/profile_pic_bio_name.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -27,57 +28,7 @@ class SettingsScreen extends StatelessWidget {
                 bio: cubit.bio,
                 profileImage: cubit.image,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: InkWell(
-                        onTap: () {},
-                        child: const Column(
-                          children: [
-                            Text('100'),
-                            Text('Post'),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: InkWell(
-                        onTap: () {},
-                        child: const Column(
-                          children: [
-                            Text('150'),
-                            Text('Photos'),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: InkWell(
-                        onTap: () {},
-                        child: const Column(
-                          children: [
-                            Text('826'),
-                            Text('Following'),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: InkWell(
-                        onTap: () {},
-                        child: const Column(
-                          children: [
-                            Text('690 K'),
-                            Text('Follwers'),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              const PhotosFlowersPostsCounter(),
               Row(
                 children: [
                   Expanded(
