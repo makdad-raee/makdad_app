@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:makdad_app/core/utils/componants.dart';
-import 'package:makdad_app/features/data/models/user_model.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_cubit.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
 import 'package:makdad_app/features/data/presentation/views/settings/profile_pic_bio_name.dart';
@@ -16,12 +16,17 @@ class SettingsScreen extends StatelessWidget {
     return BlocConsumer<SocialCubit, SocialState>(
       listener: (context, state) {},
       builder: (context, state) {
-        var cubit = SocialCubit.get(context);
+        var cubit = SocialCubit.get(context).model;
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-           const ProfilePicAndNameAndBio(),
+              ProfilePicAndNameAndBio(
+                name: cubit.name!,
+                coverImage: cubit.coverImage,
+                bio: cubit.bio,
+                profileImage: cubit.image,
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 20),
                 child: Row(
@@ -42,8 +47,8 @@ class SettingsScreen extends StatelessWidget {
                         onTap: () {},
                         child: const Column(
                           children: [
-                            Text('100'),
-                            Text('Post'),
+                            Text('150'),
+                            Text('Photos'),
                           ],
                         ),
                       ),
@@ -53,8 +58,8 @@ class SettingsScreen extends StatelessWidget {
                         onTap: () {},
                         child: const Column(
                           children: [
-                            Text('100'),
-                            Text('Post'),
+                            Text('826'),
+                            Text('Following'),
                           ],
                         ),
                       ),
@@ -64,8 +69,8 @@ class SettingsScreen extends StatelessWidget {
                         onTap: () {},
                         child: const Column(
                           children: [
-                            Text('100'),
-                            Text('Post'),
+                            Text('690 K'),
+                            Text('Follwers'),
                           ],
                         ),
                       ),
@@ -76,10 +81,35 @@ class SettingsScreen extends StatelessWidget {
               Row(
                 children: [
                   Expanded(
-                    child: defaultTextbutton(
-                      text: 'Edit Profile',
+                    child: OutlinedButton(
+                      style: ButtonStyle(
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ))),
+                      child: const Text(
+                        'Add Photos',
+                        style: TextStyle(color: defaulColor),
+                      ),
                       onPressed: () {},
                     ),
+                  ),
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  OutlinedButton(
+                    style: ButtonStyle(
+                        shape:
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ))),
+                    child: const Icon(
+                      FontAwesomeIcons.penToSquare,
+                      color: defaulColor,
+                    ),
+                    onPressed: () {},
                   )
                 ],
               )

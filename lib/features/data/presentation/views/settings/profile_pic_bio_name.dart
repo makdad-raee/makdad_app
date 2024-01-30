@@ -6,12 +6,12 @@ class ProfilePicAndNameAndBio extends StatelessWidget {
     super.key,
     this.profileImage,
     this.coverImage,
-    this.name,
+    required this.name,
     this.bio,
   });
   final String? profileImage;
   final String? coverImage;
-  final String? name;
+  final String name;
   final String? bio;
 
   @override
@@ -55,9 +55,8 @@ class ProfilePicAndNameAndBio extends StatelessWidget {
         const SizedBox(
           height: 5,
         ),
-         Text(
-          name??
-          'Sara Ahmed',
+        Text(
+          name,
           style: style22,
         ),
         Text(

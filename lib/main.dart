@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:makdad_app/core/utils/cashe_helper.dart';
 import 'package:makdad_app/core/utils/constant.dart';
 import 'package:makdad_app/core/utils/simple_bloc_observer.dart';
+import 'package:makdad_app/features/data/models/user_model.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_cubit.dart';
 import 'package:makdad_app/features/data/presentation/views/home_views.dart';
 import 'package:makdad_app/features/data/presentation/views/social_home_view.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<SocialCubit>(
-          create: (context) => SocialCubit()..getUserData(),
+          create: (context) => SocialCubit(UserModel())..getUserData(),
         )
       ],
       child: MaterialApp(
