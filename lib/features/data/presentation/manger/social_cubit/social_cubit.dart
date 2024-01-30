@@ -11,17 +11,25 @@ import 'package:makdad_app/features/data/presentation/views/settings/settings.da
 import 'package:makdad_app/features/data/presentation/views/users/users.dart';
 
 class SocialCubit extends Cubit<SocialState> {
-  SocialCubit() : super(SocialIntialState());
+  SocialCubit() : super(SocialIntialState()
+  );
+  
   static SocialCubit get(context) {
     return BlocProvider.of(context);
   }
 
-  UserModel? userModel;
+   static UserModel? model;
+   //String name=model!.name!;
+  static getUserModel(UserModel user ){
+    return user;
+  }
+
   void getUserData() {
     emit(SocialGetUserLoadinState());
     FirebaseFirestore.instance.collection('users').doc(uId).get().then((value) {
       print(value.data());
-      emit(SocialGetUserSuccesState());
+      model=UserModel.fromJson(value.data()!);
+      emit(SocialGetUserSuccesState(model: model!));
     }).catchError((error) {
       print(error.toString());
       emit(
@@ -34,10 +42,10 @@ class SocialCubit extends Cubit<SocialState> {
 
   int currentIndex = 0;
   List<Widget> screensNave = const [
-    FeedsScreen(),
-    ChatsScreen(),
-    NewPostView(),
-    UsersScreen(),
+     FeedsScreen(),
+     ChatsScreen(),
+     NewPostView(),
+     UsersScreen(),
     SettingsScreen(),
   ];
   List<String> titlels = const [
@@ -55,4 +63,5 @@ class SocialCubit extends Cubit<SocialState> {
  emit(SocialChangeBottomNavState());}
     
   }
+ // SocialCubit get(context)=>BlocProvider.of(context);
 }

@@ -10,7 +10,7 @@ Widget defaultTextbutton({
 }) {
   return Container(
     width: double.infinity,
-    height: 55,
+    height: 40,
     decoration: BoxDecoration(
       color: color,
       borderRadius: BorderRadius.circular(12),
@@ -19,7 +19,7 @@ Widget defaultTextbutton({
       onPressed: onPressed,
       child: Text(
         text!,
-        style: const TextStyle(color: Colors.white, fontSize: 20),
+        style: const TextStyle(color: Colors.white, fontSize: 18),
       ),
     ),
   );

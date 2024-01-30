@@ -14,8 +14,10 @@ class SocialHomeView extends StatelessWidget {
     var cubit = SocialCubit.get(context);
     return BlocConsumer<SocialCubit, SocialState>(
       listener: (context, state) {
-        if(state is SocialNewPostBottomNavState){
-Navigator.of(context).push(MaterialPageRoute(builder: (context) =>const NewPostView(),));
+        if (state is SocialNewPostBottomNavState) {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const NewPostView(),
+          ));
         }
       },
       builder: (context, state) => Scaffold(
