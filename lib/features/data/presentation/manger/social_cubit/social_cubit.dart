@@ -11,14 +11,14 @@ import 'package:makdad_app/features/data/presentation/views/settings/settings.da
 import 'package:makdad_app/features/data/presentation/views/users/users.dart';
 
 class SocialCubit extends Cubit<SocialState> {
-  SocialCubit(this.model) : super(SocialIntialState()
+  SocialCubit(this.usermodel) : super(SocialIntialState()
   );
   
   static SocialCubit get(context) {
     return BlocProvider.of(context);
   }
 
-   UserModel model;
+   UserModel usermodel;
  
 
 
@@ -26,8 +26,8 @@ class SocialCubit extends Cubit<SocialState> {
     emit(SocialGetUserLoadinState());
     FirebaseFirestore.instance.collection('users').doc(uId).get().then((value) {
       print(value.data());
-      model=UserModel.fromJson(value.data()!);
-      emit(SocialGetUserSuccesState(model: model));
+      usermodel=UserModel.fromJson(value.data()!);
+      emit(SocialGetUserSuccesState(model: usermodel));
     }).catchError((error) {
       print(error.toString());
       emit(

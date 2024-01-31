@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:makdad_app/core/utils/componants.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_cubit.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
+import 'package:makdad_app/features/data/presentation/views/settings/edit_profile.dart';
 import 'package:makdad_app/features/data/presentation/views/settings/photos_flowers_posts_row.dart';
 import 'package:makdad_app/features/data/presentation/views/settings/profile_pic_bio_name.dart';
 
@@ -17,7 +18,7 @@ class SettingsScreen extends StatelessWidget {
     return BlocConsumer<SocialCubit, SocialState>(
       listener: (context, state) {},
       builder: (context, state) {
-        var cubit = SocialCubit.get(context).model;
+        var cubit = SocialCubit.get(context).usermodel;
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -60,7 +61,11 @@ class SettingsScreen extends StatelessWidget {
                       FontAwesomeIcons.penToSquare,
                       color: defaulColor,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const EditProfileView(),
+                      ));
+                    },
                   )
                 ],
               )

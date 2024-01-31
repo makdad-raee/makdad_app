@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 const defaulColor = Colors.green;
 
@@ -81,3 +82,18 @@ Color choosToastColor({required ToastState state}) {
   }
   return color;
 }
+
+PreferredSizeWidget? defaultAppar({
+  required BuildContext context,
+  String? title,
+  List<Widget>? action,
+}) =>
+    AppBar(
+      title: Text(title!),
+      leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: const Icon(FontAwesomeIcons.angleLeft)),
+          actions: action,
+    );
