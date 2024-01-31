@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,7 +6,6 @@ import 'package:makdad_app/core/utils/componants.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_cubit.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
 import 'package:makdad_app/features/data/presentation/views/settings/profile_pic_bio_name.dart';
-import 'package:image_picker/image_picker.dart';
 
 class EditProfileView extends StatelessWidget {
   const EditProfileView({super.key});
@@ -20,7 +18,11 @@ class EditProfileView extends StatelessWidget {
     return BlocConsumer<SocialCubit, SocialState>(
       listener: (context, state) {},
       builder: (context, state) {
-        var userMode = SocialCubit.get(context).usermodel;
+        var userModel = SocialCubit.get(context).usermodel;
+        var profileImage = SocialCubit.get(context).profileimage;
+        var coverImage = SocialCubit.get(context).coverImage;
+        nameController.text = userModel.name!;
+        bioController.text = userModel.bio!;
         return Scaffold(
           appBar:
               defaultAppar(context: context, title: 'Edit profile', action: [
@@ -40,11 +42,21 @@ class EditProfileView extends StatelessWidget {
             child: Column(
               children: [
                 ProfilePicAndNameAndBio(
-                  name: userMode.name!,
-                  coverImage: userMode.coverImage,
-                  bio: userMode.bio,
-                  profileImage: userMode.image,
+                  backgroundImageCover:
+                      coverImage != null ? FileImage(coverImage) : null,
+                  name: userModel.name!,
+                  coverImage: userModel.coverImage,
+                  bio: userModel.bio,
+                  profileImage: userModel.image,
                   isEditView: true,
+                  backgroundImageProfile:
+                      profileImage != null ? FileImage(profileImage) : null,
+                  onPressedProfile: () {
+                    SocialCubit.get(context).pickProfileImage();
+                  },
+                  onPressedCover: () {
+                    SocialCubit.get(context).pickCoverImage();
+                  },
                 ),
                 const SizedBox(
                   height: 15,
@@ -65,7 +77,7 @@ class EditProfileView extends StatelessWidget {
                   height: 12,
                 ),
                 defaulatTextFormField(
-                  controller: nameController,
+                  controller: bioController,
                   type: TextInputType.text,
                   hinttext: 'Bio',
                   prefixIcon: const Icon(FontAwesomeIcons.circleInfo),

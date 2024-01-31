@@ -1,6 +1,10 @@
+
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:makdad_app/core/utils/constant.dart';
 import 'package:makdad_app/features/data/models/user_model.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
@@ -61,5 +65,29 @@ class SocialCubit extends Cubit<SocialState> {
  emit(SocialChangeBottomNavState());}
     
   }
- // SocialCubit get(context)=>BlocProvider.of(context);
+  final ImagePicker picker=ImagePicker();
+   File? profileimage;
+Future<void> pickProfileImage()async{
+  final pickedImage=await picker.pickImage(source: ImageSource.gallery);
+  if (pickedImage!=null) {
+    profileimage=File(pickedImage.path);
+    emit(SocialPickedProfileImageSuccesState());
+  }
+  else{
+    print('No  Image Selected');
+    emit(SocialPickedProfileImageSuccesState());
+  }
+}
+   File? coverImage;
+Future<void> pickCoverImage()async{
+  final pickedImage=await picker.pickImage(source: ImageSource.gallery);
+  if (pickedImage!=null) {
+    coverImage=File(pickedImage.path);
+    emit(SocialPickedCoverImageSuccesState());
+  }
+  else{
+    print('No  Image Selected');
+    emit(SocialPickedCoverImageErrorState());
+  }
+}
 }

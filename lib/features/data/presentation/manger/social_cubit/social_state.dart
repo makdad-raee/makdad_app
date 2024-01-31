@@ -17,5 +17,11 @@ class SocialGetUserErrorState extends SocialState {
 
   SocialGetUserErrorState({required this.error});
 }
-class SocialChangeBottomNavState extends SocialState{}
-class SocialNewPostBottomNavState extends SocialState{}
+
+class SocialChangeBottomNavState extends SocialState {}
+
+class SocialNewPostBottomNavState extends SocialState {}
+class SocialPickedProfileImageSuccesState extends SocialState {}
+class SocialPickedProfileImageErrorState extends SocialState {}
+class SocialPickedCoverImageSuccesState extends SocialState{}
+class SocialPickedCoverImageErrorState extends SocialState{}
