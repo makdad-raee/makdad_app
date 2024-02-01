@@ -95,5 +95,6 @@ PreferredSizeWidget? defaultAppar({
             Navigator.of(context).pop();
           },
           icon: const Icon(FontAwesomeIcons.angleLeft)),
-          actions: action,
+      actions: action,
     );
+Widget defaultIndicator()=>const RefreshProgressIndicator(color: defaulColor,);
