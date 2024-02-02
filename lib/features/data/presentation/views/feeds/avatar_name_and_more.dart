@@ -5,8 +5,10 @@ import 'package:makdad_app/core/utils/constant.dart';
 class AvatarNameAndMore extends StatelessWidget {
   const AvatarNameAndMore({
     super.key,
+    this.isCreate = false,
   });
 
+  final bool isCreate;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -32,31 +34,38 @@ class AvatarNameAndMore extends StatelessWidget {
                   const SizedBox(
                     width: 5,
                   ),
-                  const Icon(
-                    FontAwesomeIcons.solidCircleCheck,
-                    color: Colors.blue,
-                    size: 18,
-                  )
+                  isCreate
+                      ? const SizedBox()
+                      : const Icon(
+                          FontAwesomeIcons.solidCircleCheck,
+                          color: Colors.blue,
+                          size: 18,
+                        ),
                 ],
               ),
-              Text(
-                'January 30/5/2024 at 11 PM',
-                style: style12!.copyWith(height: 1.4),
-              ),
+              isCreate
+                  ? const Text(
+                      'Public',
+                      style:
+                          TextStyle(color: Color.fromARGB(255, 112, 108, 108)),
+                    )
+                  : Text(
+                      'January 30/5/2024 at 11 PM',
+                      style: style12!.copyWith(height: 1.4),
+                    ),
             ],
           ),
         ),
         const SizedBox(
           height: 15,
         ),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(Icons.more_horiz),
-        ),
+        !isCreate
+            ? IconButton(
+                onPressed: () {},
+                icon: const Icon(Icons.more_horiz),
+              )
+            : const SizedBox(),
       ],
     );
   }
 }
-
-
-

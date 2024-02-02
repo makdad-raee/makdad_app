@@ -88,8 +88,6 @@ class SocialCubit extends Cubit<SocialState> {
     }
   }
 
-
-
   void uploadProfileImage({
     required String name,
     required String phone,
@@ -103,7 +101,12 @@ class SocialCubit extends Cubit<SocialState> {
         .then((value) {
       value.ref.getDownloadURL().then((value) {
         emit(SocialUploadProfileImageSuccesState());
-        updateUser(name: name, phone: phone, bio: bio,profileImage: value);
+        updateUser(
+          name: name,
+          phone: phone,
+          bio: bio,
+          profileImage: value,
+        );
         print(value);
       }).catchError((error) {
         emit(SocialUploadProfileImageErrorState());
@@ -113,10 +116,8 @@ class SocialCubit extends Cubit<SocialState> {
     });
   }
 
-
-
   void uploadCoverImage({
-      required String name,
+    required String name,
     required String phone,
     required String bio,
   }) {
@@ -127,8 +128,8 @@ class SocialCubit extends Cubit<SocialState> {
         .putFile(coverImage!)
         .then((value) {
       value.ref.getDownloadURL().then((value) {
-       emit(SocialUploadCoverImageSuccesState());
-        updateUser(name: name, phone: phone, bio: bio,coverImage: value);
+        emit(SocialUploadCoverImageSuccesState());
+        updateUser(name: name, phone: phone, bio: bio, coverImage: value);
 
         print(value);
       }).catchError((error) {
