@@ -234,10 +234,11 @@ class SocialCubit extends Cubit<SocialState> {
   }
 
   List<PostModel> posts = [];
+  List<String> postId = [];
   void getPosts() {
     FirebaseFirestore.instance.collection('Posts').get().then((value) {
       value.docs.forEach((element) {
-       print( element.id);
+        postId.add(element.id);
         posts.add(PostModel.fromJson(element.data()));
       });
       emit(SocialGetPostsSuccesState());
