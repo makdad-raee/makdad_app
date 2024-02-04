@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:makdad_app/core/utils/constant.dart';
+import 'package:makdad_app/features/data/models/post_model.dart';
 import 'package:makdad_app/features/data/models/user_model.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
 import 'package:makdad_app/features/data/presentation/views/chats/chats.dart';
@@ -165,6 +166,96 @@ class SocialCubit extends Cubit<SocialState> {
       getUserData();
     }).catchError((error) {
       emit(SocialUserUpdateErrorState());
+    });
+  }
+
+  File? postImage;
+  Future<void> pickPostImage() async {
+    final pickedImage = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      postImage = File(pickedImage.path);
+      emit(SocialPickedPostImageSuccesState());
+    } else {
+      print('No  Image Selected');
+      emit(SocialPickedPostImageSuccesState());
+    }
+  }
+
+  void uploadImagePost({
+    required String? dateTime,
+    required String? postText,
+  }) {
+    emit(SocialCreatePostLoadingState());
+    FirebaseStorage.instance
+        .ref()
+        .child('Posts/${Uri.file(postImage!.path).pathSegments.last}')
+        .putFile(postImage!)
+        .then((value) {
+      value.ref.getDownloadURL().then((value) {
+        emit(SocialUploadProfileImageSuccesState());
+
+        print(value);
+        createNewPost(dateTime: dateTime, postText: postText, postImage: value);
+      }).catchError((error) {
+        emit(SocialCreatePostErrorState());
+      });
+    }).catchError((error) {
+      emit(SocialCreatePostErrorState());
+    });
+  }
+
+  void createNewPost({
+    required String? dateTime,
+    required String? postText,
+    String? postImage,
+  }) {
+    emit(SocialCreatePostLoadingState());
+    PostModel model = PostModel(
+      name: usermodel.name,
+      image: usermodel.image,
+      uId: usermodel.uId,
+      dateTime: dateTime,
+      postImage: postImage ?? '',
+      postText: postText,
+    );
+    FirebaseFirestore.instance
+        .collection('Posts')
+        .add(model.toMap())
+        .then((value) {
+      emit(SocialCreatePostSuccesState());
+    }).catchError((error) {
+      emit(SocialCreatePostErrorState());
+    });
+  }
+
+  void removePostImage() {
+    postImage = null;
+    emit(SocialRemovePostImageState());
+  }
+
+  List<PostModel> posts = [];
+  void getPosts() {
+    FirebaseFirestore.instance.collection('Posts').get().then((value) {
+      value.docs.forEach((element) {
+       print( element.id);
+        posts.add(PostModel.fromJson(element.data()));
+      });
+      emit(SocialGetPostsSuccesState());
+    }).catchError((error) {
+      emit(SocialGetPostsErrorState(error: error.toString()));
+    });
+  }
+
+  void likePost(String postId) {
+    FirebaseFirestore.instance
+        .collection('Posts')
+        .doc(postId)
+        .collection('likes')
+        .doc(usermodel.uId)
+        .set({'like': true}).then((value) {
+      emit(SocialLikePostsSuccesState());
+    }).catchError((error) {
+      emit(SocialLikePostsErrorState(error: error.toString()));
     });
   }
 }

@@ -6,17 +6,22 @@ class AvatarNameAndMore extends StatelessWidget {
   const AvatarNameAndMore({
     super.key,
     this.isCreate = false,
+     this.name,
+     this.profileImage,  this.dateTime,
+ 
   });
+  final String? name;
+  final String? profileImage;
+  final String? dateTime;
 
   final bool isCreate;
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const CircleAvatar(
+        CircleAvatar(
           radius: 24,
-          backgroundImage: NetworkImage(
-              'https://img.freepik.com/free-photo/woman-sportswear-exercising-outdoors_23-2148965007.jpg?t=st=1706044475~exp=1706045075~hmac=68c156d1ff94c3efd853725b26ef5192db95e11c18c1ae56a1b4ada27f166674'),
+          backgroundImage: NetworkImage(profileImage??''),
         ),
         const SizedBox(
           width: 15,
@@ -28,7 +33,7 @@ class AvatarNameAndMore extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'Sara Ahmed',
+                    name??'',
                     style: style18!.copyWith(height: 1.4),
                   ),
                   const SizedBox(
@@ -50,7 +55,7 @@ class AvatarNameAndMore extends StatelessWidget {
                           TextStyle(color: Color.fromARGB(255, 112, 108, 108)),
                     )
                   : Text(
-                      'January 30/5/2024 at 11 PM',
+                      dateTime??'',
                       style: style12!.copyWith(height: 1.4),
                     ),
             ],

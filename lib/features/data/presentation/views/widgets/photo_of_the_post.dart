@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 
 class PhotoOfThePost extends StatelessWidget {
   const PhotoOfThePost({
-    super.key,
+    super.key, required this.photoPost,
   });
+  final String? photoPost;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 150,
+    return  Container(
+      height: 350,
       width: double.infinity,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(4),
-        image: const DecorationImage(
+        image:  DecorationImage(
           fit: BoxFit.cover,
           image: NetworkImage(
-            'https://img.freepik.com/free-photo/medium-shot-woman-eating-delicious-pizza_23-2150280218.jpg?w=740&t=st=1706081529~exp=1706082129~hmac=fe7bd96859ecaf7cf9c0be90d7eb1f3bb7191c96d6a43f69a6ea8b51aba537d0',
+           photoPost!,
           ),
         ),
       ),
