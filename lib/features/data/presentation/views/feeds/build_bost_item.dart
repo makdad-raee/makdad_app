@@ -25,12 +25,9 @@ class BuildPostItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocBuilder<SocialCubit, SocialState>(
       builder: (context, state) {
-        Widget startWidget=const CircularProgressIndicator();
-if (SocialCubit.get(context).posts.isNotEmpty) {
-  startWidget=Column(
+        return Column(
           children: [
             Card(
               margin: const EdgeInsets.all(8),
@@ -66,18 +63,18 @@ if (SocialCubit.get(context).posts.isNotEmpty) {
                     ),
                     if (postModel.postImage != '')
                       PhotoOfThePost(photoPost: postModel.postImage),
-                    const Padding(
-                      padding: EdgeInsets.only(top: 10),
+                     Padding(
+                      padding: const EdgeInsets.only(top: 10),
                       child: Row(
                         children: [
                           Align(
                               alignment: Alignment.topLeft,
                               child: CustomReaction(
-                                text: '0',
+                                text: '${ SocialCubit.get(context).likesCount[index]??''}',
                                 icon: FontAwesomeIcons.heart,
                               )),
-                          Spacer(),
-                          Align(
+                          const Spacer(),
+                          const Align(
                             alignment: Alignment.topRight,
                             child: Expanded(
                               child: CustomReaction(
@@ -145,8 +142,6 @@ if (SocialCubit.get(context).posts.isNotEmpty) {
             ),
           ],
         );
-}
-        return  startWidget;
       },
     );
   }
