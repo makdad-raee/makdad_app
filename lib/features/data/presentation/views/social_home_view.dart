@@ -21,6 +21,7 @@ class SocialHomeView extends StatelessWidget {
         }
       },
       builder: (context, state) => Scaffold(
+        resizeToAvoidBottomInset: true,
         appBar: AppBar(
           actions: [
             IconButton(

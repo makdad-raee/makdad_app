@@ -1,29 +1,74 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:makdad_app/core/utils/constant.dart';
+import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_cubit.dart';
+import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
 
 class CommentsSheet extends StatelessWidget {
-  const CommentsSheet({super.key});
+  const CommentsSheet({super.key, required this.index});
+  final int index;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 12),
-      child: Column(
-        children: [
-          const CustomCommentItem(),
-          SizedBox(
-            height: 48,
-            child: TextFormField(
-              decoration: InputDecoration(
-                  suffixIcon: const Icon(FontAwesomeIcons.paperPlane),
-                  label: const Text('Write Your Comment'),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(32),
-                  )),
-            ),
-          ),
-        ],
+      child: Expanded(
+        child: BlocConsumer<SocialCubit, SocialState>(
+          listener: (context, state) {},
+          builder: (context, state) {
+            var cubit=SocialCubit.get(context);
+            return Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.all(12.0),
+                child: Row(
+                  children: [
+                    Icon(FontAwesomeIcons.heart),
+                    SizedBox(
+                      width: 12,
+                    ),
+                    Text(
+                      'sara Ahmad and 300 others',
+                      style: style16,
+                    ),
+                    SizedBox(
+                      width: 12,
+                    ),
+                    Icon(FontAwesomeIcons.caretRight),
+                    Spacer(),
+                    Icon(FontAwesomeIcons.heart),
+                  ],
+                ),
+              ),
+              Expanded(
+                  child: ListView.builder(
+                //physics: NeverScrollableScrollPhysics(),
+                itemCount: 15,
+                itemBuilder: (context, index) => const CustomCommentItem(),
+              )),
+              SizedBox(
+                height: 48,
+                child: Expanded(
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        //  suffixIcon: const Icon(FontAwesomeIcons.paperPlane),
+                        label: const Text('Write Your Comment'),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(32),
+                        )),
+                  ),
+                ),
+              ),
+              IconButton(
+                  onPressed: () {
+                   cubit.commentPost(cubit.postId[index], 'default comment');
+                  },
+                  icon: const Icon(FontAwesomeIcons.paperPlane))
+            ],
+          );
+          },
+        ),
       ),
     );
   }

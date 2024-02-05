@@ -76,13 +76,13 @@ class BuildPostItem extends StatelessWidget {
                                 icon: FontAwesomeIcons.heart,
                               )),
                           const Spacer(),
-                          const Align(
+                           Align(
                             alignment: Alignment.topRight,
                             child: Expanded(
                               child: CustomReaction(
                                   icon: FontAwesomeIcons.comment,
                                   color: Colors.amber,
-                                  text: '0 comments'),
+                                  text: '${SocialCubit.get(context).commentCount[index]} comments'),
                             ),
                           ),
                         ],
@@ -99,7 +99,7 @@ class BuildPostItem extends StatelessWidget {
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(18)),
                                 context: context,
-                                builder: (context) => const CommentsSheet(),
+                                builder: (context) =>  CommentsSheet(index: index),
                               );
                             },
                             child: Row(
