@@ -72,10 +72,20 @@ class SocialGetPostsErrorState extends SocialState {
   SocialGetPostsErrorState({required this.error});
 }
 
+//Posts Like
 class SocialLikePostsSuccesState extends SocialState {}
 
 class SocialLikePostsErrorState extends SocialState {
   final String error;
 
   SocialLikePostsErrorState({required this.error});
+}
+
+//
+class SocialCommentPostsSuccesState extends SocialState {}
+
+class SocialCommentPostsErrorState extends SocialState {
+  final String error;
+
+  SocialCommentPostsErrorState({required this.error});
 }

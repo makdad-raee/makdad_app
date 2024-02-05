@@ -6,6 +6,7 @@ import 'package:makdad_app/features/data/models/post_model.dart';
 import 'package:makdad_app/features/data/models/user_model.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_cubit.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
+import 'package:makdad_app/features/data/presentation/views/comments/modal_bottom_comment.dart';
 import 'package:makdad_app/features/data/presentation/views/feeds/avatar_name_and_more.dart';
 import 'package:makdad_app/features/data/presentation/views/widgets/custom_reaction.dart';
 import 'package:makdad_app/features/data/presentation/views/widgets/diveder.dart';
@@ -63,14 +64,15 @@ class BuildPostItem extends StatelessWidget {
                     ),
                     if (postModel.postImage != '')
                       PhotoOfThePost(photoPost: postModel.postImage),
-                     Padding(
+                    Padding(
                       padding: const EdgeInsets.only(top: 10),
                       child: Row(
                         children: [
                           Align(
                               alignment: Alignment.topLeft,
                               child: CustomReaction(
-                                text: '${ SocialCubit.get(context).likesCount[index]??''}',
+                                text:
+                                    '${SocialCubit.get(context).likesCount[index] ?? ''}',
                                 icon: FontAwesomeIcons.heart,
                               )),
                           const Spacer(),
@@ -91,7 +93,15 @@ class BuildPostItem extends StatelessWidget {
                       children: [
                         Expanded(
                           child: InkWell(
-                            onTap: () {},
+                            onTap: () {
+                              showModalBottomSheet(
+                                isScrollControlled: true,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(18)),
+                                context: context,
+                                builder: (context) => const CommentsSheet(),
+                              );
+                            },
                             child: Row(
                               children: [
                                 CircleAvatar(
