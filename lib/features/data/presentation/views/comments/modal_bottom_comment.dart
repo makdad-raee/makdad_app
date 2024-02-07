@@ -5,10 +5,16 @@ import 'package:makdad_app/core/utils/constant.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_cubit.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
 
-class CommentsSheet extends StatelessWidget {
+class CommentsSheet extends StatefulWidget {
   const CommentsSheet({super.key, required this.index});
   final int index;
 
+  @override
+  State<CommentsSheet> createState() => _CommentsSheetState();
+}
+
+class _CommentsSheetState extends State<CommentsSheet> {
+  GlobalKey<FormState> formkey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -17,56 +23,68 @@ class CommentsSheet extends StatelessWidget {
         child: BlocConsumer<SocialCubit, SocialState>(
           listener: (context, state) {},
           builder: (context, state) {
-            var cubit=SocialCubit.get(context);
-            return Column(
-            children: [
-              const Padding(
-                padding: EdgeInsets.all(12.0),
-                child: Row(
-                  children: [
-                    Icon(FontAwesomeIcons.heart),
-                    SizedBox(
-                      width: 12,
+            var cubit = SocialCubit.get(context);
+            return Form(
+              key: formkey,
+              child: Column(
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.all(12.0),
+                    child: Row(
+                      children: [
+                        Icon(FontAwesomeIcons.heart),
+                        SizedBox(
+                          width: 12,
+                        ),
+                        Text(
+                          'sara Ahmad and 300 others',
+                          style: style16,
+                        ),
+                        SizedBox(
+                          width: 12,
+                        ),
+                        Icon(FontAwesomeIcons.caretRight),
+                        Spacer(),
+                        Icon(FontAwesomeIcons.heart),
+                      ],
                     ),
-                    Text(
-                      'sara Ahmad and 300 others',
-                      style: style16,
-                    ),
-                    SizedBox(
-                      width: 12,
-                    ),
-                    Icon(FontAwesomeIcons.caretRight),
-                    Spacer(),
-                    Icon(FontAwesomeIcons.heart),
-                  ],
-                ),
-              ),
-              Expanded(
-                  child: ListView.builder(
-                //physics: NeverScrollableScrollPhysics(),
-                itemCount: 15,
-                itemBuilder: (context, index) => const CustomCommentItem(),
-              )),
-              SizedBox(
-                height: 48,
-                child: Expanded(
-                  child: TextFormField(
-                    decoration: InputDecoration(
-                        //  suffixIcon: const Icon(FontAwesomeIcons.paperPlane),
-                        label: const Text('Write Your Comment'),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(32),
-                        )),
                   ),
-                ),
+                  Expanded(
+                      child: ListView.builder(
+                    //physics: NeverScrollableScrollPhysics(),
+                    itemCount: 15,
+                    itemBuilder: (context, index) => const CustomCommentItem(),
+                  )),
+                  SizedBox(
+                    height: 48,
+                    child: Expanded(
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'must not be empty ';
+                          }
+                          return null;
+                        },
+                        decoration: InputDecoration(
+                            //  suffixIcon: const Icon(FontAwesomeIcons.paperPlane),
+                            label: const Text('Write Your Comment'),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(32),
+                            )),
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                      onPressed: () {
+                        if (formkey.currentState!.validate()) {
+                          cubit.commentPost(postId: 
+                              cubit.postId[widget.index],commentText:  'default comment');
+                        }
+                      },
+                      icon: const Icon(FontAwesomeIcons.paperPlane))
+                ],
               ),
-              IconButton(
-                  onPressed: () {
-                   cubit.commentPost(cubit.postId[index], 'default comment');
-                  },
-                  icon: const Icon(FontAwesomeIcons.paperPlane))
-            ],
-          );
+            );
           },
         ),
       ),

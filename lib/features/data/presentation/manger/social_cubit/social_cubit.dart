@@ -268,7 +268,7 @@ class SocialCubit extends Cubit<SocialState> {
     });
   }
 
-  void commentPost(String postId, String commentText) {
+  void commentPost({required String postId, required String commentText}) {
     FirebaseFirestore.instance
         .collection('Posts')
         .doc(postId)
@@ -276,6 +276,7 @@ class SocialCubit extends Cubit<SocialState> {
         .doc(usermodel.uId)
         .set({
       'comment': true,
+      'commentText':commentText,
     }).then((value) {
       emit(SocialCommentPostsSuccesState());
     }).catchError((error) {
