@@ -276,6 +276,7 @@ class SocialCubit extends Cubit<SocialState> {
         .doc(usermodel.uId)
         .set({
       'comment': true,
+      
       'commentText':commentText,
     }).then((value) {
       emit(SocialCommentPostsSuccesState());
