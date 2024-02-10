@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:makdad_app/core/utils/constant.dart';
+import 'package:makdad_app/features/data/models/comment_model.dart';
 import 'package:makdad_app/features/data/models/post_model.dart';
 import 'package:makdad_app/features/data/models/user_model.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
@@ -59,6 +60,9 @@ class SocialCubit extends Cubit<SocialState> {
     if (index == 2) {
       emit(SocialNewPostBottomNavState());
     } else {
+      if (index==1) {
+        getAllUsers();
+      }
       currentIndex = index;
       emit(SocialChangeBottomNavState());
     }
@@ -269,19 +273,56 @@ class SocialCubit extends Cubit<SocialState> {
   }
 
   void commentPost({required String postId, required String commentText}) {
+    var now = DateTime.now();
+    var commentModel = CommentModel(
+        name: usermodel.name,
+        commentText: commentText,
+        dateTime: now.toString(),
+        image: usermodel.image,
+        uId: usermodel.uId);
     FirebaseFirestore.instance
         .collection('Posts')
         .doc(postId)
         .collection('Comments')
-        .doc(usermodel.uId)
-        .set({
-      'comment': true,
-      
-      'commentText':commentText,
-    }).then((value) {
+        .add(commentModel.toMap())
+        .then((value) {
       emit(SocialCommentPostsSuccesState());
     }).catchError((error) {
       emit(SocialCommentPostsErrorState(error: error));
+    });
+  }
+
+  List<CommentModel> comments = [];
+  void getAllComments({required String postId}) {
+    //   emit(SocialGetALLCommentLoadinState());
+    FirebaseFirestore.instance
+        .collection('Posts')
+        .doc(postId)
+        .collection('Comments')
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        comments.add(CommentModel.fromJson(element.data()));
+
+        //print(comments);
+      });
+      emit(SocialGetALLCommentSuccesState());
+    }).catchError((error) {
+      emit(SocialGetALLCommentErrorState(error: error.toString()));
+    });
+  }
+
+  List<UserModel> users = [];
+  void getAllUsers() {
+    users=[];
+    FirebaseFirestore.instance.collection('users').get().then((value) {
+      value.docs.forEach((element) {
+        if(element.data()['uId']!=usermodel.uId)
+        users.add(UserModel.fromJson(element.data()));
+      });
+      emit(SocialGetALLUserSuccesState());
+    }).catchError((error) {
+      emit(SocialGetALLUserErrorState(error: error.toString()));
     });
   }
 }

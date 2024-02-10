@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         BlocProvider<SocialCubit>(
           create: (context) => SocialCubit(UserModel())
             ..getUserData()
-            ..getPosts(),
+            ..getPosts()..getAllUsers(),
         )
       ],
       child: MaterialApp(

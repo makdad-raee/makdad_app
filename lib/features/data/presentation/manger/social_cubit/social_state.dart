@@ -19,6 +19,27 @@ class SocialGetUserErrorState extends SocialState {
   SocialGetUserErrorState({required this.error});
 }
 
+//Get All user data
+class SocialGetALLUserLoadinState extends SocialState {}
+
+class SocialGetALLUserSuccesState extends SocialState {}
+
+class SocialGetALLUserErrorState extends SocialState {
+  final String error;
+
+  SocialGetALLUserErrorState({required this.error});
+}
+//Get All Comment
+class SocialGetALLCommentLoadinState extends SocialState {}
+
+class SocialGetALLCommentSuccesState extends SocialState {}
+
+class SocialGetALLCommentErrorState extends SocialState {
+  final String error;
+
+  SocialGetALLCommentErrorState({required this.error});
+}
+
 //Bottom navigation bar
 class SocialChangeBottomNavState extends SocialState {}
 

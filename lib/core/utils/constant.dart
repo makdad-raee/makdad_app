@@ -30,3 +30,4 @@ const TextStyle style14 =  TextStyle(
 );
 TextStyle? style12 =
     const TextStyle(fontSize: 12, color: Color.fromARGB(255, 97, 96, 96));
+const double chatRadiusCirculer=12.0;
