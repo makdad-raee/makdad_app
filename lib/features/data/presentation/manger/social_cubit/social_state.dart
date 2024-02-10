@@ -29,6 +29,7 @@ class SocialGetALLUserErrorState extends SocialState {
 
   SocialGetALLUserErrorState({required this.error});
 }
+
 //Get All Comment
 class SocialGetALLCommentLoadinState extends SocialState {}
 
@@ -110,3 +111,17 @@ class SocialCommentPostsErrorState extends SocialState {
 
   SocialCommentPostsErrorState({required this.error});
 }
+
+//chats State
+class SocialSendMessageSuccesState extends SocialState {}
+
+class SocialSendMessageErrorState extends SocialState {
+  final String error;
+
+  SocialSendMessageErrorState({required this.error});
+}
+
+class SocialReciveMessageSuccesState extends SocialState {}
+
+
+
