@@ -300,16 +300,13 @@ class SocialCubit extends Cubit<SocialState> {
         .collection('Posts')
         .doc(postId)
         .collection('Comments')
-        .get()
-        .then((value) {
-      for (var element in value.docs) {
+        .snapshots()
+        .listen((event) {
+      comments = [];
+      for (var element in event.docs) {
         comments.add(CommentModel.fromJson(element.data()));
-
-        //print(comments);
       }
       emit(SocialGetALLCommentSuccesState());
-    }).catchError((error) {
-      emit(SocialGetALLCommentErrorState(error: error.toString()));
     });
   }
 

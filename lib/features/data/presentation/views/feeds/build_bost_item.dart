@@ -73,17 +73,18 @@ class BuildPostItem extends StatelessWidget {
                               alignment: Alignment.topLeft,
                               child: CustomReaction(
                                 text:
-                                    '${SocialCubit.get(context).likesCount[index] }',
+                                    '${SocialCubit.get(context).likesCount[index]}',
                                 icon: FontAwesomeIcons.heart,
                               )),
                           const Spacer(),
-                           Align(
+                          Align(
                             alignment: Alignment.topRight,
                             child: Expanded(
                               child: CustomReaction(
                                   icon: FontAwesomeIcons.comment,
                                   color: Colors.amber,
-                                  text: '${SocialCubit.get(context).commentCount[index]} comments'),
+                                  text:
+                                      '${SocialCubit.get(context).commentCount[index]} comments'),
                             ),
                           ),
                         ],
@@ -95,8 +96,14 @@ class BuildPostItem extends StatelessWidget {
                         Expanded(
                           child: InkWell(
                             onTap: () {
-                              SocialCubit.get(context).getAllComments(postId:SocialCubit.get(context).postId[index]);
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context) => CommentsScreen(index: index, postModel: postModel),));
+                              SocialCubit.get(context).getAllComments(
+                                  postId:
+                                      SocialCubit.get(context).postId[index]);
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => const CommentsScreen(
+                                    //index: index, postModel: postModel
+                                    ),
+                              ));
                             },
                             child: Row(
                               children: [
