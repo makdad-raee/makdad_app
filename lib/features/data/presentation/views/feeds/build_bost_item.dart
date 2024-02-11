@@ -6,8 +6,7 @@ import 'package:makdad_app/features/data/models/post_model.dart';
 import 'package:makdad_app/features/data/models/user_model.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_cubit.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
-import 'package:makdad_app/features/data/presentation/views/comments/comments.screen.dart';
-import 'package:makdad_app/features/data/presentation/views/comments/modal_bottom_comment.dart';
+import 'package:makdad_app/features/data/presentation/views/comments/comments_screen.dart';
 import 'package:makdad_app/features/data/presentation/views/feeds/avatar_name_and_more.dart';
 import 'package:makdad_app/features/data/presentation/views/widgets/custom_reaction.dart';
 import 'package:makdad_app/features/data/presentation/views/widgets/diveder.dart';
@@ -96,12 +95,14 @@ class BuildPostItem extends StatelessWidget {
                         Expanded(
                           child: InkWell(
                             onTap: () {
-                              SocialCubit.get(context).getAllComments(
-                                  postId:
-                                      SocialCubit.get(context).postId[index]);
+                              SocialCubit.get(context).getComments(postId: SocialCubit.get(context).postId[index]);
+                            //  SocialCubit.get(context).getAllComments(
+                                  //postId:
+                                    //  SocialCubit.get(context).postId[index]);
                               Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) => const CommentsScreen(
-                                    //index: index, postModel: postModel
+                                builder: (context) =>  CommentsScreen(
+                                  postModel: postModel,
+                                    index1: index
                                     ),
                               ));
                             },

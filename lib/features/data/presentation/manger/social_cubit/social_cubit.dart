@@ -250,7 +250,7 @@ class SocialCubit extends Cubit<SocialState> {
           postId.add(element.id);
           posts.add(PostModel.fromJson(element.data()));
         }).catchError((error) {});
-        element.reference.collection('Comments').get().then((value) {
+        element.reference.collection('comments').get().then((value) {
           commentCount.add(value.docs.length);
         }).catchError((error) {});
       });
@@ -273,42 +273,42 @@ class SocialCubit extends Cubit<SocialState> {
     });
   }
 
-  void commentPost({required String postId, required String commentText}) {
-    var now = DateTime.now();
-    var commentModel = CommentModel(
-        name: usermodel.name,
-        commentText: commentText,
-        dateTime: now.toString(),
-        image: usermodel.image,
-        uId: usermodel.uId);
-    FirebaseFirestore.instance
-        .collection('Posts')
-        .doc(postId)
-        .collection('Comments')
-        .add(commentModel.toMap())
-        .then((value) {
-      emit(SocialCommentPostsSuccesState());
-    }).catchError((error) {
-      emit(SocialCommentPostsErrorState(error: error));
-    });
-  }
+  // void commentPost({required String postId, required String commentText}) {
+  //   var now = DateTime.now();
+  //   var commentModel = CommentModel(
+  //       name: usermodel.name,
+  //       commentText: commentText,
+  //       dateTime: now.toString(),
+  //       image: usermodel.image,
+  //       uId: usermodel.uId);
+  //   FirebaseFirestore.instance
+  //       .collection('Posts')
+  //       .doc(postId)
+  //       .collection('Comments')
+  //       .add(commentModel.toMap())
+  //       .then((value) {
+  //     emit(SocialCommentPostsSuccesState());
+  //   }).catchError((error) {
+  //     emit(SocialCommentPostsErrorState(error: error));
+  //   });
+  // }
 
-  List<CommentModel> comments = [];
-  void getAllComments({required String postId}) {
-    //   emit(SocialGetALLCommentLoadinState());
-    FirebaseFirestore.instance
-        .collection('Posts')
-        .doc(postId)
-        .collection('Comments')
-        .snapshots()
-        .listen((event) {
-      comments = [];
-      for (var element in event.docs) {
-        comments.add(CommentModel.fromJson(element.data()));
-      }
-      emit(SocialGetALLCommentSuccesState());
-    });
-  }
+  // List<CommentModel> comments = [];
+  // void getAllComments({required String postId}) {
+  //   //   emit(SocialGetALLCommentLoadinState());
+  //   FirebaseFirestore.instance
+  //       .collection('Posts')
+  //       .doc(postId)
+  //       .collection('Comments')
+  //       .snapshots()
+  //       .listen((event) {
+  //     comments = [];
+  //     for (var element in event.docs) {
+  //       comments.add(CommentModel.fromJson(element.data()));
+  //     }
+  //     emit(SocialGetALLCommentSuccesState());
+  //   });
+  // }
 
   List<UserModel> users = [];
   void getAllUsers() {
@@ -382,4 +382,44 @@ class SocialCubit extends Cubit<SocialState> {
       emit(SocialReciveMessageSuccesState());
     });
   }
+
+  void sendComment(
+      {required String commentText,
+      required String postId,
+      required PostModel postModel}) {
+    CommentModel commentModel = CommentModel(
+        commentText: commentText,
+        dateTime: DateTime.now().toString(),
+        image: usermodel.image,
+        name: usermodel.name,
+        reciveCommentId: postModel.uId);
+    FirebaseFirestore.instance
+        .collection('Posts')
+        .doc(postId)
+        .collection('comments')
+        .add(commentModel.toMap())
+        .then((value) {
+      emit(SocialCommentPostsSuccesState());
+    }).catchError((error) {
+      emit(SocialCommentPostsErrorState(error: error));
+    });
+  }
+List<CommentModel>comments=[];
+List<CommentModel>commentscount=[];
+void getComments({required String postId}){
+  FirebaseFirestore.instance
+        .collection('Posts')
+        .doc(postId)
+        .collection('comments').orderBy('dateTime')
+        .snapshots()
+        .listen((event) {
+      comments = [];
+      for (var element in event.docs) {
+        comments.add(CommentModel.fromJson(element.data()));
+        
+          emit(SocialGetALLCommentSuccesState());
+      }
+    
+    });
+}
 }
