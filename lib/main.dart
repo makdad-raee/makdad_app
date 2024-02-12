@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:makdad_app/core/utils/cashe_helper.dart';
@@ -18,6 +19,11 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  var token = await FirebaseMessaging.instance.getToken();
+  print('tooooken$token');
+  FirebaseMessaging.onMessage.listen((event) { 
+    print('evvvennnnnnnnt${event.data.toString()}');
+  });
   Widget widget;
   uId = CasheHelper.getData(key: 'uId');
   if (uId != '') {
@@ -26,9 +32,7 @@ void main() async {
     widget = const HomeView();
   }
 
-  runApp(MyApp(
-    starWidget: widget,
-  ));
+  runApp(MyApp(starWidget: widget));
 }
 
 class MyApp extends StatelessWidget {
@@ -42,7 +46,8 @@ class MyApp extends StatelessWidget {
         BlocProvider<SocialCubit>(
           create: (context) => SocialCubit(UserModel())
             ..getUserData()
-            ..getPosts()..getAllUsers(),
+            ..getPosts()
+            ..getAllUsers(),
         )
       ],
       child: MaterialApp(
