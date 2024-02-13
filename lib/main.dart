@@ -24,6 +24,9 @@ void main() async {
   FirebaseMessaging.onMessage.listen((event) { 
     print('evvvennnnnnnnt${event.data.toString()}');
   });
+    FirebaseMessaging.onMessageOpenedApp.listen((event) { 
+    print('evvvennnnnnnnt${event.data.toString()}');
+  });
   Widget widget;
   uId = CasheHelper.getData(key: 'uId');
   if (uId != '') {
