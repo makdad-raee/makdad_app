@@ -11,6 +11,15 @@ import 'package:makdad_app/features/data/presentation/views/home_views.dart';
 import 'package:makdad_app/features/data/presentation/views/social_home_view.dart';
 import 'package:makdad_app/firebase_options.dart';
 
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // print("Handling a background message: ${message.messageId}");
+  
+  print('======BackGroundMessage======');
+  print(message.notification!.title);
+  print(message.notification!.body);
+   print('========BackGroundMessage========');
+}
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -21,12 +30,17 @@ void main() async {
   );
   var token = await FirebaseMessaging.instance.getToken();
   print('tooooken$token');
-  FirebaseMessaging.onMessage.listen((event) { 
+  FirebaseMessaging.onMessage.listen((event) {
+    print('=======onMessage==========');
     print('evvvennnnnnnnt${event.data.toString()}');
+    print('=======onMessage==========');
   });
-    FirebaseMessaging.onMessageOpenedApp.listen((event) { 
+  FirebaseMessaging.onMessageOpenedApp.listen((event) {
+    print('=======onOpen==========');
     print('evvvennnnnnnnt${event.data.toString()}');
+    print('=======onOpen==========');
   });
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   Widget widget;
   uId = CasheHelper.getData(key: 'uId');
   if (uId != '') {
