@@ -44,7 +44,9 @@ class SettingsScreen extends StatelessWidget {
                         'Add Photos',
                         style: TextStyle(color: defaulColor),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        SocialCubit.get(context).sendMessageNoti(title: 'tryyy', messagge: 'tryyy2');
+                      },
                     ),
                   ),
                   const SizedBox(

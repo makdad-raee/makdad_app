@@ -1,9 +1,12 @@
 import 'dart:io';
+import 'package:dio/dio.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:makdad_app/Api/dio_helper.dart';
 import 'package:makdad_app/core/utils/constant.dart';
 import 'package:makdad_app/features/data/models/comment_model.dart';
 import 'package:makdad_app/features/data/models/message_model.dart';
@@ -404,22 +407,78 @@ class SocialCubit extends Cubit<SocialState> {
       emit(SocialCommentPostsErrorState(error: error));
     });
   }
-List<CommentModel>comments=[];
-List<CommentModel>commentscount=[];
-void getComments({required String postId}){
-  FirebaseFirestore.instance
+
+  List<CommentModel> comments = [];
+  List<CommentModel> commentscount = [];
+  void getComments({required String postId}) {
+    FirebaseFirestore.instance
         .collection('Posts')
         .doc(postId)
-        .collection('comments').orderBy('dateTime')
+        .collection('comments')
+        .orderBy('dateTime')
         .snapshots()
         .listen((event) {
       comments = [];
       for (var element in event.docs) {
         comments.add(CommentModel.fromJson(element.data()));
-        
-          emit(SocialGetALLCommentSuccesState());
+
+        emit(SocialGetALLCommentSuccesState());
       }
-    
     });
-}
+  }
+
+  Future getToken() async {
+    print('==============================');
+    String? myToken = await FirebaseMessaging.instance.getToken();
+    print('==============================');
+  }
+
+  myRequestPremission() async {
+    FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+    NotificationSettings settings = await messaging.requestPermission(
+      alert: true,
+      announcement: false,
+      badge: true,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: true,
+    );
+
+    print('User granted permission: ${settings.authorizationStatus}');
+  }
+
+  sendMessageNoti({required String title, required String messagge}) async {
+    Map<String, dynamic> headersList = {
+      'Accept': '*/*',
+      'Content-Type': 'application/json',
+      'Authorization':
+          'key=AAAAQ7As_k0:APA91bGXFX9Fn0dOMs8yysBvzMs8NpdU206C5EYQZOSaACbHPBFdPzLXRxT3qtzOTBi_WEd3Soa5L5h5shN0zRB6_50-NdnW45YYiSnex2K6ruq40hyiam1yf4fl6cPF1-zZngZ8lH5N'
+    };
+    //var url = Uri.parse('https://fcm.googleapis.com/fcm/send');
+
+    Map<String, dynamic> body = {
+      "to":
+          "dDkPsufNSrq5QXH4pjxD-Z:APA91bF7RkzhsjU-21vV_Rb-wO8TZcueKFTE8BNm6PKko6sMw6LOgVeHCOc9_beEIA-j9tT_jhPjBa51wWuTLqHgSTqebWxmfD9FA-7tRXdOXmtccsdl4KI3gJGIP-831AoK25RY8YMC",
+      "notification": {
+        "title": title,
+        "body": messages,
+        "mutable_content": true,
+        "sound": "Tri-tone"
+      }
+    };
+
+    final dio = Dio(
+      BaseOptions(headers: headersList),
+    );
+
+    final response = await dio.post('https://fcm.googleapis.com/fcm/send',
+        data: body);
+        print('=======================Dio=======================');
+    print(response.data);
+       print('========================DIo======================');
+
+    
+  }
 }
