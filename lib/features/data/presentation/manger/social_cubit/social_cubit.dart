@@ -473,12 +473,12 @@ class SocialCubit extends Cubit<SocialState> {
       BaseOptions(headers: headersList),
     );
 
-    final response = await dio.post('https://fcm.googleapis.com/fcm/send',
-        data: body);
-        print('=======================Dio=======================');
+    final response = await dio.post(
+      'https://fcm.googleapis.com/fcm/send',
+      data: body,
+    );
+    print('=======================Dio=======================');
     print(response.data);
-       print('========================DIo======================');
-
-    
+    print('========================DIo======================');
   }
 }
