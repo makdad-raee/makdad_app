@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:makdad_app/core/utils/componants.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_cubit.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
 import 'package:makdad_app/features/data/presentation/views/feeds/build_bost_item.dart';
@@ -19,24 +20,40 @@ class FeedsBody extends StatelessWidget {
         var userModel = SocialCubit.get(context).usermodel;
         return Column(
           children: [
-            const Card(
-              margin: EdgeInsets.all(8),
-              elevation: 10,
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              child:
-                  Stack(alignment: AlignmentDirectional.bottomEnd, children: [
-                Image(
-                  image: NetworkImage(
-                      'https://img.freepik.com/free-photo/man-woman-sportswear-exercising-outdoors_23-2148965023.jpg?w=740&t=st=1706044767~exp=1706045367~hmac=a4aaf226e46e72669ae1e05443252e28dad7c8a4b57532ad5d29a2828c3fc814'),
-                  height: 200,
-                  width: double.infinity,
-                  fit: BoxFit.cover,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Container(
+                padding: const EdgeInsets.only(
+                  top: 12,
+                  left: 12,
                 ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text('Comuncate with friends'),
+                height: 60,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  boxShadow: const [
+                    BoxShadow(
+                        color: Color.fromRGBO(224, 224, 224, 1),
+                        blurRadius: 6,
+                        offset: Offset(0, 0)),
+                    BoxShadow(
+                        color: Colors.white,
+                        blurRadius: 6,
+                        offset: Offset(2, 0))
+                  ],
+                  border: Border.all(
+                      width: 2, color: const Color.fromRGBO(238, 238, 238, 1)),
+                  borderRadius: BorderRadiusDirectional.circular(40),
+                  color: Colors.grey[200],
                 ),
-              ]),
+                child: Text(
+                  'Whats in your mind ?',
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.grey[500],
+                      fontStyle: FontStyle.italic),
+                  textAlign: TextAlign.start,
+                ),
+              ),
             ),
             ListView.builder(
                 shrinkWrap: true,

@@ -31,6 +31,7 @@ class BuildPostItem extends StatelessWidget {
         return Column(
           children: [
             Card(
+              color: Colors.white,
               margin: const EdgeInsets.all(8),
               elevation: 5,
               clipBehavior: Clip.antiAliasWithSaveLayer,

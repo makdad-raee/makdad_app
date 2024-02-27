@@ -21,6 +21,7 @@ class SocialHomeView extends StatelessWidget {
         }
       },
       builder: (context, state) => Scaffold(
+        extendBody: true,
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
           actions: [
@@ -36,12 +37,25 @@ class SocialHomeView extends StatelessWidget {
           ),
         ),
         body: cubit.screensNave[cubit.currentIndex],
-        bottomNavigationBar: BottomNavigationBar(
-            currentIndex: cubit.currentIndex,
-            onTap: (value) {
-              cubit.changeBottomNav(value);
-            },
-            items: bottomNavigationBarItems),
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
+          child: Container(
+            //  height: 80,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(30)),
+            // color: Colors.grey,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(24),
+              child: BottomNavigationBar(
+                  unselectedItemColor: Colors.white,
+                  backgroundColor: Colors.grey[400],
+                  currentIndex: cubit.currentIndex,
+                  onTap: (value) {
+                    cubit.changeBottomNav(value);
+                  },
+                  items: bottomNavigationBarItems),
+            ),
+          ),
+        ),
       ),
     );
   }

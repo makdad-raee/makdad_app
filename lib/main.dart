@@ -13,12 +13,10 @@ import 'package:makdad_app/features/data/presentation/views/social_home_view.dar
 import 'package:makdad_app/firebase_options.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  // print("Handling a background message: ${message.messageId}");
-  
   print('======BackGroundMessage======');
   print(message.notification!.title);
   print(message.notification!.body);
-   print('========BackGroundMessage========');
+  print('========BackGroundMessage========');
 }
 
 void main() async {
@@ -44,7 +42,7 @@ void main() async {
   });
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   Widget widget;
-  uId = CasheHelper.getData(key: 'uId')??'';
+  uId = CasheHelper.getData(key: 'uId') ?? '';
   if (uId != '') {
     widget = const SocialHomeView();
   } else {
@@ -71,12 +69,11 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(
-            // iconTheme:const IconThemeData(color: Colors.grey),
             bottomNavigationBarTheme: BottomNavigationBarThemeData(
                 type: BottomNavigationBarType.fixed,
                 selectedItemColor: defaultColor,
-                backgroundColor: Colors.white,
-                elevation: 20.0,
+               backgroundColor: Colors.transparent,
+                elevation: 0.0,
                 unselectedItemColor: Colors.grey)),
         debugShowCheckedModeBanner: false,
         home: starWidget,
