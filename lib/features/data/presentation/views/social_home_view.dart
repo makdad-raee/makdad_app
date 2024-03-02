@@ -25,6 +25,15 @@ class SocialHomeView extends StatelessWidget {
         resizeToAvoidBottomInset: true,
         appBar: AppBar(
           actions: [
+            // IconButton(
+            //     onPressed: () {},
+            //     icon: const Icon(FontAwesomeIcons.magnifyingGlass)),
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: CircleAvatar(
+            //     backgroundImage: AssetImage(cubit.usermodel.image ?? ''),
+            //   ),
+            // ),
             IconButton(
                 onPressed: () {}, icon: const Icon(FontAwesomeIcons.bell)),
             IconButton(

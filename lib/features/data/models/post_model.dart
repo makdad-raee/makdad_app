@@ -1,3 +1,5 @@
+import 'package:makdad_app/features/data/models/user_model.dart';
+
 class PostModel {
   String? name;
   String? uId;
@@ -5,6 +7,8 @@ class PostModel {
   String? dateTime;
   String? postText;
   String? postImage;
+  UserModel ? usermodel;
+  
 
   PostModel({
     this.name,
@@ -13,6 +17,7 @@ class PostModel {
     this.dateTime,
     this.postText,
     this.postImage,
+    this.usermodel,
   });
   PostModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
@@ -21,6 +26,7 @@ class PostModel {
     dateTime = json['dateTime'];
     postText = json['postText'];
     postImage = json['postImage'];
+    usermodel=json['usermodel'];
   }
   Map<String, dynamic> toMap() {
     return {

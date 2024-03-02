@@ -6,7 +6,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:makdad_app/Api/dio_helper.dart';
 import 'package:makdad_app/core/utils/constant.dart';
 import 'package:makdad_app/features/data/models/comment_model.dart';
 import 'package:makdad_app/features/data/models/message_model.dart';
@@ -219,6 +218,7 @@ class SocialCubit extends Cubit<SocialState> {
   }) {
     emit(SocialCreatePostLoadingState());
     PostModel model = PostModel(
+      user
       name: usermodel.name,
       image: usermodel.image,
       uId: usermodel.uId,

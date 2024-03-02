@@ -23,15 +23,17 @@ class FeedsBody extends StatelessWidget {
         return Column(
           children: [
             const StoryAndWritePostView(),
-            ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: listPosts.length,
-                itemBuilder: (context, child) => BuildPostItem(
-                      postModel: listPosts[child],
-                      userModel: userModel,
-                      index: child,
-                    )),
+            listPosts.isEmpty
+                ? Center(child: defaultIndicator())
+                : ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: listPosts.length,
+                    itemBuilder: (context, child) => BuildPostItem(
+                          postModel: listPosts[child],
+                          userModel: userModel,
+                          index: child,
+                        )),
           ],
         );
       },
@@ -74,7 +76,7 @@ class StoryAndWritePostView extends StatelessWidget {
               color: Colors.grey[200],
             ),
             child: Text(
-              'Whats in your mind ?',
+              'What\'s in your mind ?',
               style: TextStyle(
                   fontSize: 20,
                   color: Colors.grey[500],
@@ -86,7 +88,7 @@ class StoryAndWritePostView extends StatelessWidget {
           //   height: 12,
           // ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 6),
+            padding: const EdgeInsets.symmetric(vertical: 8),
             child: Row(
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -95,7 +97,7 @@ class StoryAndWritePostView extends StatelessWidget {
                       height: 50,
                       decoration: BoxDecoration(
                           color: Colors.red.withOpacity(0.8),
-                          borderRadius: BorderRadius.circular(18)),
+                          borderRadius: BorderRadius.circular(32)),
                       child: const Center(
                           child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -123,7 +125,7 @@ class StoryAndWritePostView extends StatelessWidget {
                       height: 50,
                       decoration: BoxDecoration(
                           color: defaultColor.withOpacity(0.8),
-                          borderRadius: BorderRadius.circular(18)),
+                          borderRadius: BorderRadius.circular(32)),
                       child: const Center(
                           child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -136,7 +138,7 @@ class StoryAndWritePostView extends StatelessWidget {
                             width: 12,
                           ),
                           Text(
-                            'Photos',
+                            'Photo',
                             style: TextStyle(color: Colors.white),
                           ),
                         ],

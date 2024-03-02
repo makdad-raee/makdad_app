@@ -96,15 +96,15 @@ class BuildPostItem extends StatelessWidget {
                         Expanded(
                           child: InkWell(
                             onTap: () {
-                              SocialCubit.get(context).getComments(postId: SocialCubit.get(context).postId[index]);
-                            //  SocialCubit.get(context).getAllComments(
-                                  //postId:
-                                    //  SocialCubit.get(context).postId[index]);
+                              SocialCubit.get(context).getComments(
+                                  postId:
+                                      SocialCubit.get(context).postId[index]);
+                              //  SocialCubit.get(context).getAllComments(
+                              //postId:
+                              //  SocialCubit.get(context).postId[index]);
                               Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) =>  CommentsScreen(
-                                  postModel: postModel,
-                                    index1: index
-                                    ),
+                                builder: (context) => CommentsScreen(
+                                    postModel: postModel, index1: index),
                               ));
                             },
                             child: Row(
