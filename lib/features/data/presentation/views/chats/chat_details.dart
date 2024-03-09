@@ -37,7 +37,7 @@ class ChatDetails extends StatelessWidget {
                     children: [
                       Expanded(
                         child: ListView.separated(
-                          physics:const BouncingScrollPhysics(),
+                            physics: const BouncingScrollPhysics(),
                             itemBuilder: (context, index) {
                               var message =
                                   SocialCubit.get(context).messages[index];
@@ -47,13 +47,16 @@ class ChatDetails extends StatelessWidget {
                                   messageModel: message,
                                 );
                               } else {
-                                return BuildFriendMessage(messageModel: message);
+                                return BuildFriendMessage(
+                                    messageModel: message);
                               }
                             },
-                            separatorBuilder: (context, index) => const SizedBox(
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(
                                   height: 12,
                                 ),
-                            itemCount: SocialCubit.get(context).messages.length),
+                            itemCount:
+                                SocialCubit.get(context).messages.length),
                       ),
                       Container(
                         clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -79,12 +82,11 @@ class ChatDetails extends StatelessWidget {
                               color: defaultColor.withOpacity(0.8),
                               child: TextButton(
                                   onPressed: () {
-                                  
                                     SocialCubit.get(context).sendMessage(
                                         textMessge: messageController.text,
                                         reciverId: userModel.uId!,
                                         dateTime: DateTime.now().toString());
-                                          messageController.text = '';
+                                    messageController.text = '';
                                   },
                                   child: const Text(
                                     'send',

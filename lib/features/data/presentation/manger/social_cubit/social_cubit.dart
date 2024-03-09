@@ -96,6 +96,7 @@ class SocialCubit extends Cubit<SocialState> {
     }
   }
 
+  List<String> profileImagesList = [];
   void uploadProfileImage({
     required String name,
     required String phone,
@@ -109,18 +110,22 @@ class SocialCubit extends Cubit<SocialState> {
         .then((value) {
       value.ref.getDownloadURL().then((value) {
         emit(SocialUploadProfileImageSuccesState());
+        profileImagesList.add(value);
         updateUser(
           name: name,
           phone: phone,
           bio: bio,
           profileImage: value,
         );
+
         // print(value);
       }).catchError((error) {
         emit(SocialUploadProfileImageErrorState());
       });
     }).catchError((error) {
       emit(SocialUploadProfileImageErrorState());
+      print('=====================================');
+      print(error.toString());
     });
   }
 
@@ -171,6 +176,31 @@ class SocialCubit extends Cubit<SocialState> {
         .update(model.toMap())
         .then((value) {
       getUserData();
+      for (var element in postId) {
+        for (int i = 0; i < postId.length; i++) {
+          //PostModel post=   posts[i].usermodel=model;
+          PostModel postModel = PostModel(
+            usermodel: model,
+            postText: posts[i].postText,
+            dateTime: posts[i].dateTime,
+            image: model.image,
+            name: model.name,
+            postImage: posts[i].postImage,
+          );
+
+          FirebaseFirestore.instance
+              .collection('users')
+              .doc(uId)
+              .collection('Posts')
+              .doc(postId[i])
+              .update(postModel.toMap())
+              .then((value) {
+            emit(SocialupdateNameAndPhotoOfThePostSuccesState());
+          }).catchError((error) {
+            emit(SocialupdateNameAndPhotoOfThePostErrorState(error: error));
+          });
+        }
+      }
     }).catchError((error) {
       emit(SocialUserUpdateErrorState());
     });
@@ -218,7 +248,7 @@ class SocialCubit extends Cubit<SocialState> {
   }) {
     emit(SocialCreatePostLoadingState());
     PostModel model = PostModel(
-      user
+      usermodel: usermodel,
       name: usermodel.name,
       image: usermodel.image,
       uId: usermodel.uId,
@@ -227,6 +257,8 @@ class SocialCubit extends Cubit<SocialState> {
       postText: postText,
     );
     FirebaseFirestore.instance
+        .collection('users')
+        .doc(uId)
         .collection('Posts')
         .add(model.toMap())
         .then((value) {
@@ -246,7 +278,36 @@ class SocialCubit extends Cubit<SocialState> {
   List<int> likesCount = [];
   List<int> commentCount = [];
   void getPosts() {
-    FirebaseFirestore.instance.collection('Posts').get().then((value) {
+//     FirebaseFirestore.instance
+//     .collection('users')
+//     .doc(uId)
+//     .collection('Posts')
+//     .get()
+//     .then((querySnapshot) {
+//   querySnapshot.docs.forEach((doc) {
+//     // إنشاء كائن PostModel من البيانات
+//     PostModel post = PostModel.fromJson(doc.data());
+//     postId.add(doc.id);
+//     posts.add(PostModel.fromJson(doc.data()));
+
+//     // عرض المعلومات
+//     print('Post: ${post.postText}');
+//     print('Date: ${post.dateTime}');
+//     print('Image: ${post.postImage}');
+//     emit(SocialGetPostsSuccesState());
+
+//     // عرض المعلومات في واجهة المستخدم (استخدم الأدوات المفضلة لديك)
+//     // مثال:
+//    // Text(post.postText);
+//     // ...
+//   });
+// }).catchError((error){print('errrrrrrrrrrrrrrrrrrrrrrrrorrrrrrrrrrrrrrrrrr');});
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(uId)
+        .collection('Posts')
+        .get()
+        .then((value) {
       value.docs.forEach((element) {
         element.reference.collection('likes').get().then((value) {
           likesCount.add(value.docs.length);

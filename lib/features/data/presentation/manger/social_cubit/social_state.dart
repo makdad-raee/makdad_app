@@ -124,4 +124,10 @@ class SocialSendMessageErrorState extends SocialState {
 class SocialReciveMessageSuccesState extends SocialState {}
 
 
+//update profileimage and name when we edit it
+class SocialupdateNameAndPhotoOfThePostSuccesState extends SocialState {}
+class SocialupdateNameAndPhotoOfThePostErrorState extends SocialState {
+  final String error;
 
+  SocialupdateNameAndPhotoOfThePostErrorState({required this.error});
+}

@@ -36,6 +36,9 @@ class EditProfileView extends StatelessWidget {
                       bio: bioController.text,
                       name: nameController.text,
                       phone: phoneController.text);
+                      SocialCubit.get(context).getUserData();
+                       //SocialCubit.get(context).getPosts();
+                       //state is SocialGetPostsSuccesState ?Navigator.of(context).pop():(){};
                 },
                 child: const Text(
                   'Save',
