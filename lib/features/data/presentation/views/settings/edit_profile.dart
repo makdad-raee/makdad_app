@@ -36,9 +36,9 @@ class EditProfileView extends StatelessWidget {
                       bio: bioController.text,
                       name: nameController.text,
                       phone: phoneController.text);
-                      SocialCubit.get(context).getUserData();
-                       //SocialCubit.get(context).getPosts();
-                       //state is SocialGetPostsSuccesState ?Navigator.of(context).pop():(){};
+                  SocialCubit.get(context).getUserData();
+                  //SocialCubit.get(context).getPosts();
+                  //state is SocialGetPostsSuccesState ?Navigator.of(context).pop():(){};
                 },
                 child: const Text(
                   'Save',
@@ -80,31 +80,36 @@ class EditProfileView extends StatelessWidget {
                           children: [
                             if (SocialCubit.get(context).profileimage != null)
                               Expanded(
-                                child:state is SocialUserUpdateLoadingState? defaultIndicator():
-                                defaultTextbutton(
-                                  text: 'Update Profile',
-                                  onPressed: () {
-                                    SocialCubit.get(context).uploadProfileImage(
-                                        name: nameController.text,
-                                        phone: phoneController.text,
-                                        bio: bioController.text);
-                                  },
-                                ),
+                                child: state is SocialUserUpdateLoadingState
+                                    ? defaultIndicator()
+                                    : defaultTextbutton(
+                                        text: 'Update Profile',
+                                        onPressed: () {
+                                          SocialCubit.get(context)
+                                              .uploadProfileImage(
+                                                  name: nameController.text,
+                                                  phone: phoneController.text,
+                                                  bio: bioController.text);
+                                        },
+                                      ),
                               ),
                             const SizedBox(
                               width: 12,
                             ),
                             if (SocialCubit.get(context).coverImage != null)
                               Expanded(
-                                child:state is SocialUserUpdateLoadingState? defaultIndicator(): defaultTextbutton(
-                                  text: 'Update Cover',
-                                  onPressed: () {
-                                    SocialCubit.get(context).uploadCoverImage(
-                                        name: nameController.text,
-                                        phone: phoneController.text,
-                                        bio: bioController.text);
-                                  },
-                                ),
+                                child: state is SocialUserUpdateLoadingState
+                                    ? defaultIndicator()
+                                    : defaultTextbutton(
+                                        text: 'Update Cover',
+                                        onPressed: () {
+                                          SocialCubit.get(context)
+                                              .uploadCoverImage(
+                                                  name: nameController.text,
+                                                  phone: phoneController.text,
+                                                  bio: bioController.text);
+                                        },
+                                      ),
                               )
                           ],
                         ),

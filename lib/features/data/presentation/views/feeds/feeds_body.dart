@@ -6,6 +6,7 @@ import 'package:makdad_app/core/utils/constant.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_cubit.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
 import 'package:makdad_app/features/data/presentation/views/feeds/build_bost_item.dart';
+import 'package:makdad_app/features/data/presentation/views/new_post/new_post_view.dart';
 
 class FeedsBody extends StatelessWidget {
   const FeedsBody({
@@ -14,6 +15,9 @@ class FeedsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
+
+    ;
     return BlocConsumer<SocialCubit, SocialState>(
       listener: (context, state) {},
       builder: (context, state) {
@@ -24,8 +28,9 @@ class FeedsBody extends StatelessWidget {
             const StoryAndWritePostView(),
             listPosts.isEmpty
                 ? Center(child: defaultIndicator())
-                :
-                 ListView.builder(
+                : ListView.builder(
+                
+                    //  controller: ScrollController(),
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemCount: listPosts.length,
@@ -54,34 +59,41 @@ class StoryAndWritePostView extends StatelessWidget {
         //crossAxisAlignment: CrossAxisAlignment.stretch,
 
         children: [
-          Container(
-            padding: const EdgeInsets.only(
-              top: 12,
-              left: 12,
-            ),
-            height: 60,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              boxShadow: const [
-                BoxShadow(
-                    color: Color.fromRGBO(224, 224, 224, 1),
-                    blurRadius: 6,
-                    offset: Offset(0, 2)),
-                BoxShadow(
-                    color: Colors.white, blurRadius: 6, offset: Offset(2, 0))
-              ],
-              border: Border.all(
-                  width: 2, color: const Color.fromRGBO(224, 224, 224, 1)),
-              borderRadius: BorderRadiusDirectional.circular(40),
-              color: Colors.grey[200],
-            ),
-            child: Text(
-              'What\'s in your mind ?',
-              style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.grey[500],
-                  fontStyle: FontStyle.italic),
-              textAlign: TextAlign.start,
+          GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const NewPostView(),
+          ));
+            },
+            child: Container(
+              padding: const EdgeInsets.only(
+                top: 12,
+                left: 12,
+              ),
+              height: 60,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                boxShadow: const [
+                  BoxShadow(
+                      color: Color.fromRGBO(224, 224, 224, 1),
+                      blurRadius: 6,
+                      offset: Offset(0, 2)),
+                  BoxShadow(
+                      color: Colors.white, blurRadius: 6, offset: Offset(2, 0))
+                ],
+                border: Border.all(
+                    width: 2, color: const Color.fromRGBO(224, 224, 224, 1)),
+                borderRadius: BorderRadiusDirectional.circular(40),
+                color: Colors.grey[200],
+              ),
+              child: Text(
+                'What\'s in your mind ?',
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.grey[500],
+                    fontStyle: FontStyle.italic),
+                textAlign: TextAlign.start,
+              ),
             ),
           ),
           // const SizedBox(

@@ -266,6 +266,14 @@ class SocialCubit extends Cubit<SocialState> {
     }).catchError((error) {
       emit(SocialCreatePostErrorState());
     });
+    // FirebaseFirestore.instance
+    //     .collection('Posts')
+    //     .add(model.toMap())
+    //     .then((value) {
+    //   emit(SocialCreatePostSuccesState());
+    // }).catchError((error) {
+    //   emit(SocialCreatePostErrorState());
+    // });
   }
 
   void removePostImage() {
@@ -506,3 +514,48 @@ class SocialCubit extends Cubit<SocialState> {
     print('========================DIo======================');
   }
 }
+
+//  void getPosts() {
+//     FirebaseFirestore.instance.collection('Posts').get().then((value) {
+//       value.docs.forEach((element) {
+//         element.reference.collection('likes').get().then((value) {
+//           likesCount.add(value.docs.length);
+//           postId.add(element.id);
+//           posts.add(PostModel.fromJson(element.data()));
+//         }).catchError((error) {});
+//         element.reference.collection('comments').get().then((value) {
+//           commentCount.add(value.docs.length);
+//         }).catchError((error) {});
+//       });
+//       emit(SocialGetPostsSuccesState());
+//     }).catchError((error) {
+//       emit(SocialGetPostsErrorState(error: error.toString()));
+//     });
+//   }
+
+
+
+//  void createNewPost({
+//     required String? dateTime,
+//     required String? postText,
+//     String? postImage,
+//   }) {
+//     emit(SocialCreatePostLoadingState());
+//     PostModel model = PostModel(
+//       user
+//       name: usermodel.name,
+//       image: usermodel.image,
+//       uId: usermodel.uId,
+//       dateTime: dateTime,
+//       postImage: postImage ?? '',
+//       postText: postText,
+//     );
+//     FirebaseFirestore.instance
+//         .collection('Posts')
+//         .add(model.toMap())
+//         .then((value) {
+//       emit(SocialCreatePostSuccesState());
+//     }).catchError((error) {
+//       emit(SocialCreatePostErrorState());
+//     });
+//   }
