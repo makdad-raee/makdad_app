@@ -108,7 +108,7 @@ class ProfilePicAndNameAndBio extends StatelessWidget {
             ? const SizedBox()
             : Text(
                 name,
-                style: style22,
+                style: style22.copyWith(fontSize: 28),
               ),
         isEditView
             ? const SizedBox()

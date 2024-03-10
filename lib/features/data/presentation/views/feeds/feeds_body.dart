@@ -23,6 +23,7 @@ class FeedsBody extends StatelessWidget {
       builder: (context, state) {
         var listPosts = SocialCubit.get(context).posts;
         var userModel = SocialCubit.get(context).usermodel;
+        
         return Column(
           children: [
             const StoryAndWritePostView(),

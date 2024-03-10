@@ -181,11 +181,11 @@ class SocialCubit extends Cubit<SocialState> {
           //PostModel post=   posts[i].usermodel=model;
           PostModel postModel = PostModel(
             usermodel: model,
-            postText: posts[i].postText,
-            dateTime: posts[i].dateTime,
+            postText: mypost[i].postText,
+            dateTime: mypost[i].dateTime,
             image: model.image,
             name: model.name,
-            postImage: posts[i].postImage,
+            postImage: mypost[i].postImage,
           );
 
           FirebaseFirestore.instance
@@ -266,14 +266,14 @@ class SocialCubit extends Cubit<SocialState> {
     }).catchError((error) {
       emit(SocialCreatePostErrorState());
     });
-    // FirebaseFirestore.instance
-    //     .collection('Posts')
-    //     .add(model.toMap())
-    //     .then((value) {
-    //   emit(SocialCreatePostSuccesState());
-    // }).catchError((error) {
-    //   emit(SocialCreatePostErrorState());
-    // });
+    FirebaseFirestore.instance
+        .collection('Posts')
+        .add(model.toMap())
+        .then((value) {
+      emit(SocialCreatePostSuccesState());
+    }).catchError((error) {
+      emit(SocialCreatePostErrorState());
+    });
   }
 
   void removePostImage() {
@@ -281,11 +281,12 @@ class SocialCubit extends Cubit<SocialState> {
     emit(SocialRemovePostImageState());
   }
 
-  List<PostModel> posts = [];
+  List<PostModel> mypost = [];
   List<String> postId = [];
   List<int> likesCount = [];
   List<int> commentCount = [];
-  void getPosts() {
+   List<PostModel> posts= [];
+  void getmyPosts() {
 //     FirebaseFirestore.instance
 //     .collection('users')
 //     .doc(uId)
@@ -320,15 +321,15 @@ class SocialCubit extends Cubit<SocialState> {
         element.reference.collection('likes').get().then((value) {
           likesCount.add(value.docs.length);
           postId.add(element.id);
-          posts.add(PostModel.fromJson(element.data()));
+          mypost.add(PostModel.fromJson(element.data()));
         }).catchError((error) {});
         element.reference.collection('comments').get().then((value) {
           commentCount.add(value.docs.length);
         }).catchError((error) {});
       });
-      emit(SocialGetPostsSuccesState());
+      emit(SocialGetMyPostsSuccesState());
     }).catchError((error) {
-      emit(SocialGetPostsErrorState(error: error.toString()));
+      emit(SocialGetmyPostsErrorState(error: error.toString()));
     });
   }
 
@@ -513,26 +514,30 @@ class SocialCubit extends Cubit<SocialState> {
     print(response.data);
     print('========================DIo======================');
   }
+
+void getPosts() {
+    FirebaseFirestore.instance.collection('Posts').get().then((value) {
+      value.docs.forEach((element) {
+        element.reference.collection('likes').get().then((value) {
+          likesCount.add(value.docs.length);
+          postId.add(element.id);
+          posts.add(PostModel.fromJson(element.data()));
+        }).catchError((error) {});
+        element.reference.collection('comments').get().then((value) {
+          commentCount.add(value.docs.length);
+        }).catchError((error) {});
+      });
+      emit(SocialGetPostsSuccesState());
+    }).catchError((error) {
+      emit(SocialGetPostsErrorState(error: error.toString()));
+    });
+  }
+
+
+
 }
 
-//  void getPosts() {
-//     FirebaseFirestore.instance.collection('Posts').get().then((value) {
-//       value.docs.forEach((element) {
-//         element.reference.collection('likes').get().then((value) {
-//           likesCount.add(value.docs.length);
-//           postId.add(element.id);
-//           posts.add(PostModel.fromJson(element.data()));
-//         }).catchError((error) {});
-//         element.reference.collection('comments').get().then((value) {
-//           commentCount.add(value.docs.length);
-//         }).catchError((error) {});
-//       });
-//       emit(SocialGetPostsSuccesState());
-//     }).catchError((error) {
-//       emit(SocialGetPostsErrorState(error: error.toString()));
-//     });
-//   }
-
+ 
 
 
 //  void createNewPost({

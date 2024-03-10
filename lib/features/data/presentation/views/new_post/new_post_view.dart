@@ -52,7 +52,7 @@ class NewPostView extends StatelessWidget {
                   const SizedBox(
                     height: 12,
                   ),
-                 AvatarNameAndMore(isCreate: true ,name:cubit.usermodel.name! ,profileImage:cubit.usermodel.image! ),
+                 AvatarNameAndMore(isCreate: true ,name:cubit.usermodel.name! ,profileImage:cubit.usermodel.image!,userModel: cubit.usermodel, ),
                 Expanded(
                   child: TextFormField(
                     controller: textPostController,

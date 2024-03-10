@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:makdad_app/core/utils/constant.dart';
+import 'package:makdad_app/features/data/models/user_model.dart';
+import 'package:makdad_app/features/data/presentation/views/users/userdetails.dart';
 
 class AvatarNameAndMore extends StatelessWidget {
   const AvatarNameAndMore({
     super.key,
     this.isCreate = false,
      this.name,
-     this.profileImage,  this.dateTime,
+     this.profileImage,  this.dateTime, required this.userModel,
  
   });
   final String? name;
@@ -15,13 +17,19 @@ class AvatarNameAndMore extends StatelessWidget {
   final String? dateTime;
 
   final bool isCreate;
+ final UserModel userModel;
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CircleAvatar(
-          radius: 24,
-          backgroundImage: NetworkImage(profileImage??''),
+        GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => UserDetailsProfile(userModel: userModel) ,));
+          },
+          child: CircleAvatar(
+            radius: 24,
+            backgroundImage: NetworkImage(profileImage??''),
+          ),
         ),
         const SizedBox(
           width: 15,

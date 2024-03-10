@@ -86,6 +86,13 @@ class SocialRemovePostImageState extends SocialState {}
 //Get post
 class SocialGetPostsLoadinState extends SocialState {}
 
+class SocialGetMyPostsSuccesState extends SocialState {}
+
+class SocialGetmyPostsErrorState extends SocialState {
+  final String error;
+
+  SocialGetmyPostsErrorState({required this.error});
+}
 class SocialGetPostsSuccesState extends SocialState {}
 
 class SocialGetPostsErrorState extends SocialState {

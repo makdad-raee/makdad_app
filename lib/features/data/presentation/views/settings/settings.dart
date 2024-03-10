@@ -19,7 +19,7 @@ class SettingsScreen extends StatelessWidget {
     return BlocConsumer<SocialCubit, SocialState>(
       listener: (context, state) {},
       builder: (context, state) {
-        var listPosts = SocialCubit.get(context).posts;
+        var listPosts = SocialCubit.get(context).mypost;
         var userModel = SocialCubit.get(context).usermodel;
         return Padding(
           padding: const EdgeInsets.all(8.0),
@@ -32,6 +32,10 @@ class SettingsScreen extends StatelessWidget {
                   bio: userModel.bio,
                   profileImage: userModel.image,
                 ),
+                const SizedBox(
+                  height: 12,
+                ),
+               // const AddFriendANdMessages(),
                 const PhotosFlowersPostsCounter(),
                 Row(
                   children: [
@@ -214,6 +218,62 @@ class SettingsScreen extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+}
+
+class AddFriendANdMessages extends StatelessWidget {
+  const AddFriendANdMessages({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: Container(
+            height: 50,
+            // width: 80,
+            decoration: BoxDecoration(
+                color: defaulColor, borderRadius: BorderRadius.circular(24)),
+            child: const Center(
+                child: Text(
+              'Add Friend',
+              style: TextStyle(color: Colors.white, fontSize: 18),
+            )),
+          ),
+        ),
+        const SizedBox(
+          width: 12,
+        ),
+        Expanded(
+          child: Container(
+            height: 50,
+            // width: 80,
+            decoration: BoxDecoration(
+                color: Colors.grey.withOpacity(0.6),
+                borderRadius: BorderRadius.circular(24)),
+            child: const Center(
+                child: Text(
+              'Messages',
+              style: TextStyle(color: Colors.black, fontSize: 18),
+            )),
+          ),
+        ),
+        const SizedBox(
+          width: 12,
+        ),
+        Container(
+            height: 40,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                color: Colors.grey[300]),
+            child: Center(
+              child: IconButton(
+                  onPressed: () {}, icon: const Icon(Icons.more_horiz)),
+            )),
+
+        //
+      ],
     );
   }
 }
