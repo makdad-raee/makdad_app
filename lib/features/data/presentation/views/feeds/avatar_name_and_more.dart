@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:makdad_app/core/utils/constant.dart';
+import 'package:makdad_app/features/data/models/post_model.dart';
 import 'package:makdad_app/features/data/models/user_model.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_cubit.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
@@ -14,7 +15,7 @@ class AvatarNameAndMore extends StatelessWidget {
     this.name,
     this.profileImage,
     this.dateTime,
-    required this.userModel,
+    required this.userModel,  required this.postModel,
   });
   final String? name;
   final String? profileImage;
@@ -22,6 +23,7 @@ class AvatarNameAndMore extends StatelessWidget {
 
   final bool isCreate;
   final UserModel userModel;
+  final PostModel postModel;
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<SocialCubit, SocialState>(
@@ -31,7 +33,7 @@ class AvatarNameAndMore extends StatelessWidget {
           GestureDetector(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => UserDetailsProfile(userModel: userModel),
+                builder: (context) => UserDetailsProfile(userModel: userModel,postModel:postModel! ),
               ));
               //bloccc remender
               //getuserpostsa

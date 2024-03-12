@@ -536,6 +536,7 @@ class SocialCubit extends Cubit<SocialState> {
 
   List<PostModel> usersPosts = [];
   void getuservisitposts({required String uid}) {
+    usersPosts=[];
     FirebaseFirestore.instance.collection('Posts').get().then((value) {
       value.docs.forEach((element) {
         if (element.data()['uId'] == uid) {
