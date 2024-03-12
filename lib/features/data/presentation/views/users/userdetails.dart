@@ -16,63 +16,69 @@ class UserDetailsProfile extends StatelessWidget {
     return BlocConsumer<SocialCubit, SocialState>(
       listener: (context, state) {},
       builder: (context, state) {
-        var listofvisituserspost=SocialCubit.get(context).posts[1].uId;
+        var listofvisituserspost = SocialCubit.get(context).usersPosts;
         return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back_ios),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
+          appBar: AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
           ),
-        ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              ProfilePicAndNameAndBio(
-                name: userModel.name!,
-                bio: userModel.bio,
-                coverImage: userModel.coverImage,
-                profileImage: userModel.image,
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        '2.8k ',
-                        style: style16,
-                      ),
-                      Text(
-                        'Followers',
-                        style: style16,
-                      ),
-                    ],
-                  ),
-                  // Text(
-                  //   '850 Friends',
-                  //   style: style16,
-                  // ),
-                ],
-              ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                child: AddFriendANdMessages(),
-              ),
-              // ListView.builder(
-              //   physics: const NeverScrollableScrollPhysics(),
-              //   shrinkWrap: true,
-              //   itemBuilder: (context, index) => BuildPostItem(postModel: postModel, userModel: userModel, index: index),
-              //   itemCount: 20,
-              // )
-            ],
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                ProfilePicAndNameAndBio(
+                  name: userModel.name!,
+                  bio: userModel.bio,
+                  coverImage: userModel.coverImage,
+                  profileImage: userModel.image,
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          '2.8k ',
+                          style: style16,
+                        ),
+                        Text(
+                          'Followers',
+                          style: style16,
+                        ),
+                      ],
+                    ),
+                    // Text(
+                    //   '850 Friends',
+                    //   style: style16,
+                    // ),
+                  ],
+                ),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  child: AddFriendANdMessages(),
+                ),
+                listofvisituserspost.isNotEmpty
+                    ? ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) => Container(
+                          height: 150,
+                          width: 60,
+                          color: Colors.red,
+                        ),
+                        itemCount: 20,
+                      )
+                    : const CircularProgressIndicator(),
+              ],
+            ),
           ),
-        ),
-      );
+        );
       },
     );
   }

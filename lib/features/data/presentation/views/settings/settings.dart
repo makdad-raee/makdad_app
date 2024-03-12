@@ -27,7 +27,7 @@ class SettingsScreen extends StatelessWidget {
             child: Column(
               children: [
                 ProfilePicAndNameAndBio(
-                  name: userModel.name!,
+                  name: userModel.name?? "",
                   coverImage: userModel.coverImage,
                   bio: userModel.bio,
                   profileImage: userModel.image,
@@ -52,6 +52,7 @@ class SettingsScreen extends StatelessWidget {
                         ),
                         onPressed: () {
                           // SocialCubit.get(context).sendMessageNoti(title: 'tryyy', messagge: 'tryyy2');
+                          SocialCubit.get(context).logOut();
                         },
                       ),
                     ),

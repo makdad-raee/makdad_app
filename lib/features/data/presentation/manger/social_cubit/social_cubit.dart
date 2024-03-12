@@ -6,6 +6,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:makdad_app/core/utils/cashe_helper.dart';
 import 'package:makdad_app/core/utils/constant.dart';
 import 'package:makdad_app/features/data/models/comment_model.dart';
 import 'package:makdad_app/features/data/models/message_model.dart';
@@ -285,7 +286,7 @@ class SocialCubit extends Cubit<SocialState> {
   List<String> postId = [];
   List<int> likesCount = [];
   List<int> commentCount = [];
-   List<PostModel> posts= [];
+  List<PostModel> posts = [];
   void getmyPosts() {
 //     FirebaseFirestore.instance
 //     .collection('users')
@@ -515,7 +516,7 @@ class SocialCubit extends Cubit<SocialState> {
     print('========================DIo======================');
   }
 
-void getPosts() {
+  void getPosts() {
     FirebaseFirestore.instance.collection('Posts').get().then((value) {
       value.docs.forEach((element) {
         element.reference.collection('likes').get().then((value) {
@@ -533,34 +534,31 @@ void getPosts() {
     });
   }
 
+  List<PostModel> usersPosts = [];
+  void getuservisitposts({required String uid}) {
+    FirebaseFirestore.instance.collection('Posts').get().then((value) {
+      value.docs.forEach((element) {
+        if (element.data()['uId'] == uid) {
+          usersPosts.add(PostModel.fromJson(element.data()));
+          print('=========================================');
+          print(usersPosts.length);
+          print('=========================================');
+        }
+        emit(SocialGetVisitUsersPostsSuccessState());
+      });
+    }).catchError((error) {
+      emit(SocialGetVisitUsersPostsErrorState(error: error));
+    });
+  }
 
+  void logOut() {
+    uId = '';
+    CasheHelper.removeData(key: uId);
 
+    emit(SocialLogOutSuccessState());
+  }
 }
 
  
 
 
-//  void createNewPost({
-//     required String? dateTime,
-//     required String? postText,
-//     String? postImage,
-//   }) {
-//     emit(SocialCreatePostLoadingState());
-//     PostModel model = PostModel(
-//       user
-//       name: usermodel.name,
-//       image: usermodel.image,
-//       uId: usermodel.uId,
-//       dateTime: dateTime,
-//       postImage: postImage ?? '',
-//       postText: postText,
-//     );
-//     FirebaseFirestore.instance
-//         .collection('Posts')
-//         .add(model.toMap())
-//         .then((value) {
-//       emit(SocialCreatePostSuccesState());
-//     }).catchError((error) {
-//       emit(SocialCreatePostErrorState());
-//     });
-//   }

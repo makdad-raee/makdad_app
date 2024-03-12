@@ -64,7 +64,8 @@ class MyApp extends StatelessWidget {
           create: (context) => SocialCubit(UserModel())
             ..getUserData()
             ..getPosts()
-            ..getAllUsers()..getmyPosts(),
+            ..getAllUsers()
+            ..getmyPosts(),
         )
       ],
       child: MaterialApp(

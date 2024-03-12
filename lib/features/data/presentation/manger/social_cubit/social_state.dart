@@ -138,3 +138,18 @@ class SocialupdateNameAndPhotoOfThePostErrorState extends SocialState {
 
   SocialupdateNameAndPhotoOfThePostErrorState({required this.error});
 }
+
+class SocialLogOutSuccessState extends SocialState{}
+class SocialLogOutErrorState extends SocialState{
+    final String error;
+
+  SocialLogOutErrorState({required this.error});
+
+}
+class SocialGetVisitUsersPostsSuccessState extends SocialState{}
+class SocialGetVisitUsersPostsErrorState extends SocialState{
+    final String error;
+
+  SocialGetVisitUsersPostsErrorState({required this.error});
+
+}

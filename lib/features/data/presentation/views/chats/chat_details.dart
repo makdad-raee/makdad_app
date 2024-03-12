@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:makdad_app/core/utils/componants.dart';
 import 'package:makdad_app/core/utils/constant.dart';
 import 'package:makdad_app/features/data/models/message_model.dart';
 import 'package:makdad_app/features/data/models/user_model.dart';
@@ -30,13 +31,14 @@ class ChatDetails extends StatelessWidget {
               ],
             ),
           ),
-          body: SocialCubit.get(context).messages.isNotEmpty
-              ? Padding(
+          body:// SocialCubit.get(context).messages.isNotEmpty?
+              
+              Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
                     children: [
                       Expanded(
-                        child: ListView.separated(
+                        child: SocialCubit.get(context).messages.isNotEmpty ?ListView.separated(
                             physics: const BouncingScrollPhysics(),
                             itemBuilder: (context, index) {
                               var message =
@@ -56,7 +58,7 @@ class ChatDetails extends StatelessWidget {
                                   height: 12,
                                 ),
                             itemCount:
-                                SocialCubit.get(context).messages.length),
+                                SocialCubit.get(context).messages.length):const CircularProgressIndicator(),
                       ),
                       Container(
                         clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -99,9 +101,9 @@ class ChatDetails extends StatelessWidget {
                     ],
                   ),
                 )
-              : const Center(
-                  child: CircularProgressIndicator(),
-                ),
+              // : const Center(
+              //     child: CircularProgressIndicator(),
+              //   ),
         ),
       );
     });
