@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:makdad_app/core/utils/componants.dart';
 import 'package:makdad_app/core/utils/constant.dart';
 import 'package:makdad_app/features/data/models/comment_model.dart';

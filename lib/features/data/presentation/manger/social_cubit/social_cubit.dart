@@ -336,8 +336,12 @@ class SocialCubit extends Cubit<SocialState> {
         .doc(usermodel.uId)
         .set({'like': true}).then((value) {
       emit(SocialLikePostsSuccesState());
+      print('======================================');
+      print(postId.length.toString());
+      print('======================================');
     }).catchError((error) {
       emit(SocialLikePostsErrorState(error: error.toString()));
+      
     });
   }
 
@@ -536,9 +540,9 @@ class SocialCubit extends Cubit<SocialState> {
       value.docs.forEach((element) {
         if (element.data()['uId'] == uid) {
           usersPosts.add(PostModel.fromJson(element.data()));
-          print('=========================================');
-          print(usersPosts.length);
-          print('=========================================');
+          // print('=========================================');
+          // print(usersPosts.length);
+          // print('=========================================');
         }
         emit(SocialGetVisitUsersPostsSuccessState());
       });

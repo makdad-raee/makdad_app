@@ -6,7 +6,6 @@ import 'package:makdad_app/core/utils/constant.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_cubit.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
 import 'package:makdad_app/features/data/presentation/views/feeds/build_bost_item.dart';
-import 'package:makdad_app/features/data/presentation/views/new_post/new_post_view.dart';
 
 class FeedsBody extends StatelessWidget {
   const FeedsBody({

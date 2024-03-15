@@ -43,8 +43,8 @@ class BuildPostItem extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: AvatarNameAndMore(
-                        postModel: postModel,
-                        userModel: postModel.usermodel!,
+                          postModel: postModel,
+                          userModel: postModel.usermodel!,
                           name: postModel.name,
                           profileImage: postModel.usermodel!.image,
                           dateTime: postModel.dateTime.toString()),
