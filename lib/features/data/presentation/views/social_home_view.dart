@@ -19,6 +19,7 @@ class SocialHomeView extends StatelessWidget {
             builder: (context) => const NewPostView(),
           ));
         }
+        
       },
       builder: (context, state) => Scaffold(
         extendBody: true,

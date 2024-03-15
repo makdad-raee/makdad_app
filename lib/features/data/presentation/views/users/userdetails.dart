@@ -10,7 +10,8 @@ import 'package:makdad_app/features/data/presentation/views/settings/profile_pic
 import 'package:makdad_app/features/data/presentation/views/settings/settings.dart';
 
 class UserDetailsProfile extends StatelessWidget {
-  const UserDetailsProfile({super.key, required this.userModel, required this.postModel});
+  const UserDetailsProfile(
+      {super.key, required this.userModel, required this.postModel});
   final UserModel userModel;
   final PostModel postModel;
 
@@ -70,13 +71,10 @@ class UserDetailsProfile extends StatelessWidget {
                     ? ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        itemBuilder: (context, index) =>BuildPostItem(postModel: postModel, userModel: userModel, index: index),
-                        //  Container(
-                        //   height: 150,
-                        //   width: 60,
-                        //   color: Colors.red,
-                        //   child: Text(postModel.postText!,style: const TextStyle(color: Colors.white),),
-                        // ),
+                        itemBuilder: (context, index) => BuildPostItem(
+                            postModel: listofvisituserspost[index],
+                            userModel: userModel,
+                            index: index),
                         itemCount: listofvisituserspost.length,
                       )
                     : const CircularProgressIndicator(),

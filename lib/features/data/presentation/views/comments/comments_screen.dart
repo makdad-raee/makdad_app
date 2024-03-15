@@ -7,7 +7,6 @@ import 'package:makdad_app/features/data/models/comment_model.dart';
 import 'package:makdad_app/features/data/models/post_model.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_cubit.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
-import 'package:makdad_app/features/data/presentation/views/widgets/diveder.dart';
 
 class CommentsScreen extends StatelessWidget {
   const CommentsScreen(

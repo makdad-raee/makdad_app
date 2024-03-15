@@ -177,30 +177,48 @@ class SocialCubit extends Cubit<SocialState> {
         .update(model.toMap())
         .then((value) {
       getUserData();
-      for (var element in postId) {
-        for (int i = 0; i < postId.length; i++) {
-          //PostModel post=   posts[i].usermodel=model;
-          PostModel postModel = PostModel(
-            usermodel: model,
-            postText: mypost[i].postText,
-            dateTime: mypost[i].dateTime,
-            image: model.image,
-            name: model.name,
-            postImage: mypost[i].postImage,
-          );
 
-          FirebaseFirestore.instance
-              .collection('users')
-              .doc(uId)
-              .collection('Posts')
-              .doc(postId[i])
-              .update(postModel.toMap())
-              .then((value) {
-            emit(SocialupdateNameAndPhotoOfThePostSuccesState());
-          }).catchError((error) {
-            emit(SocialupdateNameAndPhotoOfThePostErrorState(error: error));
+      for (int i = 0; i < postId.length; i++) {
+        //PostModel post=   posts[i].usermodel=model;
+        PostModel postModel = PostModel(
+          uId: mypost[i].uId,
+          usermodel: model,
+          postText: mypost[i].postText,
+          dateTime: mypost[i].dateTime,
+          image: model.image,
+          name: model.name,
+          postImage: mypost[i].postImage,
+        );
+        FirebaseFirestore.instance.collection('Posts').get().then((value) {
+          value.docs.forEach((element) {
+            if (element.data()['uId'] == postModel.uId) {
+              FirebaseFirestore.instance
+                  .collection('Posts')
+                  .doc(element.id)
+                  .update(postModel.toMap())
+                  .then((value) {})
+                  .catchError((error) {});
+            }
           });
-        }
+        });
+        // FirebaseFirestore.instance
+        //     .collection('Posts')
+        //     .doc(postId[i])
+        //     .update(postModel.toMap())
+        //     .then((value) {})
+        //     .catchError((error) {});
+
+        FirebaseFirestore.instance
+            .collection('users')
+            .doc(uId)
+            .collection('Posts')
+            .doc(postId[i])
+            .update(postModel.toMap())
+            .then((value) {
+          emit(SocialupdateNameAndPhotoOfThePostSuccesState());
+        }).catchError((error) {
+          emit(SocialupdateNameAndPhotoOfThePostErrorState(error: error));
+        });
       }
     }).catchError((error) {
       emit(SocialUserUpdateErrorState());
@@ -288,30 +306,6 @@ class SocialCubit extends Cubit<SocialState> {
   List<int> commentCount = [];
   List<PostModel> posts = [];
   void getmyPosts() {
-//     FirebaseFirestore.instance
-//     .collection('users')
-//     .doc(uId)
-//     .collection('Posts')
-//     .get()
-//     .then((querySnapshot) {
-//   querySnapshot.docs.forEach((doc) {
-//     // إنشاء كائن PostModel من البيانات
-//     PostModel post = PostModel.fromJson(doc.data());
-//     postId.add(doc.id);
-//     posts.add(PostModel.fromJson(doc.data()));
-
-//     // عرض المعلومات
-//     print('Post: ${post.postText}');
-//     print('Date: ${post.dateTime}');
-//     print('Image: ${post.postImage}');
-//     emit(SocialGetPostsSuccesState());
-
-//     // عرض المعلومات في واجهة المستخدم (استخدم الأدوات المفضلة لديك)
-//     // مثال:
-//    // Text(post.postText);
-//     // ...
-//   });
-// }).catchError((error){print('errrrrrrrrrrrrrrrrrrrrrrrrorrrrrrrrrrrrrrrrrr');});
     FirebaseFirestore.instance
         .collection('users')
         .doc(uId)
@@ -517,6 +511,7 @@ class SocialCubit extends Cubit<SocialState> {
   }
 
   void getPosts() {
+    posts=[];
     FirebaseFirestore.instance.collection('Posts').get().then((value) {
       value.docs.forEach((element) {
         element.reference.collection('likes').get().then((value) {
@@ -536,7 +531,7 @@ class SocialCubit extends Cubit<SocialState> {
 
   List<PostModel> usersPosts = [];
   void getuservisitposts({required String uid}) {
-    usersPosts=[];
+    usersPosts = [];
     FirebaseFirestore.instance.collection('Posts').get().then((value) {
       value.docs.forEach((element) {
         if (element.data()['uId'] == uid) {
@@ -559,7 +554,3 @@ class SocialCubit extends Cubit<SocialState> {
     emit(SocialLogOutSuccessState());
   }
 }
-
- 
-
-

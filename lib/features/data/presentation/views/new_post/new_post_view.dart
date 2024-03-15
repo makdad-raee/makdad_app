@@ -5,7 +5,6 @@ import 'package:makdad_app/core/utils/componants.dart';
 import 'package:makdad_app/core/utils/constant.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_cubit.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
-import 'package:makdad_app/features/data/presentation/views/feeds/avatar_name_and_more.dart';
 
 class NewPostView extends StatelessWidget {
   const NewPostView({super.key});
@@ -14,9 +13,15 @@ class NewPostView extends StatelessWidget {
   Widget build(BuildContext context) {
     var textPostController = TextEditingController();
     return BlocConsumer<SocialCubit, SocialState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        // if (state is SocialCreatePostSuccesState) {
+        //   //  SocialCubit.get(context).changeBottomNav(1);
+
+        // //  Navigator.pop(context);
+        // }
+      },
       builder: (context, state) {
-        var cubit=SocialCubit.get(context);
+        var cubit = SocialCubit.get(context);
         return Scaffold(
           appBar: defaultAppar(
             context: context,
@@ -52,7 +57,7 @@ class NewPostView extends StatelessWidget {
                   const SizedBox(
                     height: 12,
                   ),
-             //    AvatarNameAndMore(isCreate: true ,name:cubit.usermodel.name! ,profileImage:cubit.usermodel.image!,userModel: cubit.usermodel, ),
+                //    AvatarNameAndMore(isCreate: true ,name:cubit.usermodel.name! ,profileImage:cubit.usermodel.image!,userModel: cubit.usermodel, ),
                 Expanded(
                   child: TextFormField(
                     controller: textPostController,
@@ -72,8 +77,9 @@ class NewPostView extends StatelessWidget {
                           borderRadius: BorderRadius.circular(6),
                           image: DecorationImage(
                             fit: BoxFit.contain,
-                            image:
-                                FileImage(SocialCubit.get(context).postImage!,),
+                            image: FileImage(
+                              SocialCubit.get(context).postImage!,
+                            ),
                           ),
                         ),
                       ),
@@ -92,7 +98,9 @@ class NewPostView extends StatelessWidget {
                       )
                     ],
                   ),
-                  const SizedBox(height: 12,),
+                const SizedBox(
+                  height: 12,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -110,7 +118,9 @@ class NewPostView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(width: 20,),
+                    const SizedBox(
+                      width: 20,
+                    ),
                     TextButton(
                         onPressed: () {},
                         child: const Text(

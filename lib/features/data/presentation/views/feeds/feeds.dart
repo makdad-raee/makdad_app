@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:makdad_app/core/utils/constant.dart';
-import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_cubit.dart';
 import 'package:makdad_app/features/data/presentation/views/feeds/feeds_body.dart';
 
 class FeedsScreen extends StatelessWidget {

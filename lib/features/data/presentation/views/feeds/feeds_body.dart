@@ -15,22 +15,20 @@ class FeedsBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-
     ;
     return BlocConsumer<SocialCubit, SocialState>(
       listener: (context, state) {},
       builder: (context, state) {
         var listPosts = SocialCubit.get(context).posts;
         var userModel = SocialCubit.get(context).usermodel;
-        
+
         return Column(
           children: [
             const StoryAndWritePostView(),
             listPosts.isEmpty
                 ? Center(child: defaultIndicator())
                 : ListView.builder(
-                
+
                     //  controller: ScrollController(),
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -62,9 +60,9 @@ class StoryAndWritePostView extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => const NewPostView(),
-          ));
+              // Navigator.of(context).push(MaterialPageRoute(
+              //   builder: (context) => const NewPostView(),
+              // ));
             },
             child: Container(
               padding: const EdgeInsets.only(
