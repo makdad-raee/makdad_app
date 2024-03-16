@@ -302,6 +302,7 @@ class SocialCubit extends Cubit<SocialState> {
 
   List<PostModel> mypost = [];
   List<String> postId = [];
+  List<String> mypostId = [];
   List<int> likesCount = [];
   List<int> commentCount = [];
   List<PostModel> posts = [];
@@ -314,13 +315,13 @@ class SocialCubit extends Cubit<SocialState> {
         .then((value) {
       value.docs.forEach((element) {
         element.reference.collection('likes').get().then((value) {
-          likesCount.add(value.docs.length);
-          postId.add(element.id);
+          // likesCount.add(value.docs.length);
+          mypostId.add(element.id);
           mypost.add(PostModel.fromJson(element.data()));
         }).catchError((error) {});
-        element.reference.collection('comments').get().then((value) {
-          commentCount.add(value.docs.length);
-        }).catchError((error) {});
+        // element.reference.collection('comments').get().then((value) {
+        //   commentCount.add(value.docs.length);
+        // }).catchError((error) {});
       });
       emit(SocialGetMyPostsSuccesState());
     }).catchError((error) {
@@ -341,7 +342,6 @@ class SocialCubit extends Cubit<SocialState> {
       print('======================================');
     }).catchError((error) {
       emit(SocialLikePostsErrorState(error: error.toString()));
-      
     });
   }
 
@@ -515,7 +515,9 @@ class SocialCubit extends Cubit<SocialState> {
   }
 
   void getPosts() {
-    posts=[];
+    posts = [];
+    postId = [];
+    commentCount = [];
     FirebaseFirestore.instance.collection('Posts').get().then((value) {
       value.docs.forEach((element) {
         element.reference.collection('likes').get().then((value) {
@@ -523,8 +525,8 @@ class SocialCubit extends Cubit<SocialState> {
           postId.add(element.id);
           posts.add(PostModel.fromJson(element.data()));
         }).catchError((error) {});
-        element.reference.collection('comments').get().then((value) {
-          commentCount.add(value.docs.length);
+        element.reference.collection('comments').get().then((valueComment) {
+          commentCount.add(valueComment.docs.length);
         }).catchError((error) {});
       });
       emit(SocialGetPostsSuccesState());

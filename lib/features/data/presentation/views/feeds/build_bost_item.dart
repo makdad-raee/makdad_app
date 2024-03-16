@@ -86,7 +86,7 @@ class BuildPostItem extends StatelessWidget {
                                   icon: FontAwesomeIcons.comment,
                                   color: Colors.amber,
                                   text:
-                                      '${SocialCubit.get(context).commentCount[index]} comments'),
+                                      '${SocialCubit.get(context).commentCount[index]} Comments'),
                             ),
                           ),
                         ],
