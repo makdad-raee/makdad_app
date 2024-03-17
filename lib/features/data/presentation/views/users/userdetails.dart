@@ -48,10 +48,11 @@ class UserDetailsProfile extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   child: AddFriendANdMessages(),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 12,
                 ),
                 const VisitedUserInformation(),
+                const FriendlistCircle(),
                 listofvisituserspost.isNotEmpty
                     ? ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
@@ -258,7 +259,10 @@ class VisitedUserInformation extends StatelessWidget {
                     'Friends',
                     style: TextStyle(fontWeight: FontWeight.w600, fontSize: 30),
                   ),
-                  Text('804 , 23 Mutual Friends',style: TextStyle(color: Colors.grey,))
+                  Text('804 , 23 Mutual Friends',
+                      style: TextStyle(
+                        color: Colors.grey,
+                      ))
                 ],
               ),
               const Spacer(),
@@ -277,6 +281,73 @@ class VisitedUserInformation extends StatelessWidget {
                 ),
               )
             ],
+          ),
+        )
+      ],
+    );
+  }
+}
+
+class FriendlistCircle extends StatelessWidget {
+  const FriendlistCircle({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SizedBox(
+          height: 100,
+          child: ListView.builder(
+            itemCount: 12,
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) => const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 2),
+              child: CircleAvatar(
+                backgroundColor: defaulColor,
+                radius: 30,
+                child: Padding(
+                  padding: EdgeInsets.all(3.0),
+                  child: CircleAvatar(
+                    backgroundImage: NetworkImage(
+                        'https://img.freepik.com/free-photo/medium-shot-woman-having-fun-party_23-2151108173.jpg?w=360&t=st=1710666222~exp=1710666822~hmac=c231395ac11dc95df84fd460867a3a96521b603dc52a442b9abe369dc0f035ba'),
+                    backgroundColor: Colors.white,
+                    radius: 29,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: SizedBox(
+            height: 100,
+            child: GridView.builder(
+              // Set the grid delegate to define layout
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4, // 4 squares in each line
+                crossAxisSpacing: 10.0, // spacing between squares
+                mainAxisSpacing: 10.0, // spacing between rows
+              ),
+              // Define the number of items
+              itemCount: 4, // Adjust as needed
+              // Build each grid item
+              itemBuilder: (context, index) {
+                return Container(
+                  height: 50,
+                  width: 50,
+                  decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                              'https://img.freepik.com/free-photo/medium-shot-woman-having-fun-party_23-2151108173.jpg?w=360&t=st=1710666222~exp=1710666822~hmac=c231395ac11dc95df84fd460867a3a96521b603dc52a442b9abe369dc0f035ba')),
+                      color: Colors.grey,
+                      borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(16),
+                          topRight: Radius.circular(16))),
+                );
+              },
+            ),
           ),
         )
       ],
