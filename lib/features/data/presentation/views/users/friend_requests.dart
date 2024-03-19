@@ -10,28 +10,26 @@ class FriendRequest extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (context) {
-        SocialCubit.get(context).getsendFreindRequest();
-        return BlocConsumer<SocialCubit, SocialState>(
-          listener: (context, state) {},
-          builder: (context, state) {
-            var cubit = SocialCubit.get(context);
-            var userModel = SocialCubit.get(context).sendFreindsRequest;
-            return Scaffold(
-                appBar:
-                    defaultAppar(context: context, title: 'Send Friend Request'),
-                body:
-                    // userModel.isNotEmpty?
-                    ListView.builder(
-                  itemCount: userModel.length,
-                  itemBuilder: (context, index) =>
-                      FriendRequestItem(userModel: userModel[index]),
-                ));
-          },
-        );
-      }
-    );
+    return Builder(builder: (context) {
+      SocialCubit.get(context).getsendFreindRequest();
+      return BlocConsumer<SocialCubit, SocialState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          var cubit = SocialCubit.get(context);
+          var userModel = SocialCubit.get(context).sendFreindsRequest;
+          return Scaffold(
+              appBar:
+                  defaultAppar(context: context, title: 'Send Friend Request'),
+              body:
+                  // userModel.isNotEmpty?
+                  ListView.builder(
+                itemCount: userModel.length,
+                itemBuilder: (context, index) =>
+                    FriendRequestItem(userModel: userModel[index]),
+              ));
+        },
+      );
+    });
   }
 }
 
@@ -60,10 +58,9 @@ class FriendRequestItem extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                     CircleAvatar(
+                    CircleAvatar(
                       backgroundImage: NetworkImage(userModel.image!),
                       radius: 30,
-                      
                     ),
                     const SizedBox(
                       width: 8,

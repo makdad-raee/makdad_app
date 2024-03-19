@@ -617,8 +617,11 @@ class SocialCubit extends Cubit<SocialState> {
         .get()
         .then((value) {
       value.docs.forEach((element) {
-        sendFreindsRequest.add(UserModel.fromJson(element.data()));
+        if (element.data()['uId'] != uId) {
+          sendFreindsRequest.add(UserModel.fromJson(element.data()));
         emit(SocialGetSendFreindRequestSuccessState());
+        }
+        
       });
     }).catchError((error) {
       emit(SocialGetSendFreindRequestErrorState(error: error.toString()));
