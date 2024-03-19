@@ -21,6 +21,7 @@ class UserDetailsProfile extends StatelessWidget {
     return BlocConsumer<SocialCubit, SocialState>(
       listener: (context, state) {},
       builder: (context, state) {
+        var cubit = SocialCubit.get(context);
         var listofvisituserspost = SocialCubit.get(context).usersPosts;
         return Scaffold(
           appBar: AppBar(
@@ -44,9 +45,15 @@ class UserDetailsProfile extends StatelessWidget {
                   height: 12,
                 ),
                 const FlowersAndUserCount(),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                  child: AddFriendANdMessages(),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                  child: AddFriendANdMessages(
+                    onTapAddFriend: () {
+                      cubit.sendFriendRequest(
+                          userModelRcieverAddRequest: postModel.usermodel!);
+                    },
+                  ),
                 ),
                 const SizedBox(
                   height: 12,
@@ -113,8 +120,8 @@ class FlowersAndUserCount extends StatelessWidget {
 }
 
 class AddFriendANdMessages extends StatelessWidget {
-  const AddFriendANdMessages({super.key});
-
+  const AddFriendANdMessages({super.key, required this.onTapAddFriend});
+  final void Function() onTapAddFriend;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -125,19 +132,22 @@ class AddFriendANdMessages extends StatelessWidget {
             // width: 80,
             decoration: BoxDecoration(
                 color: defaulColor, borderRadius: BorderRadius.circular(24)),
-            child: const Center(
-                child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Icon(
-                  FontAwesomeIcons.userPlus,
-                  color: Colors.white,
-                ),
-                Text(
-                  'Add Friend',
-                  style: TextStyle(color: Colors.white, fontSize: 18),
-                ),
-              ],
+            child: Center(
+                child: GestureDetector(
+              onTap: onTapAddFriend,
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Icon(
+                    FontAwesomeIcons.userPlus,
+                    color: Colors.white,
+                  ),
+                  Text(
+                    'Add Friend',
+                    style: TextStyle(color: Colors.white, fontSize: 18),
+                  ),
+                ],
+              ),
             )),
           ),
         ),
@@ -192,7 +202,7 @@ class VisitedUserInformation extends StatelessWidget {
       children: [
         Container(
           width: double.infinity,
-          height: 150,
+          height: 120,
           decoration: BoxDecoration(color: Colors.grey.withOpacity(0.2)),
           child: Padding(
             padding: const EdgeInsets.all(8.0),

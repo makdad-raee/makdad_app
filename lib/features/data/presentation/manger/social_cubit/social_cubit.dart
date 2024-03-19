@@ -559,4 +559,51 @@ class SocialCubit extends Cubit<SocialState> {
 
     emit(SocialLogOutSuccessState());
   }
+
+  void applyFriendRequest({required UserModel friendsUserModel}) {
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(uId)
+        .collection('Freinds')
+        .add(friendsUserModel.toMap())
+        .then((value) {
+      emit(SocialAddFriendsSuccessState());
+    }).catchError((error) {
+      emit(SocialAddFriendsErrorState(error: error.toString()));
+    });
+  }
+
+  void sendFriendRequest({required UserModel userModelRcieverAddRequest}) {
+    UserModel userModelSenderAddRequest = UserModel(
+        bio: usermodel.bio,
+        coverImage: usermodel.coverImage,
+        email: usermodel.email,
+        image: usermodel.image,
+        isEmailVerfied: usermodel.isEmailVerfied,
+        name: usermodel.name,
+        phone: usermodel.phone,
+        uId: usermodel.uId);
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(uId)
+        .collection(friendSendRequestTable)
+        .add(userModelRcieverAddRequest.toMap())
+        .then((value) {
+      emit(SocialAddFriendsSuccessState());
+    }).catchError((error) {
+      print('ooooooooooooo1111');
+    });
+    //======================
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(userModelRcieverAddRequest.uId)
+        .collection(friendReciveRequest)
+        .add(userModelSenderAddRequest.toMap())
+        .then((value) {
+      emit(SocialAddFriendsSuccessState());
+    }).catchError((error) {
+      emit(SocialAddFriendsErrorState(error: error.toString()));
+      print('ooooooooooooo2222222');
+    });
+  }
 }

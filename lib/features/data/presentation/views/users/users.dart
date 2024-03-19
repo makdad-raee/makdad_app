@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:makdad_app/features/data/presentation/views/users/friend_requests.dart';
 
 class UsersScreen extends StatelessWidget {
   const UsersScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Text('Users');
+    return Column(
+      children: [
+        TextButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => const FriendRequest(),
+              ));
+            },
+            child: const Text('Requests have been send')),
+      ],
+    );
   }
 }

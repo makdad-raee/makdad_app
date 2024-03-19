@@ -153,3 +153,10 @@ class SocialGetVisitUsersPostsErrorState extends SocialState{
   SocialGetVisitUsersPostsErrorState({required this.error});
 
 }
+class SocialAddFriendsSuccessState extends SocialState{}
+class SocialAddFriendsErrorState extends SocialState{
+    final String error;
+
+  SocialAddFriendsErrorState({required this.error});
+
+}
