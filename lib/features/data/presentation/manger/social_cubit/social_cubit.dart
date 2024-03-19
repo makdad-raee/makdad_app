@@ -606,4 +606,22 @@ class SocialCubit extends Cubit<SocialState> {
       print('ooooooooooooo2222222');
     });
   }
+
+  List<UserModel> sendFreindsRequest = [];
+  void getsendFreindRequest() {
+    sendFreindsRequest = [];
+    FirebaseFirestore.instance
+        .collection(usersTable)
+        .doc(uId)
+        .collection(friendSendRequestTable)
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        sendFreindsRequest.add(UserModel.fromJson(element.data()));
+        emit(SocialGetSendFreindRequestSuccessState());
+      });
+    }).catchError((error) {
+      emit(SocialGetSendFreindRequestErrorState(error: error.toString()));
+    });
+  }
 }

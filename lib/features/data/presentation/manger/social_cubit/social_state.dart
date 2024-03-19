@@ -93,6 +93,7 @@ class SocialGetmyPostsErrorState extends SocialState {
 
   SocialGetmyPostsErrorState({required this.error});
 }
+
 class SocialGetPostsSuccesState extends SocialState {}
 
 class SocialGetPostsErrorState extends SocialState {
@@ -130,33 +131,43 @@ class SocialSendMessageErrorState extends SocialState {
 
 class SocialReciveMessageSuccesState extends SocialState {}
 
-
 //update profileimage and name when we edit it
 class SocialupdateNameAndPhotoOfThePostSuccesState extends SocialState {}
+
 class SocialupdateNameAndPhotoOfThePostErrorState extends SocialState {
   final String error;
 
   SocialupdateNameAndPhotoOfThePostErrorState({required this.error});
 }
 
-class SocialLogOutSuccessState extends SocialState{}
-class SocialLogOutErrorState extends SocialState{
-    final String error;
+class SocialLogOutSuccessState extends SocialState {}
+
+class SocialLogOutErrorState extends SocialState {
+  final String error;
 
   SocialLogOutErrorState({required this.error});
-
 }
-class SocialGetVisitUsersPostsSuccessState extends SocialState{}
-class SocialGetVisitUsersPostsErrorState extends SocialState{
-    final String error;
+
+class SocialGetVisitUsersPostsSuccessState extends SocialState {}
+
+class SocialGetVisitUsersPostsErrorState extends SocialState {
+  final String error;
 
   SocialGetVisitUsersPostsErrorState({required this.error});
-
 }
-class SocialAddFriendsSuccessState extends SocialState{}
-class SocialAddFriendsErrorState extends SocialState{
-    final String error;
+
+class SocialAddFriendsSuccessState extends SocialState {}
+
+class SocialAddFriendsErrorState extends SocialState {
+  final String error;
 
   SocialAddFriendsErrorState({required this.error});
+}
 
+class SocialGetSendFreindRequestSuccessState extends SocialState {}
+
+class SocialGetSendFreindRequestErrorState extends SocialState {
+  final String error;
+
+  SocialGetSendFreindRequestErrorState({required this.error});
 }
