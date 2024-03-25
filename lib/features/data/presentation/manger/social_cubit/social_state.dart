@@ -178,3 +178,13 @@ class SocialGetReciverFreindRequestErrorState extends SocialState {
 
   SocialGetReciverFreindRequestErrorState({required this.error});
 }
+//============APPLY FRIENDS 
+//============APPLY FRIENDS 
+class SocialApplyFriendsRequestLoadingState extends SocialState {}
+class SocialApplyFriendsRequestSuccessState extends SocialState {}
+
+class SocialApplyFriendsRequestErrorState extends SocialState {
+  final String error;
+
+  SocialApplyFriendsRequestErrorState({required this.error});
+}

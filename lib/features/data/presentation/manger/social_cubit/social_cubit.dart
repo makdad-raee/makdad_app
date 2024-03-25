@@ -560,19 +560,6 @@ class SocialCubit extends Cubit<SocialState> {
     emit(SocialLogOutSuccessState());
   }
 
-  void applyFriendRequest({required UserModel friendsUserModel}) {
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(uId)
-        .collection('Freinds')
-        .add(friendsUserModel.toMap())
-        .then((value) {
-      emit(SocialAddFriendsSuccessState());
-    }).catchError((error) {
-      emit(SocialAddFriendsErrorState(error: error.toString()));
-    });
-  }
-
   void sendFriendRequest({required UserModel userModelRcieverAddRequest}) {
     UserModel userModelSenderAddRequest = UserModel(
         bio: usermodel.bio,
@@ -648,5 +635,100 @@ class SocialCubit extends Cubit<SocialState> {
     }).catchError((error) {
       emit(SocialGetReciverFreindRequestErrorState(error: error.toString()));
     });
+  }
+
+  void applyFriendRequest({required UserModel userModelWhoSendRequest}) {
+    emit(SocialApplyFriendsRequestLoadingState());
+    UserModel usermodelWhoAcceptRequest = UserModel(
+      bio: usermodel.bio,
+      coverImage: usermodel.coverImage,
+      email: usermodel.email,
+      image: usermodel.image,
+      isEmailVerfied: usermodel.isEmailVerfied,
+      name: usermodel.name,
+      phone: usermodel.phone,
+      uId: usermodel.uId,
+    );
+
+    FirebaseFirestore.instance
+        .collection(usersTable)
+        .doc(uId)
+        .collection(friendsTable)
+        .add(userModelWhoSendRequest.toMap())
+        .then((value) {
+      print('hoohohohoohohohohoohohoho');
+
+      print(value.toString());
+      print('hoohohohoohohohohoohohoho');
+      emit(SocialApplyFriendsRequestSuccessState());
+    }).catchError((error) {
+      emit(SocialApplyFriendsRequestErrorState(error: error));
+    });
+    // =====
+    FirebaseFirestore.instance
+        .collection(usersTable)
+        .doc(userModelWhoSendRequest.uId)
+        .collection(friendsTable)
+        .add(usermodelWhoAcceptRequest.toMap())
+        .then((value) {
+      print('hoohohohoohohohohoohohoho');
+
+      print(value.toString());
+      print('hoohohohoohohohohoohohoho');
+
+      emit(SocialApplyFriendsRequestSuccessState());
+    }).catchError((error) {
+      emit(SocialApplyFriendsRequestErrorState(error: error));
+    });
+    // =======
+    FirebaseFirestore.instance
+        .collection(usersTable)
+        .doc(uId)
+        .collection(friendReciveRequest)
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        if (element.data()['uId'] == userModelWhoSendRequest.uId) {
+          FirebaseFirestore.instance
+              .collection(usersTable)
+              .doc(uId)
+              .collection(friendReciveRequest)
+              .doc(element.id)
+              .delete()
+              .then((value) {
+            print(element.id);
+            print('=================delete==============');
+
+            print('=================delete==============');
+          });
+        }
+      });
+    }).catchError((error) {});
+    //====delete from who send request
+
+    FirebaseFirestore.instance
+        .collection(usersTable)
+        .doc(userModelWhoSendRequest.uId)
+        .collection(friendSendRequestTable)
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        if (element.data()['uId'] == usermodelWhoAcceptRequest.uId) {
+          FirebaseFirestore.instance
+              .collection(usersTable)
+              .doc(usermodelWhoAcceptRequest.uId)
+              .collection(friendSendRequestTable)
+              .doc(element.id)
+              .delete()
+              .then((value) {
+            print(element.id);
+            print('=================delete==============');
+
+            print('=================delete==============');
+          });
+          //  print(object)
+        }
+      });
+    }).catchError((error) {});
   }
 }

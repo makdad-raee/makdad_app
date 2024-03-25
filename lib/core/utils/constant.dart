@@ -34,3 +34,4 @@ const double chatRadiusCirculer = 12.0;
 const String usersTable = 'users';
 const String friendSendRequestTable = 'FriendSendRequest';
 const String friendReciveRequest = 'FriendReciveRequest';
+const String friendsTable = 'Friends';

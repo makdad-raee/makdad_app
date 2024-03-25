@@ -16,17 +16,50 @@ class ChatsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<SocialCubit, SocialState>(
       listener: (context, state) {},
-      builder: (context, state) => SocialCubit.get(context).users.isNotEmpty
-          ? ListView.separated(
-              physics: const BouncingScrollPhysics(),
-              itemBuilder: (context, index) => ChatNameAndimImageUser(
-                  usermodel: SocialCubit.get(context).users[index]),
-              separatorBuilder: (context, index) => const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    child: Diveder(),
-                  ),
-              itemCount: SocialCubit.get(context).users.length)
-          : Center(child: defaultIndicator()),
+      builder: (context, state) {
+        return Column(
+          children: [
+            Container(
+                height: 60,
+                child: Row(
+                  children: [
+                    const CircleAvatar(
+                      radius: 36,
+                      child: Icon(Icons.add),
+                    ),
+                    const SizedBox(
+                      width: 12,
+                    ),
+                    Expanded(
+                      child: ListView.separated(
+                          //  physics: const NeverScrollableScrollPhysics(),
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: (context, index) => const CircleAvatar(
+                                radius: 32,
+                                child: Icon(Icons.picture_as_pdf),
+                              ),
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(width: 6),
+                          itemCount: 10),
+                    ),
+                  ],
+                )),
+            SocialCubit.get(context).users.isNotEmpty
+                ? Expanded(
+                    child: ListView.separated(
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: (context, index) => ChatNameAndimImageUser(
+                            usermodel: SocialCubit.get(context).users[index]),
+                        separatorBuilder: (context, index) => const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 20),
+                              child: Diveder(),
+                            ),
+                        itemCount: SocialCubit.get(context).users.length),
+                  )
+                : Center(child: defaultIndicator()),
+          ],
+        );
+      },
     );
   }
 }
