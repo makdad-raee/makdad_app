@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:makdad_app/core/utils/componants.dart';
+import 'package:makdad_app/features/data/presentation/views/groups/main_groups_view.dart';
 import 'package:makdad_app/features/data/presentation/views/users/friend_requests.dart';
 import 'package:makdad_app/features/data/presentation/views/users/recived_friend_request.dart';
 
@@ -57,7 +58,9 @@ class UsersScreen extends StatelessWidget {
                 ),
                 const Spacer(),
                 IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => MainGroupsView(),));
+                    },
                     icon: const Icon(
                       Icons.arrow_forward_ios,
                       size: 28,
