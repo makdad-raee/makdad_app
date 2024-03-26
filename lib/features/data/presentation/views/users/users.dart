@@ -59,7 +59,9 @@ class UsersScreen extends StatelessWidget {
                 const Spacer(),
                 IconButton(
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => MainGroupsView(),));
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => MainGroupsView(),
+                      ));
                     },
                     icon: const Icon(
                       Icons.arrow_forward_ios,
@@ -142,6 +144,7 @@ class SuggestedForYou extends StatelessWidget {
               height: 160,
               width: 200,
               decoration: BoxDecoration(
+                  border: Border.all(width: 1, color: Colors.black38),
                   image: const DecorationImage(
                       image: NetworkImage(
                           'https://img.freepik.com/free-photo/fit-blond-woman-with-perfect-smile-stylish-sportswear-looking-camera-holding-bottle-water-white-wall-demonstrate-muscles_273443-4534.jpg?size=626&ext=jpg&ga=GA1.1.1667027219.1706042622&semt=sph'),
@@ -149,20 +152,26 @@ class SuggestedForYou extends StatelessWidget {
                   // color: defaulColor,
                   borderRadius: BorderRadiusDirectional.circular(20)),
             ),
-            Text(
-              'Health',
-              style: TextStyle(
-                  color: Colors.black.withOpacity(0.6),
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500),
+            Padding(
+              padding: const EdgeInsets.only(left: 8, top: 4),
+              child: Text(
+                'Health',
+                style: TextStyle(
+                    color: Colors.black.withOpacity(0.6),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500),
+              ),
             ),
-            Text(
-              'Healthy LifeStyle',
-              maxLines: 2,
-              style: TextStyle(
-                  color: Colors.black.withOpacity(0.6),
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500),
+            Padding(
+              padding: const EdgeInsets.only(left: 8, top: 2),
+              child: Text(
+                'Healthy LifeStyle',
+                maxLines: 2,
+                style: TextStyle(
+                    color: Colors.black.withOpacity(0.6),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w500),
+              ),
             ),
           ],
         ),
@@ -189,18 +198,20 @@ class MostActiveGroupsItem extends StatelessWidget {
           // height: 100,
           width: 150,
           decoration: BoxDecoration(
+              border: Border.all(width: 1, color: Colors.black38),
               image: const DecorationImage(
                   image: NetworkImage(
-                      'https://img.freepik.com/premium-photo/fresh-vegetables-herbs-as-background_188078-30922.jpg?size=626&ext=jpg'),
+                      'https://img.freepik.com/free-photo/beautiful-collage-travel-concept_23-2149232169.jpg?w=360&t=st=1711461179~exp=1711461779~hmac=bb87314fa7b87f953d49666d986dc70d7d465c6127c11734a19cc9fa7050bcb9'),
                   fit: BoxFit.cover),
               //  / color: defaulColor,
               borderRadius: BorderRadiusDirectional.circular(20)),
         ),
         const Column(
           mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Health parners',
+              'Travels  Lovers',
               style: TextStyle(color: Colors.white, fontSize: 16),
             ),
             SizedBox(

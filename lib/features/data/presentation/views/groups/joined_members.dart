@@ -19,11 +19,12 @@ class JoinedGroups extends StatelessWidget {
                     height: 200,
                     width: 140,
                     decoration: BoxDecoration(
-                        image: DecorationImage(
+                        border: Border.all(width: 1, color: Colors.black38),
+                        image: const DecorationImage(
                             fit: BoxFit.cover,
                             image: NetworkImage(
                                 'https://img.freepik.com/free-photo/power-music-collage-concept_23-2150610201.jpg?w=360&t=st=1711457133~exp=1711457733~hmac=99a3d0c2f9391e28cfb645123b997b21c32daeeb541caedd665e88845c7406d8')),
-                        color: defaulColor,
+                        //  color: defaulColor,
                         borderRadius: BorderRadius.circular(16)),
                   ),
                   const SizedBox(
@@ -54,7 +55,7 @@ class JoinedGroups extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8)),
                     child: const Center(
                         child: Text(
-                      'Visit',
+                      'Join',
                       style: TextStyle(color: Colors.white),
                     )),
                   ),

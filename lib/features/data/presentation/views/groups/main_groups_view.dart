@@ -17,7 +17,6 @@ class MainGroupsView extends StatelessWidget {
             children: [
               JoinedGroups(),
               GroupBrowsing(),
-              
             ],
           ),
         ),
@@ -25,4 +24,3 @@ class MainGroupsView extends StatelessWidget {
     );
   }
 }
-
