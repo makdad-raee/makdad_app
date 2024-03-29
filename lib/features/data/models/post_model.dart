@@ -7,8 +7,7 @@ class PostModel {
   String? dateTime;
   String? postText;
   String? postImage;
-  UserModel ? usermodel;
-  
+  UserModel? usermodel;
 
   PostModel({
     this.name,
@@ -26,7 +25,7 @@ class PostModel {
     dateTime = json['dateTime'];
     postText = json['postText'];
     postImage = json['postImage'];
-    usermodel=UserModel.fromJson(json['usermodel']);
+    usermodel = UserModel.fromJson(json['usermodel']);
   }
   Map<String, dynamic> toMap() {
     return {
@@ -36,7 +35,7 @@ class PostModel {
       'dateTime': dateTime,
       'postText': postText,
       'postImage': postImage,
-      'usermodel':usermodel?.toMap()
+      'usermodel': usermodel?.toMap()
     };
   }
 }

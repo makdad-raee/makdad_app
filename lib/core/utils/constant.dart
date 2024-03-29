@@ -35,3 +35,6 @@ const String usersTable = 'users';
 const String friendSendRequestTable = 'FriendSendRequest';
 const String friendReciveRequest = 'FriendReciveRequest';
 const String friendsTable = 'Friends';
+const String pageTable = 'Pages';
+const String membersTable = 'Members';
+const String pagePostsTable = 'PagePosts';

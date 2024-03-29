@@ -10,6 +10,7 @@ import 'package:makdad_app/core/utils/cashe_helper.dart';
 import 'package:makdad_app/core/utils/constant.dart';
 import 'package:makdad_app/features/data/models/comment_model.dart';
 import 'package:makdad_app/features/data/models/message_model.dart';
+import 'package:makdad_app/features/data/models/page_model.dart';
 import 'package:makdad_app/features/data/models/post_model.dart';
 import 'package:makdad_app/features/data/models/user_model.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
@@ -730,5 +731,35 @@ class SocialCubit extends Cubit<SocialState> {
         }
       });
     }).catchError((error) {});
+  }
+
+  void createPage({
+    required String name,
+  }) {
+    var model = PageModel(
+      name: name,
+      uId: uId,
+      pageOwner: usermodel,
+    );
+    //===create page in usertable
+    FirebaseFirestore.instance
+        .collection(usersTable)
+        .doc(uId)
+        .collection(pageTable)
+        .add(model.toMap());
+    //===create page in pagetable
+    FirebaseFirestore.instance
+        .collection(pageTable)
+        .doc(uId)
+        .set(model.toMap());
+  }
+
+  void addMemberToPage(
+      {required UserModel member, required PageModel pageModel}) {
+    FirebaseFirestore.instance
+        .collection(pageTable)
+        .doc(pageModel.uId)
+        .collection(membersTable)
+        .add(member.toMap());
   }
 }
