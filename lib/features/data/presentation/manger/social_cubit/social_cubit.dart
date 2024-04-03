@@ -59,7 +59,7 @@ class SocialCubit extends Cubit<SocialState> {
     'Home',
     'Chats',
     'add post',
-    'Friends',
+    'Community',
     'Settings',
   ];
   void changeBottomNav(index) {
