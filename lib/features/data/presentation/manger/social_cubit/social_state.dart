@@ -171,6 +171,7 @@ class SocialGetSendFreindRequestErrorState extends SocialState {
 
   SocialGetSendFreindRequestErrorState({required this.error});
 }
+
 class SocialGetReciverFreindRequestSuccessState extends SocialState {}
 
 class SocialGetReciverFreindRequestErrorState extends SocialState {
@@ -178,9 +179,11 @@ class SocialGetReciverFreindRequestErrorState extends SocialState {
 
   SocialGetReciverFreindRequestErrorState({required this.error});
 }
-//============APPLY FRIENDS 
-//============APPLY FRIENDS 
+
+//============APPLY FRIENDS
+//============APPLY FRIENDS
 class SocialApplyFriendsRequestLoadingState extends SocialState {}
+
 class SocialApplyFriendsRequestSuccessState extends SocialState {}
 
 class SocialApplyFriendsRequestErrorState extends SocialState {
@@ -188,3 +191,14 @@ class SocialApplyFriendsRequestErrorState extends SocialState {
 
   SocialApplyFriendsRequestErrorState({required this.error});
 }
+
+class SocialCreatePageSuccessState extends SocialState {}
+
+class SocialCreatePageErrorState extends SocialState {
+  final String error;
+  SocialCreatePageErrorState({required this.error});
+}
+
+class SocialAddMemberSuccessState extends SocialState {}
+
+class SocialAddMemberErrorState extends SocialState {}

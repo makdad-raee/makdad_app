@@ -38,3 +38,6 @@ const String friendsTable = 'Friends';
 const String pageTable = 'Pages';
 const String membersTable = 'Members';
 const String pagePostsTable = 'PagePosts';
+const String groupTable = 'Groups';
+const String membersGroupTable = 'MembersGroup';
+const String groupPostsTable = 'GroupPosts';

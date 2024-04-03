@@ -9,6 +9,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:makdad_app/core/utils/cashe_helper.dart';
 import 'package:makdad_app/core/utils/constant.dart';
 import 'package:makdad_app/features/data/models/comment_model.dart';
+import 'package:makdad_app/features/data/models/group_model.dart';
 import 'package:makdad_app/features/data/models/message_model.dart';
 import 'package:makdad_app/features/data/models/page_model.dart';
 import 'package:makdad_app/features/data/models/post_model.dart';
@@ -682,6 +683,7 @@ class SocialCubit extends Cubit<SocialState> {
       emit(SocialApplyFriendsRequestErrorState(error: error));
     });
     // =======
+
     FirebaseFirestore.instance
         .collection(usersTable)
         .doc(uId)
@@ -746,7 +748,12 @@ class SocialCubit extends Cubit<SocialState> {
         .collection(usersTable)
         .doc(uId)
         .collection(pageTable)
-        .add(model.toMap());
+        .add(model.toMap())
+        .then((value) {
+      emit(SocialCreatePageSuccessState());
+    }).catchError((error) {
+      emit(SocialCreatePageErrorState(error: error));
+    });
     //===create page in pagetable
     FirebaseFirestore.instance
         .collection(pageTable)
@@ -760,6 +767,79 @@ class SocialCubit extends Cubit<SocialState> {
         .collection(pageTable)
         .doc(pageModel.uId)
         .collection(membersTable)
-        .add(member.toMap());
+        .add(member.toMap())
+        .then((value) {
+      emit(SocialAddMemberSuccessState());
+    }).catchError((error) {
+      emit(SocialAddMemberErrorState());
+    });
   }
+
+  List<PageModel> allPages = [];
+  void getAllPages() {
+    FirebaseFirestore.instance.collection(pageTable).get().then((value) {
+      value.docs.forEach((element) {
+        allPages.add(PageModel.fromJson(element.data()));
+      });
+    });
+  }
+
+  void updatePageDetails() {}
+  void deletePage() {}
+  void getMyOwnPages() {}
+  void getMySubscribedPages() {}
+
+  //===================create group
+
+  void creategroup({
+    required String name,
+  }) {
+    var model = GroupModel(name: name, uId: uId, owner: usermodel);
+
+    //===create group in usertable
+    FirebaseFirestore.instance
+        .collection(usersTable)
+        .doc(uId)
+        .collection(groupTable)
+        .add(model.toMap())
+        .then((value) {
+      emit(SocialCreatePageSuccessState());
+    }).catchError((error) {
+      emit(SocialCreatePageErrorState(error: error));
+    });
+    //===create page in pagetable
+    FirebaseFirestore.instance
+        .collection(groupTable)
+        .doc(uId)
+        .set(model.toMap());
+  }
+
+  void addMemberToGroup(
+      {required UserModel member, required GroupModel groupModel}) {
+    FirebaseFirestore.instance
+        .collection(groupTable)
+        .doc(groupModel.uId)
+        .collection(membersTable)
+        .add(member.toMap())
+        .then((value) {
+      emit(SocialAddMemberSuccessState());
+    }).catchError((error) {
+      emit(SocialAddMemberErrorState());
+    });
+  }
+
+  List<GroupModel> allGroups = [];
+  void getAllGroups() {
+    FirebaseFirestore.instance.collection(groupTable).get().then((value) {
+      value.docs.forEach((element) {
+        allGroups.add(GroupModel.fromJson(element.data()));
+      });
+    });
+  }
+
+  getMySubscribedGroup() {}
+  getMyOwnGroups() {}
+
+  void updateGroup() {}
+  void deleteGroup() {}
 }

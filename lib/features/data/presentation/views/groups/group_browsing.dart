@@ -20,7 +20,9 @@ class GroupBrowsing extends StatelessWidget {
           'Look for groups of interset by topics',
           style: TextStyle(color: Colors.black.withOpacity(0.5)),
         ),
-        const SizedBox(height: 8,),
+        const SizedBox(
+          height: 8,
+        ),
         SizedBox(
           height: 400,
           child: ListView.separated(
