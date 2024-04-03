@@ -4,6 +4,7 @@ import 'package:makdad_app/core/utils/constant.dart';
 
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_cubit.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
+import 'package:makdad_app/features/data/presentation/views/Friends/friends_view_from_the_top.dart';
 import 'package:makdad_app/features/data/presentation/views/groups/groups_view_from_the_top_.dart';
 
 class UsersScreen extends StatefulWidget {
@@ -29,15 +30,8 @@ class _UsersScreenState extends State<UsersScreen>
       listener: (context, state) {},
       builder: (context, state) => Scaffold(
           appBar: TabBar(
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             tabs: const [
-              Text(
-                'Pages',
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    fontStyle: FontStyle.italic),
-              ),
               Text(
                 'Groups',
                 style: TextStyle(
@@ -46,7 +40,7 @@ class _UsersScreenState extends State<UsersScreen>
                     fontStyle: FontStyle.italic),
               ),
               Text(
-                'Friends',
+                '#Trending',
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
@@ -59,11 +53,33 @@ class _UsersScreenState extends State<UsersScreen>
             //unselectedLabelColor: defaultColor,
             indicatorColor: defaultColor,
           ),
-          body: TabBarView(controller: _tabController, children: const [
-            Text('Pages'),
-            GroupsViewFromTop(),
-            Text('Friends'),
-          ])),
+          body: TabBarView(
+              controller: _tabController,
+              children: const [GroupsViewFromTop(), TrendingNow()])),
+    );
+  }
+}
+
+class TrendingNow extends StatelessWidget {
+  const TrendingNow({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: GridView.builder(
+          itemCount: 20,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3, crossAxisSpacing: 4, mainAxisSpacing: 4),
+          itemBuilder: (context, index) => Container(
+                decoration: BoxDecoration(
+                    image: const DecorationImage(
+                      fit: BoxFit.cover,
+                        image: NetworkImage(
+                            'https://img.freepik.com/free-photo/full-length-portrait-basketball-player-with-ball_155003-12957.jpg?w=360')),
+                    color: Colors.grey,
+                    borderRadius: BorderRadiusDirectional.circular(10)),
+              )),
     );
   }
 }
