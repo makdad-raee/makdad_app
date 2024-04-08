@@ -74,7 +74,7 @@ class TrendingNow extends StatelessWidget {
           itemBuilder: (context, index) => Container(
                 decoration: BoxDecoration(
                     image: const DecorationImage(
-                      fit: BoxFit.cover,
+                        fit: BoxFit.cover,
                         image: NetworkImage(
                             'https://img.freepik.com/free-photo/full-length-portrait-basketball-player-with-ball_155003-12957.jpg?w=360')),
                     color: Colors.grey,

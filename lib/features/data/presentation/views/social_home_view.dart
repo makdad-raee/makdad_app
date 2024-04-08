@@ -5,6 +5,7 @@ import 'package:makdad_app/core/utils/constant.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_cubit.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
 import 'package:makdad_app/features/data/presentation/views/new_post/new_post_view.dart';
+import 'package:makdad_app/features/data/presentation/views/search/search.dart';
 
 class SocialHomeView extends StatelessWidget {
   const SocialHomeView({super.key});
@@ -19,7 +20,6 @@ class SocialHomeView extends StatelessWidget {
             builder: (context) => const NewPostView(),
           ));
         }
-        
       },
       builder: (context, state) => Scaffold(
         extendBody: true,
@@ -36,9 +36,16 @@ class SocialHomeView extends StatelessWidget {
             //   ),
             // ),
             IconButton(
-                onPressed: () {}, icon: const Icon(FontAwesomeIcons.bell)),
+                onPressed: () {
+            
+                },
+                icon: const Icon(FontAwesomeIcons.bell)),
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const SearchScreen(),
+                  ));
+                },
                 icon: const Icon(FontAwesomeIcons.magnifyingGlass))
           ],
           title: Text(
