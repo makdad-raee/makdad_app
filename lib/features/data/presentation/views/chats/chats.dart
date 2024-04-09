@@ -17,49 +17,108 @@ class ChatsScreen extends StatelessWidget {
     return BlocConsumer<SocialCubit, SocialState>(
       listener: (context, state) {},
       builder: (context, state) {
-        return Column(
-          children: [
-            Container(
-                height: 60,
-                child: Row(
-                  children: [
-                    const CircleAvatar(
-                      radius: 36,
-                      child: Icon(Icons.add),
-                    ),
-                    const SizedBox(
-                      width: 12,
-                    ),
-                    Expanded(
-                      child: ListView.separated(
-                          //  physics: const NeverScrollableScrollPhysics(),
-                          scrollDirection: Axis.horizontal,
-                          itemBuilder: (context, index) => const CircleAvatar(
-                                radius: 32,
-                                child: Icon(Icons.picture_as_pdf),
-                              ),
-                          separatorBuilder: (context, index) =>
-                              const SizedBox(width: 6),
-                          itemCount: 10),
-                    ),
-                  ],
-                )),
-            SocialCubit.get(context).users.isNotEmpty
-                ? Expanded(
-                    child: ListView.separated(
-                        physics: const BouncingScrollPhysics(),
-                        itemBuilder: (context, index) => ChatNameAndimImageUser(
-                            usermodel: SocialCubit.get(context).users[index]),
-                        separatorBuilder: (context, index) => const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 20),
-                              child: Diveder(),
-                            ),
-                        itemCount: SocialCubit.get(context).users.length),
-                  )
-                : Center(child: defaultIndicator()),
-          ],
+        return Scaffold(
+          body: Column(
+            children: [
+              Container(
+                  height: 60,
+                  child: Row(
+                    children: [
+                      const AddStoryFromChat(),
+                      const SizedBox(
+                        width: 12,
+                      ),
+                      Expanded(
+                        child: ListView.separated(
+                            //  physics: const NeverScrollableScrollPhysics(),
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (context, index) =>
+                                const ChatCircleWithOnlineDot(),
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(width: 6),
+                            itemCount: 10),
+                      ),
+                    ],
+                  )),
+              const SizedBox(
+                height: 24,
+              ),
+              Expanded(
+                child: SocialCubit.get(context).users.isNotEmpty
+                    ? Expanded(
+                        child: ListView.separated(
+                            physics: const BouncingScrollPhysics(),
+                            itemBuilder: (context, index) =>
+                                ChatNameAndimImageUser(
+                                    usermodel:
+                                        SocialCubit.get(context).users[index]),
+                            separatorBuilder: (context, index) =>
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                            itemCount: SocialCubit.get(context).users.length),
+                      )
+                    : Center(child: defaultIndicator()),
+              ),
+            ],
+          ),
         );
       },
+    );
+  }
+}
+
+class AddStoryFromChat extends StatelessWidget {
+  const AddStoryFromChat({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment:Alignment.bottomRight ,
+            children: [
+        CircleAvatar(
+          radius: 36,
+          backgroundImage:
+              NetworkImage(SocialCubit.get(context).usermodel.image!),
+        ),
+        const CircleAvatar(
+          radius: 10,
+          backgroundColor: Colors.white,
+          child: Icon(Icons.add)),
+      ],
+    );
+  }
+}
+
+class ChatCircleWithOnlineDot extends StatelessWidget {
+  const ChatCircleWithOnlineDot({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return const Stack(
+      alignment: Alignment.bottomRight,
+      children: [
+        CircleAvatar(
+          radius: 36,
+          backgroundImage: NetworkImage(
+              "https://img.freepik.com/free-photo/portrait-beautiful-smiling-blond-model-dressed-summer-hipster-clothes-trendy-girl-posing-street-background-funny-positive-woman_158538-5479.jpg?size=626&ext=jpg&ga=GA1.1.1667027219.1706042622&semt=ais"),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 3),
+          child: CircleAvatar(
+            radius: 6,
+            backgroundColor: Colors.white,
+            child: CircleAvatar(
+              radius: 5,
+              backgroundColor: defaulColor,
+            ),
+          ),
+        )
+      ],
     );
   }
 }
@@ -77,7 +136,11 @@ class ChatNameAndimImageUser extends StatelessWidget {
         ));
       },
       child: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: const EdgeInsets.only(
+          left: 6,
+          top: 8,
+          right: 6,
+        ),
         child: Row(
           children: [
             CircleAvatar(
@@ -108,12 +171,14 @@ class ChatNameAndimImageUser extends StatelessWidget {
                       ),
                     ],
                   ),
+                  const Text('Hi hasan')
                 ],
               ),
             ),
             const SizedBox(
               height: 15,
             ),
+            const Text('9:24 Am')
           ],
         ),
       ),

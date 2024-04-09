@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:makdad_app/core/utils/componants.dart';
 import 'package:makdad_app/features/data/presentation/views/search/search_form_field.dart';
 
@@ -88,7 +89,57 @@ class AccountSearchSort extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const Padding(
+      padding: EdgeInsets.all(8.0),
+      child: Column(
+        children: [RowAvatarandFollow()],
+      ),
+    );
+  }
+}
+
+class RowAvatarandFollow extends StatelessWidget {
+  const RowAvatarandFollow({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        const CircleAvatar(
+          radius: 30,
+          backgroundImage: NetworkImage(
+              "https://img.freepik.com/free-photo/portrait-beautiful-smiling-blond-model-dressed-summer-hipster-clothes-trendy-girl-posing-street-background-funny-positive-woman_158538-5479.jpg?size=626&ext=jpg&ga=GA1.1.1667027219.1706042622&semt=ais"),
+        ),
+        const SizedBox(
+          width: 15,
+        ),
+        const Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Carla Washigton',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+            ),
+            Text(' Designer', style: TextStyle(fontSize: 12)),
+          ],
+        ),
+        const Spacer(),
+        Container(
+          //  height: 60,
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12), color: defaulColor),
+          child: const Padding(
+            padding: EdgeInsets.all(10.0),
+            child: Center(
+                child: Text('Follow',
+                    style: TextStyle(
+                        color: Colors.white, fontStyle: FontStyle.italic))),
+          ),
+        )
+      ],
+    );
   }
 }
 
@@ -97,7 +148,48 @@ class NewsSesarchSort extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Column(
+      children: [
+        Row(
+          children: [
+            CircleAvatar(
+              backgroundColor: defaulColor.withOpacity(0.7),
+              radius: 30,
+              child: const Icon(FontAwesomeIcons.hashtag),
+            ),
+            const SizedBox(
+              width: 15,
+            ),
+            const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Fashion ',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+                Text(
+                  '12 M Posts',
+                  style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      fontSize: 14,
+                      color: Colors.black54),
+                ),
+              ],
+            ),
+            const Spacer(),
+            // Container(
+            //   //  height: 60,
+            //   decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.circular(12), color: defaulColor),
+            //   child: const Padding(
+            //     padding: EdgeInsets.all(10.0),
+            //     child: Center(child: Text('Join Group')),
+            //   ),
+            // )
+          ],
+        ),
+      ],
+    );
   }
 }
 
@@ -106,7 +198,56 @@ class GroupsSearchSorting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              const CircleAvatar(
+                radius: 30,
+                backgroundImage: NetworkImage(
+                    "https://img.freepik.com/free-photo/top-view-illustrator-drawing-ipad_23-2150040082.jpg?w=740"),
+              ),
+              const SizedBox(
+                width: 15,
+              ),
+              const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Designers Group',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                  Text(
+                    '18 k Members',
+                    style: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        fontSize: 14,
+                        color: Colors.black54),
+                  ),
+                ],
+              ),
+              const Spacer(),
+              Container(
+                //  height: 60,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: defaulColor),
+                child: const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Center(
+                      child: Text('Join Group',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontStyle: FontStyle.italic))),
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -115,6 +256,55 @@ class PagesSearchSorting extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              const CircleAvatar(
+                radius: 30,
+                backgroundImage: NetworkImage(
+                    "https://img.freepik.com/free-photo/delicious-burger-with-many-ingredients-isolated-white-background-tasty-cheeseburger-splash-sauce_90220-1266.jpg?w=740"),
+              ),
+              const SizedBox(
+                width: 15,
+              ),
+              const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Food Community',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  Text(
+                    '18 k Likes',
+                    style: TextStyle(
+                        fontStyle: FontStyle.italic,
+                        fontSize: 14,
+                        color: Colors.black54),
+                  ),
+                ],
+              ),
+              const Spacer(),
+              Container(
+                //  height: 60,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: defaulColor),
+                child: const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                  child: Center(
+                      child: Text(
+                    'Like',
+                    style: TextStyle(
+                        color: Colors.white, fontStyle: FontStyle.italic),
+                  )),
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
