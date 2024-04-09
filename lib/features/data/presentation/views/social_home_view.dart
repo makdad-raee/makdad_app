@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:makdad_app/core/utils/constant.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_cubit.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
+import 'package:makdad_app/features/data/presentation/views/Notification%20Bell/notification_bell_view.dart';
 import 'package:makdad_app/features/data/presentation/views/new_post/new_post_view.dart';
 import 'package:makdad_app/features/data/presentation/views/search/search.dart';
 
@@ -37,7 +38,9 @@ class SocialHomeView extends StatelessWidget {
             // ),
             IconButton(
                 onPressed: () {
-            
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => const NotificationBellView(),
+            ));
                 },
                 icon: const Icon(FontAwesomeIcons.bell)),
             IconButton(

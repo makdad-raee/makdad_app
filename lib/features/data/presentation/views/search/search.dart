@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:makdad_app/core/utils/componants.dart';
@@ -52,24 +53,26 @@ class _SearchScreenState extends State<SearchScreen> {
             )
           ],
           bottom: const TabBar(
+              //  isScrollable: true,
+              //  dragStartBehavior: DragStartBehavior.down,
               labelColor: defaulColor,
               indicatorColor: defaulColor,
               tabs: [
                 Text(
                   "Account",
-                  style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
+                  style: TextStyle(fontStyle: FontStyle.italic, fontSize: 18),
                 ),
                 Text(
                   "Groups",
-                  style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
+                  style: TextStyle(fontStyle: FontStyle.italic, fontSize: 18),
                 ),
                 Text(
                   "Pages",
-                  style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
+                  style: TextStyle(fontStyle: FontStyle.italic, fontSize: 18),
                 ),
                 Text(
                   "#News",
-                  style: TextStyle(fontStyle: FontStyle.italic, fontSize: 16),
+                  style: TextStyle(fontStyle: FontStyle.italic, fontSize: 18),
                 )
               ]),
         ),

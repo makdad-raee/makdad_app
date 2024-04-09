@@ -76,17 +76,15 @@ class AddStoryFromChat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      alignment:Alignment.bottomRight ,
-            children: [
+      alignment: Alignment.bottomRight,
+      children: [
         CircleAvatar(
           radius: 36,
           backgroundImage:
               NetworkImage(SocialCubit.get(context).usermodel.image!),
         ),
         const CircleAvatar(
-          radius: 10,
-          backgroundColor: Colors.white,
-          child: Icon(Icons.add)),
+            radius: 10, backgroundColor: Colors.white, child: Icon(Icons.add)),
       ],
     );
   }
