@@ -17,7 +17,7 @@ class MostActiveGroupsItem extends StatelessWidget {
               border: Border.all(width: 1, color: Colors.black38),
               image: const DecorationImage(
                   image: NetworkImage(
-                      'https://img.freepik.com/free-photo/beautiful-collage-travel-concept_23-2149232169.jpg?w=360&t=st=1711461179~exp=1711461779~hmac=bb87314fa7b87f953d49666d986dc70d7d465c6127c11734a19cc9fa7050bcb9'),
+                      'https://img.freepik.com/free-photo/world-map-continent-global-support-graphic_53876-124649.jpg?t=st=1712682959~exp=1712686559~hmac=6e0c382de95f9e4bd700c5aeed54201e9baf1854e77b84a8c252dfca0e90ae83&w=360'),
                   fit: BoxFit.cover),
               //  / color: defaulColor,
               borderRadius: BorderRadiusDirectional.circular(20)),

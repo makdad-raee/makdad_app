@@ -54,8 +54,12 @@ class _UsersScreenState extends State<UsersScreen>
             indicatorColor: defaultColor,
           ),
           body: TabBarView(
-              controller: _tabController,
-              children: const [GroupsViewFromTop(), TrendingNow()])),
+            controller: _tabController,
+            children: const [
+              GroupsViewFromTop(),
+              TrendingNow(),
+            ],
+          )),
     );
   }
 }

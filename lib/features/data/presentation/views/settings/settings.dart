@@ -9,10 +9,24 @@ import 'package:makdad_app/features/data/presentation/views/settings/edit_profil
 import 'package:makdad_app/features/data/presentation/views/settings/photos_flowers_posts_row.dart';
 import 'package:makdad_app/features/data/presentation/views/settings/profile_pic_bio_name.dart';
 
-class SettingsScreen extends StatelessWidget {
+class SettingsScreen extends StatefulWidget {
   const SettingsScreen({
     super.key,
   });
+
+  @override
+  State<SettingsScreen> createState() => _SettingsScreenState();
+}
+
+class _SettingsScreenState extends State<SettingsScreen>
+    with TickerProviderStateMixin {
+  late TabController _tabController;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 3, vsync: this);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +41,7 @@ class SettingsScreen extends StatelessWidget {
             child: Column(
               children: [
                 ProfilePicAndNameAndBio(
-                  name: userModel.name?? "",
+                  name: userModel.name ?? "",
                   coverImage: userModel.coverImage,
                   bio: userModel.bio,
                   profileImage: userModel.image,
@@ -35,7 +49,7 @@ class SettingsScreen extends StatelessWidget {
                 const SizedBox(
                   height: 12,
                 ),
-               // const AddFriendANdMessages(),
+                // const AddFriendANdMessages(),
                 const PhotosFlowersPostsCounter(),
                 Row(
                   children: [
@@ -78,141 +92,71 @@ class SettingsScreen extends StatelessWidget {
                     )
                   ],
                 ),
-                // Card(
-                //   child: Padding(
-                //     padding: const EdgeInsets.all(8.0),
-                //     child: Column(
-                //       children: [
-                //         AvatarNameAndMore(
-                //           name: cubitUserModel.name,
-                //           profileImage: cubitUserModel.image,
-                //           dateTime: DateTime.now().toString(),
-                //         ),
-                //         const Padding(
-                //           padding: EdgeInsets.only(top: 5, bottom: 10),
-                //           child: SizedBox(
-                //             width: double.infinity,
-                //             child: Wrap(
-                //               children: [
-                //                 HashTag(),
-                //               ],
-                //             ),
-                //           ),
-                //         ),
-                //         // if (postModel.postImage != '')
-                //         PhotoOfThePost(photoPost: cubitUserModel.image
-                //             // postModel.postImage
-                //             ),
-                //         const Padding(
-                //           padding: EdgeInsets.only(top: 10),
-                //           child: Row(
-                //             children: [
-                //               Align(
-                //                   alignment: Alignment.topLeft,
-                //                   child: CustomReaction(
-                //                     text: ''
-                //                     // '${SocialCubit.get(context).likesCount[index]
-                //                     // }',
-                //                     ,
-                //                     icon: FontAwesomeIcons.heart,
-                //                   )),
-                //               Spacer(),
-                //               Align(
-                //                 alignment: Alignment.topRight,
-                //                 child: Expanded(
-                //                   child: CustomReaction(
-                //                       icon: FontAwesomeIcons.comment,
-                //                       color: Colors.amber,
-                //                       text:
-                //                           // '${SocialCubit.get(context).commentCount[index]}
-                //                           'comments'),
-                //                 ),
-                //               ),
-                //             ],
-                //           ),
-                //         ),
-                //         const Diveder(),
-                //         Row(
-                //           children: [
-                //             Expanded(
-                //               child: InkWell(
-                //                 onTap: () {
-                //                   // SocialCubit.get(context).getComments(
-                //                   //     postId:
-                //                   //         SocialCubit.get(context).postId[index]);
-
-                //                   // Navigator.of(context).push(MaterialPageRoute(
-                //                   //   builder: (context) => CommentsScreen(
-                //                   //       postModel: postModel, index1: index),
-                //                   // ));
-                //                 },
-                //                 child: Row(
-                //                   children: [
-                //                     CircleAvatar(
-                //                       radius: 18,
-                //                       backgroundImage: NetworkImage(
-                //                           cubitUserModel.image ?? ''),
-                //                     ),
-                //                     const SizedBox(
-                //                       width: 15,
-                //                     ),
-                //                     Text(
-                //                       'Write a Comment ... ',
-                //                       style: style12,
-                //                     ),
-                //                   ],
-                //                 ),
-                //               ),
-                //             ),
-                //             InkWell(
-                //               onTap: () {
-                //                 // SocialCubit.get(context).likePost(
-                //                 //     SocialCubit.get(context).postId[index]);
-                //               },
-                //               child: Row(
-                //                 children: [
-                //                   const Icon(
-                //                     FontAwesomeIcons.heart,
-                //                     color: Colors.red,
-                //                     size: 18,
-                //                   ),
-                //                   const SizedBox(
-                //                     width: 6,
-                //                   ),
-                //                   Text(
-                //                     'Like',
-                //                     style: style14.copyWith(
-                //                         color: const Color.fromARGB(
-                //                             255, 113, 111, 111)),
-                //                   )
-                //                 ],
-                //               ),
-                //             )
-                //           ],
-                //         ),
-                //       ],
-                //     ),
-                //   ),
-                // ),
-
-                Column(
-                  children: [
-                    // const StoryAndWritePostView(),
-                    listPosts.isEmpty
-                        ? Center(child: defaultIndicator())
-                        : ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: listPosts.length,
-                            itemBuilder: (context, child) => BuildPostItem(
-                                  postModel: listPosts[child],
-                                  userModel: userModel,
-                                  index: child,
-                                )),
-                  ],
+                Container(
+                  height: 50,
+                  width: double.infinity,
+                  child: TabBar(
+                      labelColor: Colors.black,
+                      unselectedLabelColor: Colors.grey,
+                      indicatorColor: defaulColor,
+                      controller: _tabController,
+                      tabs: const [
+                        Row(
+                          children: [
+                            Icon(Icons.feed),
+                            SizedBox(
+                              width: 4,
+                            ),
+                            Text('Feeds'),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Icon(Icons.video_camera_front),
+                            SizedBox(
+                              width: 4,
+                            ),
+                            Text('Video'),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Icon(Icons.tag),
+                            SizedBox(
+                              width: 4,
+                            ),
+                            Text('Tags'),
+                          ],
+                        ),
+                      ]),
                 ),
+                Container(
+                  height: double.maxFinite,
+                  width: double.infinity,
+                  child: TabBarView(controller: _tabController, children: [
+                    Column(
+                      children: [
+                        // const StoryAndWritePostView(),
+                        listPosts.isEmpty
+                            ? Center(child: defaultIndicator())
+                            : ListView.builder(
+                                shrinkWrap: true,
+                                physics: const NeverScrollableScrollPhysics(),
+                                itemCount: listPosts.length,
+                                itemBuilder: (context, child) => BuildPostItem(
+                                      postModel: listPosts[child],
+                                      userModel: userModel,
+                                      index: child,
+                                    )),
+                      ],
+                    ),
+                    Text('kkkkk'),
+                    Text('kkkkk'),
+                  ]),
+                ),
+
                 const SizedBox(
-                  height: 100,
+                  height: 30,
                 )
               ],
             ),
@@ -222,5 +166,3 @@ class SettingsScreen extends StatelessWidget {
     );
   }
 }
-
-

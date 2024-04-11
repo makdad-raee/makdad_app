@@ -8,14 +8,14 @@ class SuggestedGroupForYou extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 275,
+      height: 225,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              height: 160,
+              height: 140,
               width: 200,
               decoration: BoxDecoration(
                   border: Border.all(width: 1, color: Colors.black38),
