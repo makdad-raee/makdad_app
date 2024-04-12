@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:makdad_app/core/utils/componants.dart';
+import 'package:makdad_app/features/data/presentation/views/groups/group_details_view.dart';
 
 class JoinedGroups extends StatelessWidget {
   const JoinedGroups({
@@ -15,17 +16,24 @@ class JoinedGroups extends StatelessWidget {
           itemBuilder: (context, index) => Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    height: 200,
-                    width: 140,
-                    decoration: BoxDecoration(
-                        border: Border.all(width: 1, color: Colors.black38),
-                        image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                'https://img.freepik.com/free-photo/power-music-collage-concept_23-2150610201.jpg?w=360&t=st=1711457133~exp=1711457733~hmac=99a3d0c2f9391e28cfb645123b997b21c32daeeb541caedd665e88845c7406d8')),
-                        //  color: defaulColor,
-                        borderRadius: BorderRadius.circular(16)),
+                  InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const GroupDetailsView(),
+                      ));
+                    },
+                    child: Container(
+                      height: 200,
+                      width: 140,
+                      decoration: BoxDecoration(
+                          border: Border.all(width: 1, color: Colors.black38),
+                          image: const DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(
+                                  'https://img.freepik.com/free-photo/power-music-collage-concept_23-2150610201.jpg?w=360&t=st=1711457133~exp=1711457733~hmac=99a3d0c2f9391e28cfb645123b997b21c32daeeb541caedd665e88845c7406d8')),
+                          //  color: defaulColor,
+                          borderRadius: BorderRadius.circular(16)),
+                    ),
                   ),
                   const SizedBox(
                     width: 140,

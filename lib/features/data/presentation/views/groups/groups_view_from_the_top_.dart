@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:makdad_app/core/utils/componants.dart';
+import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_cubit.dart';
+import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
 import 'package:makdad_app/features/data/presentation/views/groups/create_group_form_field.dart';
 
 import 'package:makdad_app/features/data/presentation/views/groups/main_groups_view.dart';
@@ -27,131 +30,137 @@ class _GroupsViewFromTopState extends State<GroupsViewFromTop>
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: CustomScrollView(
-        slivers: [
-          SliverToBoxAdapter(
-            child: Column(children: [
-              Container(
-                height: 50,
-                width: double.infinity,
-                child: TabBar(
-                    // padding: EdgeInsets.zero,
-                    labelColor: Colors.black,
-                    unselectedLabelColor: Colors.grey,
-                    indicatorColor: defaulColor,
-                    controller: _tabController,
-                    tabs: const [
-                      Row(
-                        children: [
-                          Icon(Icons.feed),
-                          SizedBox(
-                            width: 4,
-                          ),
-                          Text('Explored'),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Icon(Icons.video_camera_front),
-                          SizedBox(
-                            width: 4,
-                          ),
-                          Text('Groups'),
-                        ],
-                      ),
-                    ]),
-              ),
-              Container(
-                height: 650,
-                width: double.infinity,
-                child: TabBarView(controller: _tabController, children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          const Text(
-                            'Popular ',
-                            style: TextStyle(
-                                fontSize: 30, fontWeight: FontWeight.w500),
-                          ),
-                          const Spacer(),
-                          IconButton(
-                              onPressed: () {
-                                Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => const MainGroupsView(),
-                                ));
-                              },
-                              icon: const Icon(
-                                Icons.arrow_forward_ios,
-                                size: 28,
-                              ))
-                        ],
-                      ),
-                      Text(
-                        'The most active groups in the community',
-                        style: TextStyle(color: Colors.black.withOpacity(0.5)),
-                      ),
-                      SizedBox(
-                        height: 220,
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 12.0),
-                          child: ListView.separated(
-                            separatorBuilder: (context, index) =>
-                                const SizedBox(
-                              width: 8,
+    return BlocConsumer<SocialCubit, SocialState>(
+      listener: (context, state) {},
+      builder: (context, state) => Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: Column(children: [
+                Container(
+                  height: 50,
+                  width: double.infinity,
+                  child: TabBar(
+                      // padding: EdgeInsets.zero,
+                      labelColor: Colors.black,
+                      unselectedLabelColor: Colors.grey,
+                      indicatorColor: defaulColor,
+                      controller: _tabController,
+                      tabs: const [
+                        Row(
+                          children: [
+                            Icon(Icons.feed),
+                            SizedBox(
+                              width: 4,
                             ),
-                            scrollDirection: Axis.horizontal,
-                            itemCount: 10,
-                            itemBuilder: (context, index) =>
-                                const MostActiveGroupsItem(),
+                            Text('Explored'),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Icon(Icons.video_camera_front),
+                            SizedBox(
+                              width: 4,
+                            ),
+                            Text('Groups'),
+                          ],
+                        ),
+                      ]),
+                ),
+                Container(
+                  height: 650,
+                  width: double.infinity,
+                  child: TabBarView(controller: _tabController, children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            const Text(
+                              'Popular ',
+                              style: TextStyle(
+                                  fontSize: 30, fontWeight: FontWeight.w500),
+                            ),
+                            const Spacer(),
+                            IconButton(
+                                onPressed: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) =>
+                                        const MainGroupsView(),
+                                  ));
+                                },
+                                icon: const Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 28,
+                                ))
+                          ],
+                        ),
+                        Text(
+                          'The most active groups in the community',
+                          style:
+                              TextStyle(color: Colors.black.withOpacity(0.5)),
+                        ),
+                        SizedBox(
+                          height: 220,
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 12.0),
+                            child: ListView.separated(
+                              separatorBuilder: (context, index) =>
+                                  const SizedBox(
+                                width: 8,
+                              ),
+                              scrollDirection: Axis.horizontal,
+                              itemCount: 10,
+                              itemBuilder: (context, index) =>
+                                  const MostActiveGroupsItem(),
+                            ),
                           ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              const Text(
-                                'Suggested For You ',
-                                style: TextStyle(
-                                    fontSize: 28, fontWeight: FontWeight.w500),
-                              ),
-                              const Spacer(),
-                              IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.arrow_forward_ios,
-                                    size: 28,
-                                  )),
-                            ],
-                          ),
-                          Text(
-                            'Based on another groups you\'re part of',
-                            style:
-                                TextStyle(color: Colors.black.withOpacity(0.5)),
-                          )
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      const SuggestedGroupForYou()
-                    ],
-                  ),
-                  CreateGroupView()
-                  //   Text('kkkkk'),
-                ]),
-              ),
-            ]),
-          ),
-        ],
+                        const SizedBox(
+                          height: 8,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                const Text(
+                                  'Suggested For You ',
+                                  style: TextStyle(
+                                      fontSize: 28,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                const Spacer(),
+                                IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(
+                                      Icons.arrow_forward_ios,
+                                      size: 28,
+                                    )),
+                              ],
+                            ),
+                            Text(
+                              'Based on another groups you\'re part of',
+                              style: TextStyle(
+                                  color: Colors.black.withOpacity(0.5)),
+                            )
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        const SuggestedGroupForYou()
+                      ],
+                    ),
+                    const CreateGroupView()
+                    //   Text('kkkkk'),
+                  ]),
+                ),
+              ]),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -165,10 +174,10 @@ class CreateGroupView extends StatelessWidget {
     return Column(
       children: [
         TextButton(
-          child: Text('create group'),
+          child: const Text('create group'),
           onPressed: () {
             Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => CreateGroupFormFields(),
+              builder: (context) => const CreateGroupFormFields(),
             ));
           },
         ),

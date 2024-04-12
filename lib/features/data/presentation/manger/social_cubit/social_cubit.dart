@@ -793,8 +793,18 @@ class SocialCubit extends Cubit<SocialState> {
 
   void creategroup({
     required String name,
+    required String type,
   }) {
-    var model = GroupModel(name: name, uId: uId, owner: usermodel);
+    var model = GroupModel(
+      name: name,
+      uId: uId,
+      owner: usermodel,
+      type: type,
+      members: usermodel,
+      posts: PostModel(postText: '', usermodel: usermodel),
+      image: '',
+    );
+    emit(SocialCreateGroupLoadingState());
 
     //===create group in usertable
     FirebaseFirestore.instance
@@ -803,15 +813,12 @@ class SocialCubit extends Cubit<SocialState> {
         .collection(groupTable)
         .add(model.toMap())
         .then((value) {
-      emit(SocialCreatePageSuccessState());
+      emit(SocialCreateGroupSuccessState());
     }).catchError((error) {
-      emit(SocialCreatePageErrorState(error: error));
+      emit(SocialCreateGroupErrorState(error: error));
     });
     //===create page in pagetable
-    FirebaseFirestore.instance
-        .collection(groupTable)
-        .doc(uId)
-        .set(model.toMap());
+    FirebaseFirestore.instance.collection(groupTable).add(model.toMap());
   }
 
   void addMemberToGroup(
@@ -830,9 +837,19 @@ class SocialCubit extends Cubit<SocialState> {
 
   List<GroupModel> allGroups = [];
   void getAllGroups() {
+    print('==========1111===========');
     FirebaseFirestore.instance.collection(groupTable).get().then((value) {
+      print('==========222===========');
       value.docs.forEach((element) {
+        print('==========333==========');
+        print(element.id);
+
+        print('==========444==========');
         allGroups.add(GroupModel.fromJson(element.data()));
+        print('==========5555===========');
+        print(element.data());
+
+        print('==========666==========');
       });
     });
   }

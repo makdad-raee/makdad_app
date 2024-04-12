@@ -202,3 +202,12 @@ class SocialCreatePageErrorState extends SocialState {
 class SocialAddMemberSuccessState extends SocialState {}
 
 class SocialAddMemberErrorState extends SocialState {}
+
+class SocialCreateGroupLoadingState extends SocialState {}
+
+class SocialCreateGroupSuccessState extends SocialState {}
+
+class SocialCreateGroupErrorState extends SocialState {
+  final String error;
+  SocialCreateGroupErrorState({required this.error});
+}
