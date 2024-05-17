@@ -41,9 +41,9 @@ class _GroupDetailsViewState extends State<GroupDetailsView>
               Container(
                 height: 120,
                 width: double.infinity,
-                child: TabBarView(controller: _tabController, children: [
-                  const OnlineMemberOfGroups(),
-                  const NewestMemberOfGroups(),
+                child: TabBarView(controller: _tabController, children: const [
+                  OnlineMemberOfGroups(),
+                  NewestMemberOfGroups(),
                 ]),
               ),
               const SizedBox(
@@ -52,6 +52,9 @@ class _GroupDetailsViewState extends State<GroupDetailsView>
               const Text(
                 'Posts',
                 style: TextStyle(fontWeight: FontWeight.w500, fontSize: 24),
+              ),
+              const SizedBox(
+                height: 8,
               ),
               Container(
                 padding: const EdgeInsets.all(8),
@@ -130,9 +133,9 @@ class _GroupDetailsViewState extends State<GroupDetailsView>
                       ),
                     ),
                     const Text(
-                      'Hello From paris i have been in france from 3 weeks ',
+                      'Hello From paris i have been in france from 3 weeks i\'m so happy to be here .',
                       style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
                     ),
                     const SizedBox(
                       height: 4,
@@ -180,7 +183,7 @@ class _GroupDetailsViewState extends State<GroupDetailsView>
                         ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
                     Container(
@@ -194,9 +197,9 @@ class _GroupDetailsViewState extends State<GroupDetailsView>
                                 borderRadius: BorderRadius.circular(16),
                                 color: defaulColor.withOpacity(0.3),
                               ),
-                              child: const Icon(
+                              child: Icon(
                                 Icons.favorite_border,
-                                color: Colors.red,
+                                color: Colors.red.withOpacity(0.6),
                                 size: 24,
                               ),
                             ),

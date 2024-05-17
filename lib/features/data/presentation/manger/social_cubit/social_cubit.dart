@@ -837,6 +837,7 @@ class SocialCubit extends Cubit<SocialState> {
 
   List<GroupModel> allGroups = [];
   void getAllGroups() {
+    allGroups = [];
     print('==========1111===========');
     FirebaseFirestore.instance.collection(groupTable).get().then((value) {
       print('==========222===========');
@@ -855,7 +856,20 @@ class SocialCubit extends Cubit<SocialState> {
   }
 
   getMySubscribedGroup() {}
-  getMyOwnGroups() {}
+  List<GroupModel> myGroups = [];
+  getMyOwnGroups() {
+    myGroups = [];
+    FirebaseFirestore.instance
+        .collection(usersTable)
+        .doc(uId)
+        .collection(groupTable)
+        .get()
+        .then((value) {
+      value.docs.forEach((element) {
+        myGroups.add(GroupModel.fromJson(element.data()));
+      });
+    }).catchError((error) {});
+  }
 
   void updateGroup() {}
   void deleteGroup() {}

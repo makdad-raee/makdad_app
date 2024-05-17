@@ -183,7 +183,7 @@ class AddStoryFromFeeds extends StatelessWidget {
                 width: 110,
                 decoration: const BoxDecoration(
                   image: DecorationImage(image: NetworkImage('')),
-                  color: defaulColor,
+                  color: Colors.grey,
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(16),
                       bottomRight: Radius.circular(16)),
@@ -226,7 +226,7 @@ class ListViewOfStoryFromFeeds extends StatelessWidget {
                 width: 110,
                 decoration: const BoxDecoration(
                   image: DecorationImage(image: NetworkImage('')),
-                  color: defaulColor,
+                  color: Colors.grey,
                   borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(16),
                       bottomRight: Radius.circular(16)),

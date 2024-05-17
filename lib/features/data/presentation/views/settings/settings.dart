@@ -130,7 +130,7 @@ class _SettingsScreenState extends State<SettingsScreen>
                         ),
                       ]),
                 ),
-                Container(
+                SizedBox(
                   height: double.maxFinite,
                   width: double.infinity,
                   child: TabBarView(controller: _tabController, children: [
@@ -150,7 +150,7 @@ class _SettingsScreenState extends State<SettingsScreen>
                                     )),
                       ],
                     ),
-                    Text('kkkkk'),
+                    MyVideosOnProfile(),
                     Text('kkkkk'),
                   ]),
                 ),
@@ -163,6 +163,27 @@ class _SettingsScreenState extends State<SettingsScreen>
           ),
         );
       },
+    );
+  }
+}
+
+class MyVideosOnProfile extends StatelessWidget {
+  const MyVideosOnProfile({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      child: Column(
+        children: [
+          Container(
+              height: 500,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                  color: Colors.grey, borderRadius: BorderRadius.circular(16)),
+              child: Icon(FontAwesomeIcons.play)),
+        ],
+      ),
     );
   }
 }

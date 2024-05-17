@@ -1,4 +1,3 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:makdad_app/core/utils/componants.dart';
@@ -38,7 +37,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        icon: const Icon(Icons.arrow_back),
+                        icon: const Icon(Icons.arrow_back,color: Colors.white,),
                       ),
                     ),
                   ),

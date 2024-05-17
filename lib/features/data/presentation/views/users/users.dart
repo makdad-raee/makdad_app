@@ -4,7 +4,6 @@ import 'package:makdad_app/core/utils/constant.dart';
 
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_cubit.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
-import 'package:makdad_app/features/data/presentation/views/Friends/friends_view_from_the_top.dart';
 import 'package:makdad_app/features/data/presentation/views/groups/groups_view_from_the_top_.dart';
 
 class UsersScreen extends StatefulWidget {

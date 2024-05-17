@@ -18,18 +18,51 @@ class CreateGroupFormFields extends StatelessWidget {
         }
       },
       builder: (context, state) => Scaffold(
-        appBar: AppBar(),
+        appBar: AppBar(
+          title: const Text('Create Group'),
+        ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Create Group',
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+              // const Text(
+              //   'Create Group',
+              //   style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+              // ),
+              Align(
+                alignment: Alignment.center,
+                child: Stack(
+                  alignment: Alignment.bottomRight,
+                  children: [
+                    const CircleAvatar(
+                      radius: 71,
+                      backgroundColor: Colors.black54,
+                      child: CircleAvatar(
+                        radius: 70,
+                        backgroundColor: Colors.white,
+                        child: Icon(
+                          Icons.person_outline,
+                          size: 50,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      color: Colors.white,
+                      child: IconButton(
+                          padding: EdgeInsets.zero,
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.add_a_photo_rounded,
+                            size: 26,
+                            color: defaulColor,
+                          )),
+                    )
+                  ],
+                ),
               ),
               const SizedBox(
-                height: 8,
+                height: 12,
               ),
               DefaultTextFoemFieldForGroups(
                   textEditingController: nameController,
