@@ -150,8 +150,8 @@ class _SettingsScreenState extends State<SettingsScreen>
                                     )),
                       ],
                     ),
-                    MyVideosOnProfile(),
-                    Text('kkkkk'),
+                    const MyVideosOnProfile(),
+                    const Text('kkkkk'),
                   ]),
                 ),
 
@@ -176,12 +176,151 @@ class MyVideosOnProfile extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 20),
       child: Column(
         children: [
-          Container(
-              height: 500,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  color: Colors.grey, borderRadius: BorderRadius.circular(16)),
-              child: Icon(FontAwesomeIcons.play)),
+          Stack(
+            alignment: Alignment.centerRight,
+            children: [
+              Container(
+                height: 500,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    image: const DecorationImage(
+                        image: NetworkImage(
+                          'https://img.freepik.com/free-photo/couple-making-heart-from-hands-sea-shore_23-2148019887.jpg?t=st=1716041400~exp=1716045000~hmac=3d40ae45b75c6fe8ea55f3b9494d513f9ff9475402bb4cb6bc3bf70cf7b1e7ce&w=360',
+                        ),
+                        fit: BoxFit.cover),
+                    //  / color: Colors.grey,
+                    borderRadius: BorderRadius.circular(16)),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    const SizedBox(
+                      height: 250,
+                    ),
+                    const Icon(
+                      FontAwesomeIcons.play,
+                      color: Colors.white,
+                    ),
+                    //  Spacer(),
+                    Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 8),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Row(
+                                children: [
+                                  Text(
+                                    'Adele Official',
+                                    style: TextStyle(
+                                        color: Colors.white.withOpacity(0.8),
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 16,
+                                        fontStyle: FontStyle.italic),
+                                  ),
+                                  const SizedBox(
+                                    width: 8,
+                                  ),
+                                  const Icon(Icons.verified,
+                                      color: Colors.white),
+                                ],
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              SizedBox(
+                                width: 200,
+                                child: Text(
+                                  'Hello from the other side ,My new songs is available here ,enjoy 🥰',
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                      color: Colors.white.withOpacity(0.7),
+                                      fontSize: 12),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 12,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(right: 4),
+                                child: Container(
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    borderRadius:
+                                        BorderRadiusDirectional.circular(16),
+                                    color: Colors.white.withOpacity(0.2),
+                                  ),
+                                  child: const Row(
+                                    children: [
+                                      Icon(
+                                        Icons.music_note,
+                                        color: Colors.white,
+                                      ),
+                                      Text(
+                                        'Hello - Adele',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                      Spacer(),
+                                      CircleAvatar(
+                                        radius: 18,
+                                        backgroundColor: Colors.white,
+                                        backgroundImage: NetworkImage('https://img.freepik.com/free-vector/hand-drawn-pop-singer-silhouette_23-2150966830.jpg?t=st=1716045743~exp=1716049343~hmac=d46505cd81359e922643bca972c7a0fb0287cf8d0a17564be2405fbb768ba1c6&w=740'),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ))
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 8),
+                child: Column(
+                  children: [
+                    CircleAvatar(
+                      radius: 24,
+                      backgroundColor: Colors.white.withOpacity(0.2),
+                      child: Icon(
+                        Icons.favorite_border_outlined,
+                        color: Colors.white.withOpacity(0.7),
+                        size: 24,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    CircleAvatar(
+                      radius: 24,
+                      backgroundColor: Colors.white.withOpacity(0.2),
+                      child: Icon(
+                        FontAwesomeIcons.comment,
+                        color: Colors.white.withOpacity(0.8),
+                        size: 24,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    CircleAvatar(
+                      radius: 24,
+                      backgroundColor: Colors.white.withOpacity(0.2),
+                      child: Icon(
+                        FontAwesomeIcons.share,
+                        color: Colors.white.withOpacity(0.8),
+                        size: 24,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ],
       ),
     );
