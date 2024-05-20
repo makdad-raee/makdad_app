@@ -97,4 +97,6 @@ PreferredSizeWidget? defaultAppar({
           icon: const Icon(FontAwesomeIcons.angleLeft)),
       actions: action,
     );
-Widget defaultIndicator()=>const RefreshProgressIndicator(color: defaulColor,);
+Widget defaultIndicator() => const CircularProgressIndicator(
+      color: defaulColor,
+    );

@@ -48,7 +48,9 @@ class PhotosFlowersPostsCounter extends StatelessWidget {
               ),
               child: InkWell(
                 onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Followers(),));
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const Followers(),
+                  ));
                 },
                 child: const Column(
                   children: [
@@ -74,8 +76,10 @@ class PhotosFlowersPostsCounter extends StatelessWidget {
               borderRadius: BorderRadius.circular(16),
             ),
             child: InkWell(
-              onTap:  () {
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Following(),));
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const Following(),
+                ));
               },
               child: const Column(
                 children: [

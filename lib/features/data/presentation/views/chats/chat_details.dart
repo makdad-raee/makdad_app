@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:makdad_app/core/utils/componants.dart';
 import 'package:makdad_app/core/utils/constant.dart';
 import 'package:makdad_app/features/data/models/message_model.dart';
 import 'package:makdad_app/features/data/models/user_model.dart';
@@ -19,26 +18,27 @@ class ChatDetails extends StatelessWidget {
       return BlocConsumer<SocialCubit, SocialState>(
         listener: (context, state) {},
         builder: (context, state) => Scaffold(
-          appBar: AppBar(
-            title: Row(
-              children: [
-                CircleAvatar(
-                  radius: 20,
-                  backgroundImage: NetworkImage(userModel.image!),
-                ),
-                const SizedBox(width: 12),
-                Text(userModel.name!),
-              ],
+            appBar: AppBar(
+              title: Row(
+                children: [
+                  CircleAvatar(
+                    radius: 20,
+                    backgroundImage: NetworkImage(userModel.image!),
+                  ),
+                  const SizedBox(width: 12),
+                  Text(userModel.name!),
+                ],
+              ),
             ),
-          ),
-          body:// SocialCubit.get(context).messages.isNotEmpty?
-              
-              Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: SocialCubit.get(context).messages.isNotEmpty ?ListView.separated(
+            body: // SocialCubit.get(context).messages.isNotEmpty?
+
+                Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: SocialCubit.get(context).messages.isNotEmpty
+                        ? ListView.separated(
                             physics: const BouncingScrollPhysics(),
                             itemBuilder: (context, index) {
                               var message =
@@ -57,54 +57,52 @@ class ChatDetails extends StatelessWidget {
                                 const SizedBox(
                                   height: 12,
                                 ),
-                            itemCount:
-                                SocialCubit.get(context).messages.length):const CircularProgressIndicator(),
-                      ),
-                      Container(
-                        clipBehavior: Clip.antiAliasWithSaveLayer,
-                        decoration: BoxDecoration(
-                            border:
-                                Border.all(color: Colors.grey[400]!, width: 1),
-                            borderRadius: BorderRadius.circular(16)),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 12),
-                                child: TextFormField(
-                                  controller: messageController,
-                                  decoration: const InputDecoration(
-                                      border: InputBorder.none,
-                                      hintText: 'type your message...'),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              color: defaultColor.withOpacity(0.8),
-                              child: TextButton(
-                                  onPressed: () {
-                                    SocialCubit.get(context).sendMessage(
-                                        textMessge: messageController.text,
-                                        reciverId: userModel.uId!,
-                                        dateTime: DateTime.now().toString());
-                                    messageController.text = '';
-                                  },
-                                  child: const Text(
-                                    'send',
-                                    style: TextStyle(color: Colors.white),
-                                  )),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
+                            itemCount: SocialCubit.get(context).messages.length)
+                        : const CircularProgressIndicator(),
                   ),
-                )
-              // : const Center(
-              //     child: CircularProgressIndicator(),
-              //   ),
-        ),
+                  Container(
+                    clipBehavior: Clip.antiAliasWithSaveLayer,
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey[400]!, width: 1),
+                        borderRadius: BorderRadius.circular(16)),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 12),
+                            child: TextFormField(
+                              controller: messageController,
+                              decoration: const InputDecoration(
+                                  border: InputBorder.none,
+                                  hintText: 'type your message...'),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          color: defaultColor.withOpacity(0.8),
+                          child: TextButton(
+                              onPressed: () {
+                                SocialCubit.get(context).sendMessage(
+                                    textMessge: messageController.text,
+                                    reciverId: userModel.uId!,
+                                    dateTime: DateTime.now().toString());
+                                messageController.text = '';
+                              },
+                              child: const Text(
+                                'send',
+                                style: TextStyle(color: Colors.white),
+                              )),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            )
+            // : const Center(
+            //     child: CircularProgressIndicator(),
+            //   ),
+            ),
       );
     });
   }

@@ -402,6 +402,7 @@ class SocialCubit extends Cubit<SocialState> {
   }
 
   List<MessageModel> messages = [];
+  String lastMessage = '';
   void getMessages({required String reciverId}) {
     FirebaseFirestore.instance
         .collection('users')
@@ -415,6 +416,7 @@ class SocialCubit extends Cubit<SocialState> {
       messages = [];
       for (var element in event.docs) {
         messages.add(MessageModel.fromJson(element.data()));
+        lastMessage = messages.last.textMessge ?? "";
       }
       emit(SocialReciveMessageSuccesState());
     });

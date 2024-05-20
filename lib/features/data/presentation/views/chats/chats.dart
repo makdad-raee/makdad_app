@@ -7,7 +7,6 @@ import 'package:makdad_app/features/data/models/user_model.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_cubit.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
 import 'package:makdad_app/features/data/presentation/views/chats/chat_details.dart';
-import 'package:makdad_app/features/data/presentation/views/widgets/diveder.dart';
 
 class ChatsScreen extends StatelessWidget {
   const ChatsScreen({super.key});
@@ -50,6 +49,7 @@ class ChatsScreen extends StatelessWidget {
                             physics: const BouncingScrollPhysics(),
                             itemBuilder: (context, index) =>
                                 ChatNameAndimImageUser(
+                                  lastMessage: SocialCubit.get(context).lastMessage,
                                     usermodel:
                                         SocialCubit.get(context).users[index]),
                             separatorBuilder: (context, index) =>
@@ -122,8 +122,9 @@ class ChatCircleWithOnlineDot extends StatelessWidget {
 }
 
 class ChatNameAndimImageUser extends StatelessWidget {
-  const ChatNameAndimImageUser({super.key, required this.usermodel});
+  const ChatNameAndimImageUser({super.key, required this.usermodel, required this.lastMessage});
   final UserModel usermodel;
+  final String lastMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -169,7 +170,7 @@ class ChatNameAndimImageUser extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const Text('Hi hasan')
+                  Text(lastMessage)
                 ],
               ),
             ),

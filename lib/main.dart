@@ -66,7 +66,8 @@ class MyApp extends StatelessWidget {
             ..getPosts()
             ..getAllUsers()
             ..getmyPosts()
-            ..getAllGroups()..getMyOwnGroups(),
+            ..getAllGroups()
+            ..getMyOwnGroups(),
         )
       ],
       child: MaterialApp(
