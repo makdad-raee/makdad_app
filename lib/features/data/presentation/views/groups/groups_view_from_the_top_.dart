@@ -4,6 +4,7 @@ import 'package:makdad_app/core/utils/componants.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_cubit.dart';
 import 'package:makdad_app/features/data/presentation/manger/social_cubit/social_state.dart';
 import 'package:makdad_app/features/data/presentation/views/groups/create_group_form_field.dart';
+import 'package:makdad_app/features/data/presentation/views/groups/group_details_view.dart';
 
 import 'package:makdad_app/features/data/presentation/views/groups/main_groups_view.dart';
 import 'package:makdad_app/features/data/presentation/views/groups/most_active_groups.dart';
@@ -341,9 +342,11 @@ class CreateGroupView extends StatelessWidget {
                             const Text('2 days ago'),
                             const Spacer(),
                             InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(builder: (context) =>const GroupDetailsView(),));
+                              },
                               child: const Text(
-                                'Edit',
+                                'Show',
                                 style: TextStyle(
                                     color: defaulColor,
                                     fontWeight: FontWeight.bold),

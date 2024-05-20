@@ -267,7 +267,8 @@ class MyVideosOnProfile extends StatelessWidget {
                                       CircleAvatar(
                                         radius: 18,
                                         backgroundColor: Colors.white,
-                                        backgroundImage: NetworkImage('https://img.freepik.com/free-vector/hand-drawn-pop-singer-silhouette_23-2150966830.jpg?t=st=1716045743~exp=1716049343~hmac=d46505cd81359e922643bca972c7a0fb0287cf8d0a17564be2405fbb768ba1c6&w=740'),
+                                        backgroundImage: NetworkImage(
+                                            'https://img.freepik.com/free-vector/hand-drawn-pop-singer-silhouette_23-2150966830.jpg?t=st=1716045743~exp=1716049343~hmac=d46505cd81359e922643bca972c7a0fb0287cf8d0a17564be2405fbb768ba1c6&w=740'),
                                       )
                                     ],
                                   ),

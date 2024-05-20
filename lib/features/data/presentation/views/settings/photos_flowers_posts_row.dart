@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:makdad_app/features/data/presentation/views/settings/followers.dart';
+import 'package:makdad_app/features/data/presentation/views/settings/following.dart';
 
 class PhotosFlowersPostsCounter extends StatelessWidget {
   const PhotosFlowersPostsCounter({
@@ -44,30 +46,37 @@ class PhotosFlowersPostsCounter extends StatelessWidget {
                 color: Colors.grey.withOpacity(0.8),
                 borderRadius: BorderRadius.circular(16),
               ),
-              child: const Column(
-                children: [
-                  Text(
-                    '1.8 K',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18),
-                  ),
-                  Text('followers',
+              child: InkWell(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Followers(),));
+                },
+                child: const Column(
+                  children: [
+                    Text(
+                      '1.8 K',
                       style: TextStyle(
-                          color: Colors.white, fontWeight: FontWeight.w500)),
-                ],
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18),
+                    ),
+                    Text('followers',
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.w500)),
+                  ],
+                ),
               ),
             ),
           ),
-          InkWell(
-            onTap: () {},
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 25),
-              decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.8),
-                borderRadius: BorderRadius.circular(16),
-              ),
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 25),
+            decoration: BoxDecoration(
+              color: Colors.grey.withOpacity(0.8),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: InkWell(
+              onTap:  () {
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => const Following(),));
+              },
               child: const Column(
                 children: [
                   Text(
