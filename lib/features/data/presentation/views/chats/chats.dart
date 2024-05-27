@@ -49,7 +49,8 @@ class ChatsScreen extends StatelessWidget {
                             physics: const BouncingScrollPhysics(),
                             itemBuilder: (context, index) =>
                                 ChatNameAndimImageUser(
-                                  lastMessage: SocialCubit.get(context).lastMessage,
+                                    lastMessage:
+                                        SocialCubit.get(context).lastMessage,
                                     usermodel:
                                         SocialCubit.get(context).users[index]),
                             separatorBuilder: (context, index) =>
@@ -122,7 +123,8 @@ class ChatCircleWithOnlineDot extends StatelessWidget {
 }
 
 class ChatNameAndimImageUser extends StatelessWidget {
-  const ChatNameAndimImageUser({super.key, required this.usermodel, required this.lastMessage});
+  const ChatNameAndimImageUser(
+      {super.key, required this.usermodel, required this.lastMessage});
   final UserModel usermodel;
   final String lastMessage;
 
@@ -162,7 +164,7 @@ class ChatNameAndimImageUser extends StatelessWidget {
                       const SizedBox(
                         width: 5,
                       ),
-                      const SizedBox(),
+                      const SizedBox(width: 8),
                       const Icon(
                         FontAwesomeIcons.solidCircleCheck,
                         color: Colors.blue,
@@ -177,7 +179,7 @@ class ChatNameAndimImageUser extends StatelessWidget {
             const SizedBox(
               height: 15,
             ),
-            const Text('9:24 Am')
+            const Text('9:24 Am'),
           ],
         ),
       ),

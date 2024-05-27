@@ -38,14 +38,14 @@ class SocialHomeView extends StatelessWidget {
             // ),
             IconButton(
                 onPressed: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => const NotificationBellView(),
-            ));
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const NotificationBellView(),
+                  ));
                 },
                 icon: const Icon(FontAwesomeIcons.bell)),
             IconButton(
                 onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
+                  Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => const SearchScreen(),
                   ));
                 },
@@ -61,8 +61,8 @@ class SocialHomeView extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
           child: Container(
             //  height: 80,
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(30)),
-            // color: Colors.grey,
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: Colors.white),
+       
             child: ClipRRect(
               borderRadius: BorderRadius.circular(24),
               child: BottomNavigationBar(
